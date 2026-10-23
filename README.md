@@ -6,11 +6,11 @@ Static site for **Messerschmidts EAM** and **Messerschmidts Safety**. Plain HTML
 
 | File | Page |
 |---|---|
-| `index.html` | Home: hero (Philippine power plants first), products, features, how it works, industries, example scenario, price summary, FAQ teaser |
+| `index.html` | Company home page: hero about Messerschmidts, three offerings (EAM for Power Plants, HSSE, Construction coming soon), why Messerschmidts, price summary, contact |
 | `eam.html` | Messerschmidts EAM |
 | `safety.html` | Messerschmidts Safety |
 | `pricing.html` | Subscription: Safety plans, subcontractor rules, Safety estimator, EAM Standard and quote, EAM estimator, payment and renewal |
-| `industries.html` | Power plants first (`#solar`, `#power` for wind/hydro/geothermal/biomass/diesel, `#grid` for substations and transmission, `#records` for DOLE/DOE/ERC/NGCP records), then `#construction`, `#facilities`, `#manufacturing` |
+| `industries.html` | Power plants first (`#solar`, `#power` for wind/hydro/geothermal/biomass/diesel, `#grid` for substations and transmission, `#records` for maintenance and DOLE safety records), then `#construction`, `#facilities`, `#manufacturing` |
 | `about.html`, `contact.html`, `faq.html` | About, contact (form opens the visitor's e-mail app), FAQ |
 | `privacy.html`, `terms.html` | **Drafts** for a lawyer to review (marked on the page) |
 | `404.html` | Not-found page (uses root-relative links, so it works at any path) |
