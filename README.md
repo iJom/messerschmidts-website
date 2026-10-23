@@ -6,11 +6,11 @@ Static site for **Messerschmidts EAM** and **Messerschmidts Safety**. Plain HTML
 
 | File | Page |
 |---|---|
-| `index.html` | Home: hero, products, features, how it works, industries, example scenario, price summary, FAQ teaser |
+| `index.html` | Home: hero (Philippine power plants first), products, features, how it works, industries, example scenario, price summary, FAQ teaser |
 | `eam.html` | Messerschmidts EAM |
 | `safety.html` | Messerschmidts Safety |
-| `pricing.html` | Subscription: Safety plans, subcontractor rules, price estimator, EAM Plan 1-3, payment |
-| `industries.html` | Solar and power plants, construction, facilities, manufacturing (`#solar`, `#construction`, ...) |
+| `pricing.html` | Subscription: Safety plans, subcontractor rules, Safety estimator, EAM Standard and quote, EAM estimator, payment and renewal |
+| `industries.html` | Power plants first (`#solar`, `#power` for wind/hydro/geothermal/biomass/diesel, `#grid` for substations and transmission, `#records` for DOLE/DOE/ERC/NGCP records), then `#construction`, `#facilities`, `#manufacturing` |
 | `about.html`, `contact.html`, `faq.html` | About, contact (form opens the visitor's e-mail app), FAQ |
 | `privacy.html`, `terms.html` | **Drafts** for a lawyer to review (marked on the page) |
 | `404.html` | Not-found page (uses root-relative links, so it works at any path) |
@@ -19,18 +19,30 @@ Static site for **Messerschmidts EAM** and **Messerschmidts Safety**. Plain HTML
 ## Editing text and prices
 
 Edit the HTML files directly; header and footer are repeated in each page, so change them in every file (search and replace).
-Static prices appear in `index.html` (summary), `pricing.html` (cards, table, example, calculator defaults `data-user="500" data-subcon="50"`), `safety.html`, `faq.html` and `terms.html`. Always write pesos as `&#8369;` (₱), never `$`.
+Static prices appear in the meta descriptions and in `index.html` (summary), `pricing.html` (cards, table, worked examples, Safety calculator defaults `data-user="1000" data-subcon="100"`, EAM calculator defaults `data-base="20000" data-included="25" data-extra="750"`), `safety.html`, `eam.html`, `faq.html`, `industries.html` and `terms.html`. Always write pesos as `&#8369;` (₱), never `$`.
+
+Current prices (owner, 2026-10-23):
+
+- Messerschmidts Safety Premium: ₱1,000 per user per month. First month free for a new organisation.
+- Subcontractor account invited by a user, working only on the inviter's site(s): ₱100 per month.
+- Subcontractor account that opens a new site of its own (for example an EPC or main contractor registered as a subcontractor): full ₱1,000.
+- Messerschmidts EAM Standard: ₱20,000 per month per organisation, up to 25 users included, ₱750 per month for each additional user. Bigger organisations: quote via customerservice@messerschmidts.online.
+- Renewal: an administrator subscribes or renews in Settings > Subscription; the app reminds administrators by e-mail and with a banner 7, 3 and 1 days before the free trial or paid month ends.
 
 ## Live prices from the server
 
 `assets/site.js` requests `GET {API}/api/platform/subscriptions/public`, where `{API}` is the `content` of `<meta name="msm-api" content="">` in each page (empty = same origin). Expected JSON:
 
 ```json
-{"plans":[{"app":"safety","code":"premium","name":"Premium","price_php":500,"unit":"user",
-  "subcon_price_php":50,"trial_days":30,"description":"...","features":["..."]}]}
+{"plans":[{"app":"safety","code":"premium","name":"Premium","price_php":1000,"unit":"user",
+  "subcon_price_php":100,"trial_days":30,"description":"...","features":["..."]},
+ {"app":"eam","code":"standard","name":"Standard","price_php":20000,"unit":"org",
+  "included_users":25,"extra_user_php":750,"description":"...","features":["..."]}],
+ "payment_methods":[{"name":"GCash","kind":"ewallet"},{"name":"UnionBank","kind":"bank"},
+  {"name":"USDT on TRON (TRC-20)","kind":"crypto"}]}
 ```
 
-If plans are returned for an app, the cards in `[data-plans="safety"]` / `[data-plans="eam"]` are replaced (all server text is inserted with `textContent`, never `innerHTML`), the Home price (`data-live-price`) and the calculator are updated. If the request fails, times out (6 s) or returns no plans, the static content stays. A plan with `price_php: null` shows "Coming soon" and a "Talk to us" button. When the site is on a different origin than the API, the server must allow CORS for that endpoint.
+If plans are returned for an app, the cards in `[data-plans="safety"]` / `[data-plans="eam"]` are replaced (all server text is inserted with `textContent`, never `innerHTML`), the Home prices (`data-live-price`) and both calculators are updated. A plan with `unit: "org"` shows "per organisation / month", plus "Up to N users included" (`included_users`), "₱X per additional user / month" (`extra_user_php`) and a quote link. If `payment_methods` is present and non-empty, the items of `<ul data-pay-methods>` on the Subscription page are replaced with the names grouped by `kind` (`ewallet` = E-wallets, `bank` = Banks, `crypto` = Crypto; other kinds are ignored); otherwise the static list stays. If the request fails, times out (6 s) or returns no plans, the static content stays. A plan with `price_php: null` shows "Coming soon" and a "Talk to us" button. When the site is on a different origin than the API, the server must allow CORS for that endpoint.
 
 ## Sign-in and sign-up links
 

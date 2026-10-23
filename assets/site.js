@@ -81,6 +81,17 @@
     }
     card.appendChild(price);
 
+    // Organisation plans (e.g. EAM Standard): users included and price per extra user.
+    var included = Number(p.included_users);
+    var hasIncluded = typeof p.included_users === 'number' && isFinite(included) && included > 0;
+    var hasExtra = typeof p.extra_user_php === 'number' && isFinite(p.extra_user_php) && p.extra_user_php > 0;
+    if (hasIncluded || hasExtra) {
+      var orgLines = [];
+      if (hasIncluded) orgLines.push('Up to ' + included.toLocaleString('en-PH') + ' users included.');
+      if (hasExtra) orgLines.push(peso(p.extra_user_php) + ' per additional user / month.');
+      card.appendChild(el('p', { 'class': 'plan-extra' }, orgLines.join(' ')));
+    }
+
     var trial = Number(p.trial_days);
     if (isFinite(trial) && trial > 0) {
       card.appendChild(el('p', { 'class': 'sub' }, trial + '-day free Premium demo for a new organisation'));
@@ -91,7 +102,7 @@
     if (typeof p.subcon_price_php === 'number' && isFinite(p.subcon_price_php)) {
       card.appendChild(el('p', { 'class': 'plan-extra' },
         'Invited subcontractor account: ' + peso(p.subcon_price_php) +
-        ' per month on the same site(s) as the inviter. On a site the inviter does not have, it is charged as a full user.'));
+        ' per month when it works only on the site(s) of the account that invited it. A subcontractor account that opens a new site of its own pays the full user price.'));
     }
     if (!compact && Array.isArray(p.features) && p.features.length) {
       var ul = el('ul');
@@ -100,8 +111,16 @@
       });
       card.appendChild(ul);
     }
+    if (p.unit === 'org' && hasPrice) {
+      var quote = el('p', { 'class': 'sub' }, 'Bigger organisation? ');
+      quote.appendChild(el('a', { href: 'mailto:customerservice@messerschmidts.online' }, 'Ask us for a quote'));
+      quote.appendChild(doc.createTextNode('.'));
+      card.appendChild(quote);
+    }
     var cta;
-    if (hasPrice) {
+    if (hasPrice && p.unit === 'org' && !(trial > 0)) {
+      cta = el('a', { 'class': 'btn btn-primary', href: 'contact.html' }, 'Talk to us');
+    } else if (hasPrice) {
       cta = el('a', { 'class': 'btn btn-primary', href: '/#/account/signup', 'data-app-link': '/#/account/signup' },
         trial > 0 ? 'Start free demo' : 'Request an account');
     } else {
@@ -111,9 +130,33 @@
     return card;
   }
 
+  /* Payment methods from the server: [{name, kind}], grouped by kind. */
+  var PAY_KINDS = [['ewallet', 'E-wallets:'], ['bank', 'Banks:'], ['crypto', 'Crypto:']];
+  function renderPayMethods(methods) {
+    if (!Array.isArray(methods) || !methods.length) return;
+    var lists = doc.querySelectorAll('ul[data-pay-methods]');
+    if (!lists.length) return;
+    var groups = PAY_KINDS.map(function (k) {
+      var names = methods.filter(function (m) {
+        return m && typeof m === 'object' && m.kind === k[0] && typeof m.name === 'string' && m.name.trim();
+      }).map(function (m) { return m.name.trim(); });
+      return [k[1], names];
+    }).filter(function (g) { return g[1].length; });
+    if (!groups.length) return; // keep static list
+    lists.forEach(function (ul) {
+      while (ul.firstChild) ul.removeChild(ul.firstChild);
+      groups.forEach(function (g) {
+        var li = el('li');
+        li.appendChild(el('b', null, g[0]));
+        li.appendChild(doc.createTextNode(' ' + g[1].join(', ')));
+        ul.appendChild(li);
+      });
+    });
+  }
+
   function initPlans() {
     var targets = doc.querySelectorAll('[data-plans]');
-    if ((!targets.length && !doc.querySelector('[data-live-price]')) || !window.fetch) return;
+    if ((!targets.length && !doc.querySelector('[data-live-price]') && !doc.querySelector('[data-pay-methods]')) || !window.fetch) return;
     var url = meta('msm-api') + '/api/platform/subscriptions/public';
     var ctrl = window.AbortController ? new AbortController() : null;
     var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 6000);
@@ -121,6 +164,7 @@
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (data) {
         clearTimeout(timer);
+        if (data && typeof data === 'object') renderPayMethods(data.payment_methods);
         var plans = data && Array.isArray(data.plans) ? data.plans.filter(validPlan) : [];
         if (!plans.length) return;
         targets.forEach(function (t) {
@@ -152,6 +196,15 @@
             updateCalc();
           }
         }
+        // Keep the EAM estimator in step with the live organisation plan.
+        var eam = plans.filter(function (p) { return p.app === 'eam' && p.unit === 'org' && typeof p.price_php === 'number' && p.price_php > 0; })[0];
+        var calcEam = doc.getElementById('calc-eam');
+        if (eam && calcEam) {
+          calcEam.setAttribute('data-base', String(eam.price_php));
+          if (typeof eam.included_users === 'number') calcEam.setAttribute('data-included', String(eam.included_users));
+          if (typeof eam.extra_user_php === 'number') calcEam.setAttribute('data-extra', String(eam.extra_user_php));
+          updateCalcEam();
+        }
         initAppLinks();
       })
       .catch(function () { clearTimeout(timer); /* keep static content */ });
@@ -166,15 +219,18 @@
   function updateCalc() {
     var calc = doc.getElementById('calc');
     if (!calc) return;
-    var user = Number(calc.getAttribute('data-user')) || 500;
-    var sub = Number(calc.getAttribute('data-subcon')) || 50;
+    var user = Number(calc.getAttribute('data-user')) || 1000;
+    var sub = Number(calc.getAttribute('data-subcon')) || 100;
     var u = num('calc-users'), s = num('calc-sub-same'), o = num('calc-sub-other');
     var lines = [
       [u + ' user' + (u === 1 ? '' : 's') + ' × ' + peso(user), u * user],
-      [s + ' subcontractor account' + (s === 1 ? '' : 's') + ', same site × ' + peso(sub), s * sub],
-      [o + ' invited account' + (o === 1 ? '' : 's') + ', other site × ' + peso(user), o * user]
+      [s + ' subcontractor account' + (s === 1 ? '' : 's') + ', your site(s) × ' + peso(sub), s * sub],
+      [o + ' subcontractor account' + (o === 1 ? '' : 's') + ', own site × ' + peso(user), o * user]
     ];
-    var list = doc.getElementById('calc-lines');
+    renderCalc('calc-lines', 'calc-total', lines);
+  }
+  function renderCalc(listId, totalId, lines) {
+    var list = doc.getElementById(listId);
     if (list) {
       while (list.firstChild) list.removeChild(list.firstChild);
       lines.forEach(function (l) {
@@ -185,15 +241,37 @@
       });
     }
     var total = lines.reduce(function (a, l) { return a + l[1]; }, 0);
-    var out = doc.getElementById('calc-total');
+    var out = doc.getElementById(totalId);
     if (out) out.textContent = peso(total);
+  }
+  // EAM: one price per organisation with users included, plus a price per extra user.
+  function updateCalcEam() {
+    var calc = doc.getElementById('calc-eam');
+    if (!calc) return;
+    var base = Number(calc.getAttribute('data-base')) || 20000;
+    var included = Number(calc.getAttribute('data-included'));
+    if (!isFinite(included) || included < 0) included = 25;
+    var extra = Number(calc.getAttribute('data-extra')) || 750;
+    var u = num('calc-eam-users');
+    var more = Math.max(0, u - included);
+    renderCalc('calc-eam-lines', 'calc-eam-total', [
+      ['Organisation, up to ' + included + ' users', base],
+      [more + ' additional user' + (more === 1 ? '' : 's') + ' × ' + peso(extra), more * extra]
+    ]);
   }
   function initCalc() {
     var calc = doc.getElementById('calc');
-    if (!calc) return;
-    calc.hidden = false;
-    calc.addEventListener('input', updateCalc);
-    updateCalc();
+    if (calc) {
+      calc.hidden = false;
+      calc.addEventListener('input', updateCalc);
+      updateCalc();
+    }
+    var calcEam = doc.getElementById('calc-eam');
+    if (calcEam) {
+      calcEam.hidden = false;
+      calcEam.addEventListener('input', updateCalcEam);
+      updateCalcEam();
+    }
   }
 
   /* ---------- Contact form -> mailto ---------- */
