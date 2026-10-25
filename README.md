@@ -13,9 +13,15 @@ Static site for **Messerschmidts EAM**, **Messerschmidts Safety** and **Messersc
 | `pricing.html` | Subscription: Safety plans, subcontractor rules, Safety estimator, EAM Standard and quote, EAM estimator, Construction plan (`#construction`), payment and renewal |
 | `industries.html` | Power plants first (`#solar`, `#power` for wind/hydro/geothermal/biomass/diesel, `#grid` for substations and transmission, `#records` for maintenance and DOLE safety records), then `#construction`, `#facilities`, `#manufacturing` |
 | `about.html`, `contact.html`, `faq.html` | About, contact (form opens the visitor's e-mail app), FAQ |
-| `privacy.html`, `terms.html` | **Drafts** for a lawyer to review (marked on the page) |
+| `privacy.html` | Privacy policy v1.0 (last updated 25 Oct 2026): RA 10173 first, then GDPR and California (CCPA/CPRA) sections; browser storage table, sharing, transfers, security and 72-hour breach notice, rights and response times, retention, children, change history |
+| `terms.html` | Website terms of use v1.0: site rules, content ownership, third-party links, no warranty, liability, Philippine law with mediation / small claims / venue, subscription summary; the apps themselves are governed by the in-app License Agreement |
+| `disclaimer.html` | Disclaimer v1.0: accuracy, use, damages, other users, safety (RA 11058 / DOLE), weather and Day Ahead Nominations, regulatory reports (ERC / DOE / NGCP / IEMOP), permits lists (LGU), calculations (EVM, billing, tax) |
 | `404.html` | Not-found page (uses root-relative links, so it works at any path) |
 | `assets/site.css`, `assets/site.js`, `assets/logo.svg` | Shared styles, script, logo/favicon |
+
+## Legal pages
+
+The three legal pages are linked in every footer (Account column) and from the apps' sign-in page, Settings and LEGAL page. They have **not been reviewed by a lawyer** yet (banner on each page). Placeholders in [square brackets] still to fill: `[COMPANY ADDRESS]`, `[DPO NAME]`, `[NPC REGISTRATION NUMBER, if registration applies]`, `[EU REPRESENTATIVE, if one is appointed]`, `[LOG RETENTION PERIOD]`. When a page changes, update its version and "last updated" date (format: 25 Oct 2026) and add a row to its change history table. If the browser storage the apps use changes, update the table in `privacy.html`.
 
 ## Editing text and prices
 
