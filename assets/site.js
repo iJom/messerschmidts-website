@@ -19,6 +19,14 @@
     return n;
   }
 
+  /* A number from an attribute or server value; falls back only when the
+     value is missing or not a finite number (0 is a valid price). */
+  function numOr(v, fallback) {
+    if (v === null || v === undefined || (typeof v === 'string' && v.trim() === '')) return fallback;
+    var n = Number(v);
+    return isFinite(n) && n >= 0 ? n : fallback;
+  }
+
   function peso(n) {
     var v = Number(n);
     if (!isFinite(v)) return '';
@@ -131,7 +139,7 @@
   }
 
   /* Payment methods from the server: [{name, kind}], grouped by kind. */
-  var PAY_KINDS = [['ewallet', 'E-wallets:'], ['bank', 'Banks:'], ['crypto', 'Crypto:']];
+  var PAY_KINDS = [['ewallet', 'E-wallets:'], ['card', 'Cards:'], ['qr', 'QR:'], ['bank', 'Banks:'], ['crypto', 'Crypto:']];
   function renderPayMethods(methods) {
     if (!Array.isArray(methods) || !methods.length) return;
     var lists = doc.querySelectorAll('ul[data-pay-methods]');
@@ -219,8 +227,8 @@
   function updateCalc() {
     var calc = doc.getElementById('calc');
     if (!calc) return;
-    var user = Number(calc.getAttribute('data-user')) || 1000;
-    var sub = Number(calc.getAttribute('data-subcon')) || 100;
+    var user = numOr(calc.getAttribute('data-user'), 1000);
+    var sub = numOr(calc.getAttribute('data-subcon'), 100);
     var u = num('calc-users'), s = num('calc-sub-same'), o = num('calc-sub-other');
     var lines = [
       [u + ' user' + (u === 1 ? '' : 's') + ' × ' + peso(user), u * user],
@@ -248,10 +256,9 @@
   function updateCalcEam() {
     var calc = doc.getElementById('calc-eam');
     if (!calc) return;
-    var base = Number(calc.getAttribute('data-base')) || 20000;
-    var included = Number(calc.getAttribute('data-included'));
-    if (!isFinite(included) || included < 0) included = 25;
-    var extra = Number(calc.getAttribute('data-extra')) || 750;
+    var base = numOr(calc.getAttribute('data-base'), 20000);
+    var included = numOr(calc.getAttribute('data-included'), 25);
+    var extra = numOr(calc.getAttribute('data-extra'), 750);
     var u = num('calc-eam-users');
     var more = Math.max(0, u - included);
     renderCalc('calc-eam-lines', 'calc-eam-total', [
@@ -312,6 +319,80 @@
     });
   }
 
+  /* ---------- Motion helpers ---------- */
+  var reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var hasIO = 'IntersectionObserver' in window;
+
+  /* ---------- Process graphs ----------
+     Lights the nodes of each [data-flow] one by one when it scrolls into view.
+     The <ol> text is always present; with reduced motion (or no observer)
+     every node is lit at once. */
+  function initFlows() {
+    var flows = doc.querySelectorAll('[data-flow]');
+    if (!flows.length) return;
+    var STEP_MS = 420;
+    flows.forEach(function (flow) {
+      var steps = flow.querySelectorAll('.flow-step');
+      var timers = [];
+      function lightAll() {
+        steps.forEach(function (s) { s.classList.add('is-on'); });
+        flow.classList.add('is-done');
+      }
+      function play() {
+        timers.forEach(clearTimeout);
+        timers = [];
+        flow.classList.remove('is-done');
+        steps.forEach(function (s) { s.classList.remove('is-on'); });
+        steps.forEach(function (s, i) {
+          timers.push(setTimeout(function () { s.classList.add('is-on'); }, 120 + i * STEP_MS));
+        });
+        timers.push(setTimeout(function () { flow.classList.add('is-done'); }, 120 + steps.length * STEP_MS));
+      }
+      if (reduceMotion || !hasIO) { lightAll(); return; }
+      var replay = flow.querySelector('.flow-replay');
+      if (replay) {
+        replay.hidden = false;
+        replay.addEventListener('click', play);
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { io.disconnect(); play(); }
+        });
+      }, { threshold: 0.35 });
+      io.observe(flow);
+    });
+  }
+
+  /* ---------- Reveal on scroll ----------
+     Only for blocks that start below the first screen, so nothing visible
+     at load ever flickers. Opacity/transform only: no layout shift. */
+  function initReveal() {
+    // Deep links (#section) jump straight to content: never hide it there.
+    if (reduceMotion || !hasIO || window.location.hash) return;
+    var sel = '.section .section-head, .section .grid > *, .offers > *, .plans > *, .flow, .split > *, .cta-band, .table-wrap, .faq-group, .section .panel';
+    var vh = window.innerHeight || doc.documentElement.clientHeight;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    var nodes = Array.prototype.slice.call(doc.querySelectorAll(sel));
+    var tops = nodes.map(function (n) { return n.getBoundingClientRect().top; });
+    nodes.forEach(function (n, i) {
+      if (tops[i] < vh) return;
+      if (n.closest('.hero, .page-hero')) return;
+      if (n.parentElement && n.parentElement.closest('.rv')) return; // parent already reveals
+      var idx = Array.prototype.indexOf.call(n.parentElement.children, n);
+      n.style.setProperty('--rv-d', Math.min(idx, 5) * 70 + 'ms');
+      n.classList.add('rv');
+      io.observe(n);
+    });
+    // Make sure printing never hides anything.
+    window.addEventListener('beforeprint', function () {
+      doc.querySelectorAll('.rv').forEach(function (n) { n.classList.add('in'); });
+    });
+  }
+
   function init() {
     initNav();
     initAppLinks();
@@ -319,6 +400,8 @@
     initCalc();
     initContact();
     initPrint();
+    initFlows();
+    initReveal();
     initPlans();
   }
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init);

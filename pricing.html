@@ -5,8 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Subscription and prices in pesos | Messerschmidts</title>
 <meta name="description" content="Messerschmidts EAM Standard at &#8369;20,000 per organisation per month with 25 users included, and the companion Messerschmidts Safety Premium at &#8369;1,000 per user per month with a free first month and &#8369;100 subcontractor accounts. Pay by GCash, e-wallet, bank or crypto.">
+<link rel="canonical" href="https://messerschmidts.online/pricing.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Messerschmidts">
+<meta property="og:locale" content="en_PH">
+<meta property="og:title" content="Subscription and prices in pesos | Messerschmidts">
+<meta property="og:description" content="Messerschmidts EAM Standard at &#8369;20,000 per organisation per month with 25 users included, and the companion Messerschmidts Safety Premium at &#8369;1,000 per user per month with a free first month and &#8369;100 subcontractor accounts. Pay by GCash, e-wallet, bank or crypto.">
+<meta property="og:url" content="https://messerschmidts.online/pricing.html">
+<meta property="og:image" content="https://messerschmidts.online/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Messerschmidts: software for Philippine industries, EAM for power plants and HSSE">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#0a5c78">
+<meta name="theme-color" content="#F6F5F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F141C" media="(prefers-color-scheme: dark)">
 <!-- API base for live prices; empty = same origin as this page. -->
 <meta name="msm-api" content="https://app.messerschmidts.online">
 <!-- Application base for Sign in / sign-up links; empty = same origin. -->
@@ -35,7 +48,7 @@
   <div class="container">
     <span class="eyebrow">Subscription</span>
     <h1 id="pr-title">Clear prices in Philippine peso</h1>
-    <p class="lead">Messerschmidts EAM is priced per organisation, Messerschmidts Safety per user. Safety Premium starts with a free month. Pay by GCash, Maya, MariBank, UnionBank, or crypto (USDT on TRON, OKX Pay).</p>
+    <p class="lead">Messerschmidts EAM is priced per organisation, Messerschmidts Safety per user. Safety Premium starts with a free month. Pay by GCash, Maya, card, QR Ph, online banking or USDT on TRON. Payments are verified automatically and your plan activates instantly.</p>
   </div>
 </section>
 
@@ -63,9 +76,9 @@
         <p class="sub">Many plants, many users, or your own server? Tell us how many sites and users you have and we will send a quote.</p>
         <a class="btn btn-secondary" href="mailto:customerservice@messerschmidts.online">Ask for a quote</a>
       </article></div>
-    <p class="muted small" style="margin-top:14px">Example: an organisation with 40 EAM users pays &#8369;20,000 + 15 &times; &#8369;750 = &#8369;31,250 per month.</p>
+    <p class="muted small mt-sm">Example: an organisation with 40 EAM users pays &#8369;20,000 + 15 &times; &#8369;750 = &#8369;31,250 per month.</p>
 
-    <div class="panel" id="calc-eam" data-base="20000" data-included="25" data-extra="750" hidden style="margin-top:28px">
+    <div id="calc-eam" data-base="20000" data-included="25" data-extra="750" hidden class="panel mt-lg">
       <h3>Estimate your EAM price</h3>
       <div class="calc">
         <div>
@@ -73,7 +86,7 @@
         </div>
         <div aria-live="polite">
           <ul class="calc-lines" id="calc-eam-lines"></ul>
-          <p class="muted small" style="margin:0">Estimated total per month</p>
+          <p class="muted small m-0">Estimated total per month</p>
           <p class="calc-total" id="calc-eam-total">&#8369;31,250</p>
           <p class="muted small">An estimate only. Your invoice from customer service is the final amount.</p>
         </div>
@@ -136,9 +149,9 @@
         </tbody>
       </table>
     </div>
-    <p class="muted small" style="margin-top:14px">Example: your organisation has 10 users on a 50 MW solar plant and invites 4 subcontractor accounts to the same plant. That is 10 &times; &#8369;1,000 + 4 &times; &#8369;100 = &#8369;10,400 per month.</p>
+    <p class="muted small mt-sm">Example: your organisation has 10 users on a 50 MW solar plant and invites 4 subcontractor accounts to the same plant. That is 10 &times; &#8369;1,000 + 4 &times; &#8369;100 = &#8369;10,400 per month.</p>
 
-    <div class="panel" id="calc" data-user="1000" data-subcon="100" hidden style="margin-top:28px">
+    <div id="calc" data-user="1000" data-subcon="100" hidden class="panel mt-lg">
       <h3>Estimate your monthly price</h3>
       <div class="calc">
         <div>
@@ -148,7 +161,7 @@
         </div>
         <div aria-live="polite">
           <ul class="calc-lines" id="calc-lines"></ul>
-          <p class="muted small" style="margin:0">Estimated total per month</p>
+          <p class="muted small m-0">Estimated total per month</p>
           <p class="calc-total" id="calc-total">&#8369;10,400</p>
           <p class="muted small">An estimate only. Your invoice from customer service is the final amount.</p>
         </div>
@@ -158,31 +171,37 @@
 </section>
 
 <section class="section section-alt" id="payment" aria-labelledby="pay-title">
-  <div class="container split">
-    <div>
-      <span class="eyebrow">Paying</span>
-      <h2 id="pay-title">How payment works</h2>
-      <p>Pay the way you already pay in the Philippines. We do not take card payments online.</p>
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Paying</span><h2 id="pay-title">How payment works</h2>
+      <p class="lead">Pay the way you already pay in the Philippines. The system verifies your payment automatically and your plan activates instantly, with no manual confirmation.</p></div>
+<figure class="flow" style="--n:4" data-flow aria-labelledby="pay-title">
+<ol class="flow-steps">
+<li class="flow-step"><span class="flow-node" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span class="flow-num">1</span></span><svg class="flow-link" aria-hidden="true" focusable="false"><line class="w h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="p h" pathLength="100" x1="0" y1="50%" x2="100%" y2="50%"/><line class="w v" x1="50%" y1="0" x2="50%" y2="100%"/><line class="p v" pathLength="100" x1="50%" y1="0" x2="50%" y2="100%"/></svg><h3>Choose plan</h3><p>Request an account and use the free demo month. An administrator opens Settings&nbsp;&gt; Subscription to subscribe or renew.</p></li>
+<li class="flow-step"><span class="flow-node" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg><span class="flow-num">2</span></span><svg class="flow-link" aria-hidden="true" focusable="false"><line class="w h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="p h" pathLength="100" x1="0" y1="50%" x2="100%" y2="50%"/><line class="w v" x1="50%" y1="0" x2="50%" y2="100%"/><line class="p v" pathLength="100" x1="50%" y1="0" x2="50%" y2="100%"/></svg><h3>Pay now</h3><p>GCash, Maya, card, bank or USDT. Settings&nbsp;&gt; Subscription shows this month's amount in &#8369;.</p></li>
+<li class="flow-step"><span class="flow-node" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span class="flow-num">3</span></span><svg class="flow-link" aria-hidden="true" focusable="false"><line class="w h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="p h" pathLength="100" x1="0" y1="50%" x2="100%" y2="50%"/><line class="w v" x1="50%" y1="0" x2="50%" y2="100%"/><line class="p v" pathLength="100" x1="50%" y1="0" x2="50%" y2="100%"/></svg><h3>Verified automatically</h3><p>The system verifies the payment by itself: PayMongo for GCash, Maya, cards, QR Ph and online banking, and USDT on TRON is detected automatically.</p></li>
+<li class="flow-step"><span class="flow-node" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg><span class="flow-num">4</span></span><h3>Plan active instantly</h3><p>Your plan activates straight away. No waiting for a manual confirmation.</p></li>
+</ol>
+<div class="flow-foot"><p>The app reminds administrators by e-mail and with a banner 7, 3 and 1 days before the free month or paid month ends.</p><button type="button" class="flow-replay" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>Replay steps</button></div>
+</figure>
+    <div class="split top mt-lg">
+      <div class="panel">
+        <h3>Ways to pay</h3>
+        <p class="muted small">E-wallets, cards, QR Ph and online banking go through PayMongo.</p>
       <ul class="pay-methods" data-pay-methods>
         <li><b>E-wallets:</b> GCash, Maya</li>
-        <li><b>Banks:</b> MariBank, UnionBank (InstaPay or PESONet)</li>
-        <li><b>Crypto:</b> USDT on TRON (TRC-20), OKX Pay</li>
+        <li><b>Cards and QR:</b> Credit and debit cards, QR Ph</li>
+        <li><b>Banks:</b> Online banking</li>
+        <li><b>Crypto:</b> USDT on TRON (TRC-20), detected automatically</li>
       </ul>
-      <ol>
-        <li>Request an account and use the free demo month.</li>
-        <li>The app reminds administrators by e-mail and with a banner 7, 3 and 1 days before the free month or paid month ends.</li>
-        <li>An administrator opens Settings &gt; Subscription to subscribe or renew. It shows this month's amount in &#8369; and our account numbers and QR codes.</li>
-        <li>Pay, then press <b>I have paid</b> with the reference number or transaction ID.</li>
-        <li>Customer service confirms it and your subscription continues without interruption.</li>
-      </ol>
-      <p>Questions about a payment? Our Filipino customer service team will help: <a class="email" href="mailto:customerservice@messerschmidts.online">customerservice@messerschmidts.online</a></p>
-    </div>
+        <p class="m-0">Questions about a payment? Our Filipino customer service team will help: <a class="email" href="mailto:customerservice@messerschmidts.online">customerservice@messerschmidts.online</a></p>
+      </div>
     <div class="faq">
-      <details><summary>What happens after the free month?</summary><div><p>The app reminds administrators by e-mail and with a banner 7, 3 and 1 days before the free month ends. An administrator subscribes from Settings &gt; Subscription; your data stays as it is either way.</p></div></details>
-      <details><summary>How do we renew each month?</summary><div><p>The same way: an administrator opens Settings &gt; Subscription, pays and presses I have paid. Reminders come by e-mail and as a banner 7, 3 and 1 days before the paid month ends.</p></div></details>
+      <details><summary>What happens after the free month?</summary><div><p>The app reminds administrators by e-mail and with a banner 7, 3 and 1 days before the free month ends. An administrator subscribes from Settings&nbsp;&gt; Subscription; your data stays as it is either way.</p></div></details>
+      <details><summary>How do we renew each month?</summary><div><p>The same way: an administrator opens Settings&nbsp;&gt; Subscription and pays. The payment is verified automatically and the plan continues straight away. Reminders come by e-mail and as a banner 7, 3 and 1 days before the paid month ends.</p></div></details>
       <details><summary>Can I change the number of users?</summary><div><p>Yes. Tell customer service and the change applies from the next billing month.</p></div></details>
       <details><summary>Do you charge VAT?</summary><div><p>Customer service will confirm tax on your quotation and invoice.</p></div></details>
       <details><summary>Is hosting on our own server priced differently?</summary><div><p>Talk to us. Running on your own server may involve a set-up and support arrangement agreed with you.</p></div></details>
+    </div>
     </div>
   </div>
 </section>
@@ -203,7 +222,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href="index.html" aria-label="Messerschmidts home"><svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect width="40" height="40" rx="10" fill="#0a5c78"/><path d="M9 29V12l11 10 11-10v17" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="31" cy="9" r="4" fill="#f2b233"/></svg><span>Messerschmidts<small>Philippine industrial software</small></span></a>
-        <p class="muted small" style="margin-top:12px;max-width:340px">Maintenance management for Philippine power plants, with a companion safety app. Runs on your server or ours, works offline, syncs when it can.</p>
+        <p class="muted small footer-blurb">Maintenance management for Philippine power plants, with a companion safety app. Runs on your server or ours, works offline, syncs when it can.</p>
         <p class="small"><a class="email" href="mailto:customerservice@messerschmidts.online">customerservice@messerschmidts.online</a></p>
       </div>
       <nav aria-label="Products"><h2>Products</h2><ul>

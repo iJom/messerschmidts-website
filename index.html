@@ -5,8 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Messerschmidts | Software for Philippine industries</title>
 <meta name="description" content="Messerschmidts makes Philippine-made software for industry: EAM for power plants and HSSE for every site, with a construction app coming soon. Works offline at remote sites, prices in pesos, GCash and bank payment, Filipino customer service.">
+<link rel="canonical" href="https://messerschmidts.online/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Messerschmidts">
+<meta property="og:locale" content="en_PH">
+<meta property="og:title" content="Messerschmidts | Software for Philippine industries">
+<meta property="og:description" content="Messerschmidts makes Philippine-made software for industry: EAM for power plants and HSSE for every site, with a construction app coming soon. Works offline at remote sites, prices in pesos, GCash and bank payment, Filipino customer service.">
+<meta property="og:url" content="https://messerschmidts.online/">
+<meta property="og:image" content="https://messerschmidts.online/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Messerschmidts: software for Philippine industries, EAM for power plants and HSSE">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#0a5c78">
+<meta name="theme-color" content="#F6F5F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F141C" media="(prefers-color-scheme: dark)">
 <!-- API base for live prices; empty = same origin as this page. -->
 <meta name="msm-api" content="https://app.messerschmidts.online">
 <!-- Application base for Sign in / sign-up links; empty = same origin. -->
@@ -51,13 +64,19 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
       </ul>
     </div>
     <div class="hero-visual">
-      <div class="mock" role="img" aria-label="Illustration of the Messerschmidts dashboard with open work orders, preventive maintenance due, spare parts and active permits">
-        <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Site overview</b><span class="pill ok">Synced</span></div>
+      <div class="mock" role="img" aria-label="Illustration with sample data: the Messerschmidts dashboard with open work orders, preventive maintenance due, spare parts, active permits, a 30-day plant availability trend at 98.6%, 92% of preventive maintenance on time and 86% of permits closed on time">
+        <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Site overview</b><span class="pill ok live">Synced</span></div>
         <div class="mock-kpis" aria-hidden="true">
           <div class="kpi"><strong>18</strong><span>Open work orders</span></div>
           <div class="kpi"><strong>7</strong><span>PM due this week</span></div>
           <div class="kpi"><strong>3</strong><span>Spares below minimum</span></div>
           <div class="kpi"><strong>5</strong><span>Active permits</span></div>
+        </div>
+        <div class="mock-viz" aria-hidden="true">
+          <div class="viz viz-spark"><div class="viz-head"><span>Plant availability, 30 days</span><strong>98.6%</strong></div>
+            <svg class="spark" viewBox="0 0 200 48" preserveAspectRatio="none" focusable="false"><path class="spark-area" d="M0.0 27.1 L6.9 22.5 L13.8 25.5 L20.7 19.4 L27.6 24.0 L34.5 31.7 L41.4 37.8 L48.3 28.6 L55.2 20.9 L62.1 16.3 L69.0 19.4 L75.9 13.2 L82.8 17.8 L89.7 22.5 L96.6 14.8 L103.4 10.2 L110.3 13.2 L117.2 19.4 L124.1 24.0 L131.0 17.8 L137.9 11.7 L144.8 8.6 L151.7 14.8 L158.6 16.3 L165.5 11.7 L172.4 7.1 L179.3 13.2 L186.2 17.8 L193.1 14.8 L200.0 16.3 L200 48 L0 48 Z"/><path class="spark-line" pathLength="100" d="M0.0 27.1 L6.9 22.5 L13.8 25.5 L20.7 19.4 L27.6 24.0 L34.5 31.7 L41.4 37.8 L48.3 28.6 L55.2 20.9 L62.1 16.3 L69.0 19.4 L75.9 13.2 L82.8 17.8 L89.7 22.5 L96.6 14.8 L103.4 10.2 L110.3 13.2 L117.2 19.4 L124.1 24.0 L131.0 17.8 L137.9 11.7 L144.8 8.6 L151.7 14.8 L158.6 16.3 L165.5 11.7 L172.4 7.1 L179.3 13.2 L186.2 17.8 L193.1 14.8 L200.0 16.3"/></svg></div>
+          <div class="viz viz-ring"><svg class="ring" viewBox="0 0 44 44" focusable="false"><circle class="ring-track" cx="22" cy="22" r="18"/><circle class="ring-val" style="--v:92" pathLength="100" cx="22" cy="22" r="18"/></svg><div><strong>92%</strong><span>PM on time</span></div></div>
+          <div class="viz viz-ring safety"><svg class="ring" viewBox="0 0 44 44" focusable="false"><circle class="ring-track" cx="22" cy="22" r="18"/><circle class="ring-val" style="--v:86" pathLength="100" cx="22" cy="22" r="18"/></svg><div><strong>86%</strong><span>Permits closed on time</span></div></div>
         </div>
         <ul class="mock-list" aria-hidden="true">
           <li><span>Inverter 3B - quarterly inspection</span><span class="pill info">PM</span></li>
@@ -80,7 +99,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
     </div>
     <div class="offers">
       <article class="card offer">
-        <span class="offer-num">01 &middot; Messerschmidts EAM</span>
+        <div class="offer-top"><span class="offer-num">01 &middot; Messerschmidts EAM</span><span class="status status-live">Live</span></div>
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div>
         <h3>EAM for Power Plants</h3>
         <p class="muted">Maintenance management for solar, wind, hydro, geothermal, biomass and diesel plants and substations.</p>
@@ -94,7 +113,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <div class="btn-row"><a class="btn btn-primary" href="eam.html">Explore EAM</a></div>
       </article>
       <article class="card offer safety">
-        <span class="offer-num">02 &middot; Messerschmidts Safety</span>
+        <div class="offer-top"><span class="offer-num">02 &middot; Messerschmidts Safety</span><span class="status status-live">Live</span></div>
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div>
         <h3>HSSE</h3>
         <p class="muted">Health, safety, security and environment for the people on your site.</p>
@@ -108,8 +127,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <div class="btn-row"><a class="btn btn-accent" href="safety.html">Explore Safety</a></div>
       </article>
       <article class="card offer build">
-        <span class="offer-badge">Coming soon</span>
-        <span class="offer-num">03 &middot; Messerschmidts Construction</span>
+        <div class="offer-top"><span class="offer-num">03 &middot; Messerschmidts Construction</span><span class="status status-soon">Coming soon</span></div>
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></div>
         <h3>Construction</h3>
         <p class="muted">Messerschmidts Construction is our coming app for construction projects.</p>
@@ -131,7 +149,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
       <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 21V4M5 4h12l-2 4 2 4H5"/></svg></div><h3>Philippine-made</h3><p>Built in the Philippines for Philippine sites, in the plain English site teams use. Dates and reports in Manila time.</p></article>
       <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12a10 10 0 0 1 3-2M2 8.5A15 15 0 0 1 6 6M19 12a10 10 0 0 0-5-2.8M22 8.5A15 15 0 0 0 11 4.1M8.5 15.5a5 5 0 0 1 5-1"/><circle cx="12" cy="19" r="1"/><path d="M3 3l18 18"/></svg></div><h3>Works offline at remote sites</h3><p>Phones and tablets keep recording with weak or no signal, and sync with the server when the connection comes back.</p></article>
       <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 20V4h5a4 4 0 0 1 0 8H8M6 7h12M6 10h12"/></svg></div><h3>Prices in pesos</h3><p>Clear monthly prices in Philippine peso. No foreign currency, no surprises on the exchange rate.</p></article>
-      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></div><h3>GCash and bank payment</h3><p>Pay by GCash, Maya, MariBank, UnionBank, or crypto (USDT on TRON, OKX Pay). We do not take card payments online.</p></article>
+      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></div><h3>GCash, card and bank payment</h3><p>Pay by GCash, Maya, card, QR Ph, online banking or USDT on TRON. Payments are verified automatically and your plan activates instantly.</p></article>
       <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M8 9h8M8 12h5"/></svg></div><h3>Filipino customer service</h3><p>Questions, demos, payments and support go to our Filipino customer service team, by e-mail.</p></article>
       <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="7" rx="1.5"/><rect x="4" y="13" width="16" height="7" rx="1.5"/><path d="M8 7.5h.01M8 16.5h.01M12 7.5h5M12 16.5h5"/></svg></div><h3>Your server or ours</h3><p>Run it on your own server inside your network, or let us host it. Updates are signed.</p></article>
     </div>
@@ -143,7 +161,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
     <div class="section-head center">
       <span class="eyebrow">Subscription</span>
       <h2 id="price-title">Simple prices in Philippine peso</h2>
-      <p class="lead">Pay by GCash, Maya, MariBank, UnionBank, or crypto (USDT on TRON, OKX Pay).</p>
+      <p class="lead">Pay by GCash, Maya, card, QR Ph, online banking or USDT on TRON. Verified automatically, active instantly.</p>
     </div>
     <div class="grid grid-2">
       <article class="card product-card">
@@ -169,7 +187,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <div class="btn-row"><a class="btn btn-primary" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a><a class="btn btn-secondary" href="pricing.html">Details</a></div>
       </article>
     </div>
-    <p class="muted small center-text" style="margin-top:18px">Messerschmidts Construction is coming soon. Until then, construction teams use the Safety and EAM prices above.</p>
+    <p class="muted small center-text mt-md">Messerschmidts Construction is coming soon. Until then, construction teams use the Safety and EAM prices above.</p>
   </div>
 </section>
 
@@ -190,7 +208,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href="index.html" aria-label="Messerschmidts home"><svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect width="40" height="40" rx="10" fill="#0a5c78"/><path d="M9 29V12l11 10 11-10v17" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="31" cy="9" r="4" fill="#f2b233"/></svg><span>Messerschmidts<small>Philippine industrial software</small></span></a>
-        <p class="muted small" style="margin-top:12px;max-width:340px">Maintenance management for Philippine power plants, with a companion safety app. Runs on your server or ours, works offline, syncs when it can.</p>
+        <p class="muted small footer-blurb">Maintenance management for Philippine power plants, with a companion safety app. Runs on your server or ours, works offline, syncs when it can.</p>
         <p class="small"><a class="email" href="mailto:customerservice@messerschmidts.online">customerservice@messerschmidts.online</a></p>
       </div>
       <nav aria-label="Products"><h2>Products</h2><ul>
