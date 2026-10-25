@@ -533,6 +533,9 @@ textarea { min-height: 140px; resize: vertical; }
 .site-footer li a { display: inline-block; padding: 4px 0; min-height: 28px; }
 .site-footer a { color: var(--text); text-decoration: none; }
 .site-footer a:hover { color: var(--primary); text-decoration: underline; }
+.bir-seal { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.bir-seal img { display: block; width: 300px; max-width: 100%; height: auto; border-radius: 6px; background: #fff; }
+.bir-seal p { margin: 0; max-width: 46ch; }
 .footer-bottom { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; color: var(--text-2); font-size: .88rem; }
 .email { overflow-wrap: anywhere; }
 
