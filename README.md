@@ -21,7 +21,7 @@ Static site for **Messerschmidts EAM**, **Messerschmidts Safety** and **Messersc
 
 ## Legal pages
 
-The three legal pages are linked in every footer (Account column) and from the apps' sign-in page, Settings and LEGAL page. They have **not been reviewed by a lawyer** yet (banner on each page). Placeholders in [square brackets] still to fill: `[COMPANY ADDRESS]`, `[DPO NAME]`, `[NPC REGISTRATION NUMBER, if registration applies]`, `[EU REPRESENTATIVE, if one is appointed]`, `[LOG RETENTION PERIOD]`. When a page changes, update its version and "last updated" date (format: 25 Oct 2026) and add a row to its change history table. If the browser storage the apps use changes, update the table in `privacy.html`.
+The three legal pages are linked in every footer (Account column) and from the apps' sign-in page, Settings and LEGAL page. They have **not been reviewed by a lawyer** yet (banner on each page). Placeholders in [square brackets] still to fill: `[COMPANY ADDRESS]`, `[DPO NAME]`, `[NPC REGISTRATION NUMBER, if registration applies]`, `[EU REPRESENTATIVE, if one is appointed]`. When a page changes, update its version and "last updated" date (format: 25 Oct 2026) and add a row to its change history table. If the browser storage the apps use changes, update the table in `privacy.html`.
 
 ## Editing text and prices
 
