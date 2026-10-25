@@ -701,9 +701,9 @@ a.chip:hover { border-color: var(--amber); color: var(--text); background: var(-
 .ind-build .art::before { width: 100%; height: 8px; bottom: auto; background: repeating-linear-gradient(-45deg, #FFB000 0 12px, #2A2108 12px 24px); }
 .ind .product-card { border-top-color: var(--primary); }
 .ind .product-card.safety { border-top-color: var(--safety); }
-.ind .grid-3 > .card:first-child { background: color-mix(in srgb, var(--a) 7%, var(--surface)); border-color: color-mix(in srgb, var(--a) 30%, var(--border)); }
-.ind .grid-3 > .card:first-child h3 { color: var(--text); }
-.ind .grid-3 > .card:first-child .check-list li::before { width: 14px; height: 4px; margin-top: .7em; border-radius: 2px; background: var(--a); }
+.ind .grid-3 > .card:first-child, .ind .grid-4 > .card:first-child { background: color-mix(in srgb, var(--a) 7%, var(--surface)); border-color: color-mix(in srgb, var(--a) 30%, var(--border)); }
+.ind .grid-3 > .card:first-child h3, .ind .grid-4 > .card:first-child h3 { color: var(--text); }
+.ind .grid-3 > .card:first-child .check-list li::before, .ind .grid-4 > .card:first-child .check-list li::before { width: 14px; height: 4px; margin-top: .7em; border-radius: 2px; background: var(--a); }
 .ind-build .notice { border-left-color: var(--amber); background: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--amber) 10%, var(--surface)) 0 14px, var(--surface) 14px 28px); }
 .ind-records .grid-3 > .card:first-child { background: var(--surface); border-color: var(--border); }
 
@@ -856,6 +856,71 @@ textarea { min-height: 140px; resize: vertical; }
 .notfound .code { font-family: var(--font-display); font-size: clamp(4.5rem, 20vw, 9rem); font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 10px; letter-spacing: -.02em; }
 .notfound .art { max-width: 320px; margin: 0 auto 8px; --a: var(--amber); }
 .notfound .lead { margin-left: auto; margin-right: auto; }
+
+/* ---------- Construction: amber hazard accents (live since 4.13.0) ----------
+   Amber is the product colour; --build (rebar rust on light, warm amber-orange on dark)
+   carries text so it keeps contrast. Hazard stripes mark Construction surfaces. */
+.eyebrow.build { color: var(--build); }
+.hero .eyebrow.build, .page-hero .eyebrow.build { color: var(--amber); }
+.page-hero.build-hero { background-image:
+    linear-gradient(rgba(140, 170, 210, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 170, 210, .07) 1px, transparent 1px),
+    radial-gradient(900px 480px at 88% -10%, rgba(255, 176, 0, .24), transparent 70%),
+    radial-gradient(700px 400px at -5% 115%, rgba(255, 154, 98, .14), transparent 70%); }
+.page-hero.build-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8px; background: repeating-linear-gradient(-45deg, var(--amber) 0 14px, #1A1405 14px 28px); }
+.hero-price.build { border-left-color: var(--amber); }
+.sld .bar-l { font-size: 13px; font-weight: 700; }
+@media (max-width: 600px) {
+  .build-hero .sld text { font-size: 20px; }
+  .build-hero .sld .bar-l { font-size: 16px; }
+}
+.sld .node-build { fill: rgba(255, 176, 0, .14); stroke: #FFB000; stroke-width: 2; }
+.card.build .icon, .icon.build { background: color-mix(in srgb, var(--amber) 18%, transparent); color: var(--build); }
+.feature-card.build::after { background: repeating-linear-gradient(-45deg, var(--amber) 0 6px, #2A2108 6px 12px); }
+@media (hover: hover) { .feature-card.build:hover .icon { background: var(--amber); color: var(--on-amber); } }
+.product-card.build { border-top: 0; padding-top: 33px; }
+.product-card.build.compact { padding-top: 27px; }
+.product-card.build::before { content: ""; position: absolute; left: -1px; right: -1px; top: -1px; height: 5px; border-radius: var(--radius) var(--radius) 0 0; background: repeating-linear-gradient(-45deg, var(--amber) 0 10px, #2A2108 10px 20px); }
+.product-card.build .product-tag { color: var(--build); }
+.product-card.build li::before { background: var(--amber); }
+.ind .product-card.build { border-top-color: transparent; }
+.flow.build { --flow-c: var(--build); }
+.price-tile.build { border-left: 0; position: relative; padding-left: 23px; overflow: hidden; }
+.price-tile.build::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: repeating-linear-gradient(-45deg, var(--amber) 0 6px, #2A2108 6px 12px); }
+.plans.build-plan { max-width: 980px; }
+.plans.build-plan .plan::before { background: repeating-linear-gradient(-45deg, var(--amber) 0 6px, #2A2108 6px 12px); width: 64px; }
+.plan.build.featured { border-color: var(--amber); }
+.plan .included { display: inline-flex; align-items: center; gap: 6px; font-size: .76rem; font-weight: 800; padding: 2px 9px; border-radius: 999px; color: var(--safety); background: var(--safety-tint); border: 1px solid color-mix(in srgb, var(--safety) 35%, transparent); margin-left: 4px; white-space: nowrap; }
+.status-new { color: var(--on-amber); background: var(--amber); }
+.status-new::before { background: var(--on-amber); }
+
+/* Executive dashboard KPI wall (sample values) */
+.kpi-wall { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 560px) { .kpi-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.kpi-wall .kpi { border-left-color: var(--amber); }
+.kpi-wall .kpi.k-safe { border-left-color: var(--safety); }
+.kpi-wall .kpi strong { font-size: 1.5rem; }
+
+/* Standards compliance matrix */
+.std-matrix { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); margin: 0; padding: 0; list-style: none; }
+.std-matrix li { display: flex; align-items: center; gap: 9px; min-height: 48px; padding: 8px 12px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); font-weight: 700; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.std-matrix li::before { content: ""; flex: none; width: 10px; height: 10px; border-radius: 2px; transform: rotate(45deg); background: var(--amber); }
+
+/* Request for payment: the arithmetic, as a sample sheet */
+.rfp { margin: 0; display: grid; gap: 0; font-size: .95rem; }
+.rfp div { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px dashed var(--border-strong); }
+.rfp dt { color: var(--text-2); }
+.rfp dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+.rfp div.net { border-bottom: 0; border-top: 2px solid var(--text); margin-top: 4px; }
+.rfp div.net dt { color: var(--text); font-weight: 700; }
+.rfp div.net dd { font-family: var(--font-display); font-size: 1.4rem; }
+
+/* Safety included band */
+.included-band { border-radius: var(--radius-lg); border: 2px solid var(--safety); background: color-mix(in srgb, var(--emerald) 8%, var(--surface)); padding: 28px; display: grid; gap: 24px; box-shadow: var(--shadow), var(--edge); }
+@media (min-width: 900px) { .included-band { grid-template-columns: 1.1fr .9fr; padding: 40px; gap: 48px; align-items: center; } }
+.included-band h2 { margin-bottom: .35em; }
+.not-yet { margin-top: 28px; padding: 14px 18px; border-radius: 12px; border: 1px dashed var(--border-strong); color: var(--text-2); background: var(--surface); }
+.not-yet strong { color: var(--text); }
 
 /* ---------- Reveal on scroll (added by JS only below the first screen) ---------- */
 @media (prefers-reduced-motion: no-preference) {

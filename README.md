@@ -1,15 +1,16 @@
 # Messerschmidts marketing website
 
-Static site for **Messerschmidts EAM** and **Messerschmidts Safety**. Plain HTML, one CSS file and one JS file. No build step, no external CDNs, fonts, analytics or trackers. All code is our own.
+Static site for **Messerschmidts EAM**, **Messerschmidts Safety** and **Messerschmidts Construction**. Plain HTML, one CSS file and one JS file. No build step, no external CDNs, fonts, analytics or trackers. All code is our own.
 
 ## Pages
 
 | File | Page |
 |---|---|
-| `index.html` | Company home page: hero about Messerschmidts, three offerings (EAM for Power Plants, HSSE, Construction coming soon), why Messerschmidts, price summary, contact |
+| `index.html` | Company home page: hero about Messerschmidts, three offerings (EAM for Power Plants, HSSE, Construction, all live), why Messerschmidts, price summary, contact |
 | `eam.html` | Messerschmidts EAM |
 | `safety.html` | Messerschmidts Safety |
-| `pricing.html` | Subscription: Safety plans, subcontractor rules, Safety estimator, EAM Standard and quote, EAM estimator, payment and renewal |
+| `construction.html` | Messerschmidts Construction (live since app release 4.13.0) |
+| `pricing.html` | Subscription: Safety plans, subcontractor rules, Safety estimator, EAM Standard and quote, EAM estimator, Construction plan (`#construction`), payment and renewal |
 | `industries.html` | Power plants first (`#solar`, `#power` for wind/hydro/geothermal/biomass/diesel, `#grid` for substations and transmission, `#records` for maintenance and DOLE safety records), then `#construction`, `#facilities`, `#manufacturing` |
 | `about.html`, `contact.html`, `faq.html` | About, contact (form opens the visitor's e-mail app), FAQ |
 | `privacy.html`, `terms.html` | **Drafts** for a lawyer to review (marked on the page) |
@@ -27,6 +28,7 @@ Current prices (owner, 2026-10-23):
 - Subcontractor account invited by a user, working only on the inviter's site(s): ₱100 per month.
 - Subcontractor account that opens a new site of its own (for example an EPC or main contractor registered as a subcontractor): full ₱1,000.
 - Messerschmidts EAM Standard: ₱20,000 per month per organisation, up to 25 users included, ₱750 per month for each additional user. Bigger organisations: quote via customerservice@messerschmidts.online.
+- Messerschmidts Construction (release 4.13.0): ₱50,000 per month per organisation, any number of sites, 30-day free trial. Includes Safety for the organisation's own users on its sites; subcontractor accounts keep their own Safety price (₱100 per site); Security Gate accounts are free. Not yet: 3D BIM viewer, design submittal review, stamped PDF export.
 - Payment: GCash, Maya, cards, QR Ph and online banking through PayMongo, and USDT on TRON (detected automatically). Payments are verified automatically by the system and the plan activates instantly, with no manual confirmation.
 - Renewal: an administrator subscribes or renews in Settings > Subscription; the app reminds administrators by e-mail and with a banner 7, 3 and 1 days before the free trial or paid month ends.
 
