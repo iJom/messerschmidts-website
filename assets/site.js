@@ -393,7 +393,99 @@
     });
   }
 
+  /* ---------- Header dropdowns (disclosure pattern) ----------
+     Each .menu-toggle button shows/hides the panel it controls. Escape closes the
+     open panel and returns focus to its button; a click outside or focus leaving
+     the item closes it too. Without JS, CSS opens panels on hover/focus. */
+  function initMenus() {
+    var items = doc.querySelectorAll('.has-menu');
+    if (!items.length) return;
+    function setOpen(li, open) {
+      var b = li.querySelector('.menu-toggle');
+      li.classList.toggle('is-open', open);
+      if (b) b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    function closeAll(except) {
+      items.forEach(function (li) { if (li !== except) setOpen(li, false); });
+    }
+    items.forEach(function (li) {
+      var b = li.querySelector('.menu-toggle');
+      if (!b) return;
+      b.addEventListener('click', function () {
+        var open = !li.classList.contains('is-open');
+        closeAll(li);
+        setOpen(li, open);
+      });
+      li.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && li.classList.contains('is-open')) {
+          e.stopPropagation();
+          setOpen(li, false);
+          b.focus();
+        }
+      });
+      li.addEventListener('focusout', function (e) {
+        if (e.relatedTarget && !li.contains(e.relatedTarget)) setOpen(li, false);
+      });
+    });
+    doc.addEventListener('click', function (e) {
+      if (!e.target.closest || !e.target.closest('.has-menu')) closeAll(null);
+    });
+  }
+
+  /* ---------- Counters ----------
+     [data-count] figures count up from zero once when they scroll into view.
+     The final text is in the HTML, so without JS or with reduced motion it simply shows. */
+  function initCounters() {
+    var nodes = doc.querySelectorAll('[data-count]');
+    if (!nodes.length || reduceMotion || !hasIO || !window.requestAnimationFrame) return;
+    nodes.forEach(function (n) {
+      var text = n.textContent;
+      var m = text.match(/^(\D*)([\d.,]+)(.*)$/);
+      if (!m) return;
+      var target = parseFloat(m[2].replace(/,/g, ''));
+      if (!isFinite(target)) return;
+      var dec = (m[2].split('.')[1] || '').length;
+      var fmt = function (v) {
+        return m[1] + v.toLocaleString('en-PH', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + m[3];
+      };
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          io.disconnect();
+          var t0 = null, dur = 1200;
+          function step(ts) {
+            if (t0 === null) t0 = ts;
+            var k = Math.min(1, (ts - t0) / dur);
+            var eased = 1 - Math.pow(1 - k, 3);
+            n.textContent = fmt(target * eased);
+            if (k < 1) window.requestAnimationFrame(step); else n.textContent = text;
+          }
+          n.textContent = fmt(0);
+          window.requestAnimationFrame(step);
+        });
+      }, { threshold: 0.4 });
+      io.observe(n);
+    });
+  }
+
+  /* Marks [data-inview] blocks (and .platform) once visible, so their CSS
+     animations start when seen rather than off-screen. */
+  function initInView() {
+    var nodes = doc.querySelectorAll('.platform, [data-inview]');
+    if (!nodes.length) return;
+    if (reduceMotion || !hasIO) { nodes.forEach(function (n) { n.classList.add('in-view'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.25 });
+    nodes.forEach(function (n) { io.observe(n); });
+  }
+
   function init() {
+    initMenus();
+    initCounters();
+    initInView();
     initNav();
     initAppLinks();
     initYear();
