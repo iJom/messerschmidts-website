@@ -31,7 +31,7 @@ Static prices appear in the meta descriptions and in `index.html` (summary), `pr
 
 Current prices (owner, 2026-10-23):
 
-- Free trials (owner, 2026-10-26): a new organisation picks ONE app at sign-up: Safety only 14 days, Construction (with Safety) 7 days, EAM 7 days. The lengths live in one place, `TRIALS` at the top of `assets/site.js`; every `<span data-trial="safety|construction|eam">` reads it (`data-trial-fmt="day"` gives "14-day", `"n"` the bare number). The HTML fallback text and the meta descriptions are static, so change them too when the lengths change.
+- Free trials (owner, 2026-10-26): a new organisation picks ONE app at sign-up: Safety only 14 days, Construction (with Safety) 7 days, EAM 7 days. The lengths live in one place, `TRIALS` at the top of `assets/site.js`; every `<span data-trial="safety|construction|eam">` reads it (`data-trial-fmt="day"` gives "14-day", `"n"` the bare number). If the public prices endpoint sends a top-level `trial_days` map (`{"eam":7,"construction":7,"safety":14}`), it wins over `TRIALS`; per-plan `trial_days` are used only once `PLAN_TRIAL_DAYS_LIVE` is set to `true` (the endpoint still reported 30 / 0 / 30 on 2026-10-26). The HTML fallback text and the meta descriptions are static, so change them too when the lengths change.
 - Messerschmidts Safety Premium: ₱1,000 per user per month. 14-day free trial for a new organisation that picks Safety.
 - Subcontractor account invited by a user, working only on the inviter's site(s): ₱100 per month.
 - Subcontractor account that opens a new site of its own (for example an EPC or main contractor registered as a subcontractor): full ₱1,000.

@@ -42,6 +42,29 @@
     return n + (n === 1 ? ' day' : ' days');
   }
 
+  /* Trial days from the public prices endpoint win over TRIALS when it sends them:
+     a top-level map { "trial_days": { "eam": 7, "construction": 7, "safety": 14 } }.
+     Per-plan trial_days are read too once PLAN_TRIAL_DAYS_LIVE is true; it stays
+     false while the endpoint still reports the old trials (30 / 0 / 30 on 2026-10-26). */
+  var PLAN_TRIAL_DAYS_LIVE = false;
+
+  function applyServerTrials(data, plans) {
+    var seen = {}, changed = false;
+    function take(app, v) {
+      var n = Number(v);
+      if (!Object.prototype.hasOwnProperty.call(TRIALS, app) || seen[app] || !isFinite(n) || n < 1 || n > 365) return;
+      seen[app] = true;
+      if (TRIALS[app] !== Math.round(n)) { TRIALS[app] = Math.round(n); changed = true; }
+    }
+    var map = data && data.trial_days;
+    if (map && typeof map === 'object') {
+      Object.keys(map).forEach(function (k) { take(k, map[k]); });
+    } else if (PLAN_TRIAL_DAYS_LIVE) {
+      (plans || []).forEach(function (p) { take(p.app, p.trial_days); });
+    }
+    if (changed) initTrials();
+  }
+
   function initTrials() {
     doc.querySelectorAll('[data-trial]').forEach(function (n) {
       var t = trialText(n.getAttribute('data-trial'), n.getAttribute('data-trial-fmt'));
@@ -139,7 +162,7 @@
       var ul = el('ul');
       p.features.slice(0, 20).forEach(function (f) {
         // The trial line above comes from TRIALS; skip a server feature that states its own trial length.
-        if (typeof f === 'string' && f && !/(free|trial|demo).*(month|days?|trial|demo)/i.test(f)) ul.appendChild(el('li', null, f));
+        if (typeof f === 'string' && f && !/\b(free|trial|demo)\b.*\b(month|days?|trial|demo)\b/i.test(f)) ul.appendChild(el('li', null, f));
       });
       card.appendChild(ul);
     }
@@ -198,6 +221,7 @@
         clearTimeout(timer);
         if (data && typeof data === 'object') renderPayMethods(data.payment_methods);
         var plans = data && Array.isArray(data.plans) ? data.plans.filter(validPlan) : [];
+        applyServerTrials(data, plans);
         if (!plans.length) return;
         targets.forEach(function (t) {
           var app = t.getAttribute('data-plans');
