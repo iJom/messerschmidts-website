@@ -1156,6 +1156,57 @@ html:not(.js) .tour-panel + .tour-panel { margin-top: 56px; }
   .rv.in { opacity: 1; transform: none; }
 }
 
+/* ---------- Free month of Premium: the offer tag (home hero, pricing) ----------
+   A safety tag on the navy chrome: hazard-striped head, a punched eyelet, the
+   price in the headline face, one amber CTA, two plain-spoken perks, small print.
+   Only the CTA's sheen moves, once, when the tag comes into view. */
+.hero .fm-title { font-size: clamp(2.3rem, 4.6vw, 3.5rem); max-width: 18ch; line-height: 1; }
+@media (min-width: 980px) { .hero-grid:has(.fm-hero) { align-items: start; } .hero-grid:has(.fm-hero) .hero-art { margin-top: 40px; } }
+.fm-hero .lead { margin-bottom: 0; }
+.fm-card { position: relative; margin-top: 26px; max-width: 580px; padding: 30px 24px 22px; border-radius: 14px 14px 14px 4px;
+  background: #12305A; border: 2px solid var(--amber); box-shadow: 0 18px 44px -18px rgba(2, 8, 20, .7), 0 0 0 6px rgba(255, 176, 0, .08); }
+.fm-card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 8px; border-radius: 12px 12px 0 0;
+  background: repeating-linear-gradient(-45deg, var(--amber) 0 12px, #1A1405 12px 24px); }
+.fm-card::after { content: ""; position: absolute; right: 20px; top: 22px; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--navy); border: 3px solid var(--amber); }
+.fm-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin: 0 40px 16px 0; }
+.fm-amount { font-family: var(--font-display); font-weight: 700; font-size: clamp(3.6rem, 9vw, 5rem); line-height: .9; color: var(--amber); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.fm-for { font-weight: 700; font-size: 1.05rem; color: var(--text); max-width: 22ch; line-height: 1.3; }
+.btn.fm-cta { width: 100%; min-height: 60px; font-size: 1.2rem; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 28px -10px rgba(255, 176, 0, .75); }
+.btn.fm-cta:focus-visible { outline-offset: 4px; }
+.fm-perks { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
+.fm-perks li { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1rem; color: var(--text); line-height: 1.3; }
+.fm-perks svg { flex: none; width: 34px; height: 34px; padding: 7px; border-radius: 50%; color: var(--on-safety); background: var(--safety); }
+.fm-fine { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--border-strong); font-size: .84rem; line-height: 1.5; color: rgba(230, 238, 247, .74); }
+.fm-also { margin: 20px 0 0; font-size: .95rem; color: var(--text-2); max-width: 580px; }
+.fm-also a { color: var(--text); font-weight: 700; text-decoration: underline; text-decoration-color: var(--amber); text-underline-offset: 3px; }
+.fm-also a:hover { color: var(--amber); }
+@media (min-width: 480px) { .fm-card { padding: 34px 30px 24px; } .fm-perks { grid-template-columns: 1fr 1fr; } }
+
+/* Pricing page: the same tag, wide, between the lead and the price tiles */
+.fm-card.fm-wide { max-width: 960px; margin-top: 30px; }
+.fm-h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); margin: 0; max-width: 20ch; line-height: 1.05; }
+.fm-wide .fm-price { margin-bottom: 8px; }
+.fm-wide .fm-act { margin-top: 20px; }
+@media (min-width: 860px) {
+  .fm-card.fm-wide { display: grid; grid-template-columns: 1.05fr 1fr; gap: 0 36px; align-items: center; padding: 38px 36px 26px; }
+  .fm-wide .fm-act { margin-top: 0; }
+  .fm-wide .fm-perks { grid-template-columns: 1fr; }
+  .fm-wide .fm-fine { grid-column: 1 / -1; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fm-cta::after { content: ""; position: absolute; top: 0; bottom: 0; left: -40%; width: 30%; transform: skewX(-20deg); background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55), transparent); opacity: 0; pointer-events: none; }
+  .js .fm-card.in-view .fm-cta::after { animation: fm-sheen 1.1s var(--ease) .5s 2 both; }
+}
+@keyframes fm-sheen { 0% { left: -40%; opacity: 1; } 100% { left: 120%; opacity: 1; } }
+
+@media print {
+  .fm-card { background: #fff !important; border-color: #000 !important; box-shadow: none !important; }
+  .fm-card::before, .fm-card::after { display: none; }
+  .fm-amount, .fm-for, .fm-perks li, .fm-fine { color: #000 !important; }
+}
+
 /* ---------- Reduced motion: stop everything decorative ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

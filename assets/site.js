@@ -27,6 +27,28 @@
     return isFinite(n) && n >= 0 ? n : fallback;
   }
 
+  /* ---------- Free trial lengths: the one place to change them ----------
+     A new organisation picks one app at sign-up. Every [data-trial="app"] on the
+     site reads its length from here; data-trial-fmt: "days" (default) = "14 days",
+     "Days" = "14 Days" (title-case headline), "day" = "14-day", "n" = "14". The HTML keeps the same values for no-JS. */
+  var TRIALS = { eam: 7, construction: 7, safety: 14 };
+
+  function trialText(app, fmt) {
+    var n = TRIALS[app];
+    if (!(n > 0)) return null;
+    if (fmt === 'day') return n + '-day';
+    if (fmt === 'n') return String(n);
+    if (fmt === 'Days') return n + (n === 1 ? ' Day' : ' Days');
+    return n + (n === 1 ? ' day' : ' days');
+  }
+
+  function initTrials() {
+    doc.querySelectorAll('[data-trial]').forEach(function (n) {
+      var t = trialText(n.getAttribute('data-trial'), n.getAttribute('data-trial-fmt'));
+      if (t) n.textContent = t;
+    });
+  }
+
   function peso(n) {
     var v = Number(n);
     if (!isFinite(v)) return '';
@@ -101,8 +123,9 @@
     }
 
     var trial = Number(p.trial_days);
-    if (isFinite(trial) && trial > 0) {
-      card.appendChild(el('p', { 'class': 'sub' }, trial + '-day free Premium demo for a new organisation'));
+    var shown = trialText(p.app, 'day');
+    if (shown) {
+      card.appendChild(el('p', { 'class': 'sub' }, shown + ' free trial for a new organisation that picks ' + (p.app === 'safety' ? 'Safety' : p.app === 'eam' ? 'EAM' : 'this app') + ' at sign-up'));
     }
     if (typeof p.description === 'string' && p.description) {
       card.appendChild(el('p', { 'class': 'sub' }, p.description));
@@ -115,7 +138,8 @@
     if (!compact && Array.isArray(p.features) && p.features.length) {
       var ul = el('ul');
       p.features.slice(0, 20).forEach(function (f) {
-        if (typeof f === 'string' && f) ul.appendChild(el('li', null, f));
+        // The trial line above comes from TRIALS; skip a server feature that states its own trial length.
+        if (typeof f === 'string' && f && !/(free|trial|demo).*(month|days?|trial|demo)/i.test(f)) ul.appendChild(el('li', null, f));
       });
       card.appendChild(ul);
     }
@@ -608,6 +632,7 @@
   }
 
   function init() {
+    initTrials();
     initTabs();
     initMenus();
     initCounters();

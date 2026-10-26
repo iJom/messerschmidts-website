@@ -93,20 +93,20 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
 <g mask="url(#pv-mask)"><rect class="sky-shine" x="0" y="0" width="420" height="70" fill="url(#pv-glint)"/></g>
 </svg>
   <div class="container hero-grid">
-    <div>
-      <span class="eyebrow">Messerschmidts &middot; Philippine-made industrial software</span>
-      <h1 id="hero-title">We help Philippine industries keep plants running and people safe.</h1>
-      <p class="lead">Messerschmidts makes software for the work on Philippine sites: maintenance of power plants (EAM), health, safety, security and environment (HSSE), and project control for construction. Our apps work offline at remote sites, are priced in pesos, and come with Filipino customer service.</p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="#offerings">See what we do</a>
-        <a class="btn btn-secondary" href="#contact">Talk to us</a>
+    <div class="fm-hero">
+      <span class="eyebrow safety">Messerschmidts Safety Premium</span>
+      <h1 id="hero-title" class="fm-title">Get <span data-trial="safety" data-trial-fmt="Days">14 Days</span> of Premium Free upon Sign-Up</h1>
+      <p class="lead">Permits to work, incidents, man-hours, ID cards and gate passes for everyone on your site. Use the full Premium plan with your own team before you pay anything.</p>
+      <div class="fm-card" data-inview>
+        <p class="fm-price"><span class="fm-amount">&#8369;0</span><span class="fm-for">for your first <span data-trial="safety">14 days</span> of Premium</span></p>
+        <a class="btn btn-primary fm-cta" href="/#/account/signup" data-app-link="/#/account/signup"><span>Start free, up to <span data-trial="safety">14 days</span></span></a>
+        <ul class="fm-perks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M3 3l18 18"/></svg>No credit card required</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>Short form: company, name and work e-mail</li>
+        </ul>
+        <p class="fm-fine">We confirm your e-mail, review the request and e-mail you an invitation to set your password. A paid subscription (<span data-live-price="safety">&#8369;1,000</span> per user per month) is only needed after the <span data-trial="safety" data-trial-fmt="day">14-day</span> free trial ends. Without one, the site turns read-only after a 7&#8209;day grace period; your data is kept. At sign-up a new organisation picks one app, once: Safety only (<span data-trial="safety">14 days</span> free), Construction with Safety (<span data-trial="construction">7 days</span>) or EAM (<span data-trial="eam">7 days</span>).</p>
       </div>
-      <ul class="hero-note">
-        <li>Philippine-made</li>
-        <li>Works offline</li>
-        <li>Prices in pesos</li>
-        <li>Filipino customer service</li>
-      </ul>
+      <p class="fm-also">Also from Messerschmidts: <a href="contact.html?topic=eam">Ask for an EAM demo</a> for your power plant, or <a href="/#/account/signup" data-app-link="/#/account/signup">start a <span data-trial="construction" data-trial-fmt="day">7-day</span> Construction trial</a>.</p>
     </div>
     <figure class="hero-art">
 <svg class="sld" viewBox="0 0 560 470" role="img" aria-labelledby="sld-title" focusable="false"><title id="sld-title">Diagram: solar, wind, hydro and thermal plants and substations all connect to one Messerschmidts platform, which runs EAM for maintenance, Safety for HSSE and Construction for projects.</title>
@@ -146,7 +146,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
     <ul class="bus-stats" aria-label="Key facts">
       <li><strong data-count>3</strong><span>apps on one sign-in: EAM, Safety and Construction</span></li>
       <li><strong data-count>25</strong><span>users included in Messerschmidts EAM Standard</span></li>
-      <li><strong data-count>30</strong><span>day free trial of Messerschmidts Construction</span></li>
+      <li><strong data-count data-trial="construction" data-trial-fmt="n">7</strong><span>day free trial of Messerschmidts Construction</span></li>
       <li><strong data-count>&#8369;100</strong><span>a month for an invited subcontractor account in Safety</span></li>
     </ul>
   </div>
@@ -343,6 +343,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <ul>
           <li>Up to 25 users included</li>
           <li>&#8369;750 per additional user / month</li>
+          <li><span><span data-trial="eam" data-trial-fmt="day">7-day</span> free trial for a new organisation</span></li>
           <li>Bigger organisation? Ask us for a quote</li>
         </ul>
         <div class="btn-row"><a class="btn btn-primary" href="contact.html?topic=eam">Talk to us</a><a class="btn btn-secondary" href="pricing.html#eam">Details</a></div>
@@ -352,7 +353,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <h3>Premium</h3>
         <div class="price"><span class="amount" data-live-price="safety">&#8369;1,000</span><span class="per">per user / month</span></div>
         <ul>
-          <li>1 month free Premium demo for a new organisation</li>
+          <li><span><span data-trial="safety" data-trial-fmt="day">14-day</span> free trial for a new organisation</span></li>
           <li>Invited subcontractor on your site(s) only: &#8369;100 / month</li>
           <li>Subcontractor that opens its own site: full &#8369;1,000</li>
         </ul>
@@ -364,7 +365,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <div class="price"><span class="amount">&#8369;50,000</span><span class="per">per organisation / month</span></div>
         <ul>
           <li>First site included; &#8369;15,000 / month per extra site</li>
-          <li>30-day free trial</li>
+          <li><span><span data-trial="construction" data-trial-fmt="day">7-day</span> free trial</span></li>
           <li>Safety included for your own users</li>
         </ul>
         <div class="btn-row"><a class="btn btn-primary" href="/#/account/signup" data-app-link="/#/account/signup">Start free trial</a><a class="btn btn-secondary" href="pricing.html#construction">Details</a></div>

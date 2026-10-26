@@ -31,11 +31,12 @@ Static prices appear in the meta descriptions and in `index.html` (summary), `pr
 
 Current prices (owner, 2026-10-23):
 
-- Messerschmidts Safety Premium: ₱1,000 per user per month. First month free for a new organisation.
+- Free trials (owner, 2026-10-26): a new organisation picks ONE app at sign-up: Safety only 14 days, Construction (with Safety) 7 days, EAM 7 days. The lengths live in one place, `TRIALS` at the top of `assets/site.js`; every `<span data-trial="safety|construction|eam">` reads it (`data-trial-fmt="day"` gives "14-day", `"n"` the bare number). The HTML fallback text and the meta descriptions are static, so change them too when the lengths change.
+- Messerschmidts Safety Premium: ₱1,000 per user per month. 14-day free trial for a new organisation that picks Safety.
 - Subcontractor account invited by a user, working only on the inviter's site(s): ₱100 per month.
 - Subcontractor account that opens a new site of its own (for example an EPC or main contractor registered as a subcontractor): full ₱1,000.
 - Messerschmidts EAM Standard: ₱20,000 per month per organisation, up to 25 users included, ₱750 per month for each additional user. Bigger organisations: quote via customerservice@messerschmidts.online.
-- Messerschmidts Construction (release 4.13.0): ₱50,000 per month per organisation including its first site; each additional site ₱15,000 a month, activated when paid (first month prorated to the renewal date); 30-day free trial. Includes Safety for the organisation's own users on its sites; Subcontractor accounts on the organisation's sites are included too. Not yet: 3D BIM viewer, design submittal review, stamped PDF export.
+- Messerschmidts Construction (release 4.13.0): ₱50,000 per month per organisation including its first site; each additional site ₱15,000 a month, activated when paid (first month prorated to the renewal date); 7-day free trial. Includes Safety for the organisation's own users on its sites; Subcontractor accounts on the organisation's sites are included too. Not yet: 3D BIM viewer, design submittal review, stamped PDF export.
 - Payment: GCash, Maya, cards, QR Ph and online banking through PayMongo, and USDT on TRON (detected automatically). Payments are verified automatically by the system and the plan activates instantly, with no manual confirmation.
 - Renewal: an administrator subscribes or renews in Settings > Subscription; the app reminds administrators by e-mail and with a banner 7, 3 and 1 days before the free trial or paid month ends.
 
