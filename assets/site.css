@@ -186,7 +186,7 @@ h3 { font-size: 1.18rem; letter-spacing: -.005em; }
 p { margin: 0 0 1em; text-wrap: pretty; }
 ul { padding-left: 1.2em; }
 code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em; background: var(--well); padding: .1em .35em; border-radius: 5px; }
-.amount, .calc-total, .kpi strong, td.num, .viz strong { font-variant-numeric: tabular-nums; }
+.amount, .calc-total, .kpi strong, td.num { font-variant-numeric: tabular-nums; }
 
 .skip-link { position: absolute; left: -9999px; top: 0; z-index: 100; background: var(--amber); color: var(--on-amber); font-weight: 700; padding: .7em 1.1em; border-radius: 0 0 8px 0; }
 .skip-link:focus { left: 0; }
@@ -438,8 +438,6 @@ html:not(.js) .has-menu:hover > .menu, html:not(.js) .has-menu:focus-within > .m
 .mock-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--border-strong); display: inline-block; }
 .mock-bar b { margin-left: 8px; font-weight: 700; font-size: .88rem; }
 .mock-bar .pill { margin-left: auto; }
-.mock-kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-@media (min-width: 480px) { .mock-kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .kpi { background: var(--well); border-radius: 10px; padding: 10px 12px; border-left: 3px solid var(--primary); }
 .kpi:nth-child(3) { border-left-color: var(--amber); }
 .kpi:nth-child(4) { border-left-color: var(--safety); }
@@ -455,31 +453,6 @@ html:not(.js) .has-menu:hover > .menu, html:not(.js) .has-menu:focus-within > .m
 .pill.warn { background: var(--amber); color: var(--on-amber); border-color: transparent; }
 .pill.info { color: var(--primary); }
 
-.mock-viz { display: grid; gap: 10px; margin-top: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.viz { background: var(--well); border-radius: 10px; padding: 10px; min-width: 0; }
-.viz-spark { grid-column: 1 / -1; display: grid; gap: 4px; }
-.viz-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-.viz-head span { color: var(--text-2); font-size: .78rem; }
-.viz-head strong { font-family: var(--font-display); font-size: 1.25rem; color: var(--ok); }
-.spark { display: block; width: 100%; height: 48px; }
-.spark-area { fill: color-mix(in srgb, var(--cyan) 22%, transparent); }
-.spark-line { fill: none; stroke: var(--primary); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; stroke-dashoffset: 0; }
-.viz-ring { display: flex; align-items: center; gap: 8px; }
-.ring { width: 46px; height: 46px; flex: none; transform: rotate(-90deg); }
-.ring-track { fill: none; stroke: var(--border-strong); stroke-width: 5; }
-.ring-val { fill: none; stroke: var(--primary); stroke-width: 5; stroke-linecap: round; stroke-dasharray: var(--v) 100; }
-.viz-ring.safety .ring-val { stroke: var(--safety); }
-.viz-ring strong { display: block; font-family: var(--font-display); font-size: 1.2rem; line-height: 1.1; }
-.viz-ring span { color: var(--text-2); font-size: .74rem; line-height: 1.25; display: block; }
-@media (prefers-reduced-motion: no-preference) {
-  .js .spark-line { animation: draw 1.6s var(--ease) .3s both; }
-  .js .spark-area { animation: fade-in .6s ease 1.5s both; }
-  .js .ring-val { animation: ring-fill 1.4s var(--ease) .4s both; }
-  .js .platform:not(.in-view) .spark-line, .js .platform:not(.in-view) .ring-val, .js .platform:not(.in-view) .spark-area { animation-play-state: paused; }
-}
-@keyframes draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
-@keyframes ring-fill { from { stroke-dasharray: 0 100; } }
-@keyframes fade-in { from { opacity: 0; } }
 
 /* Home: platform overview band */
 .platform { display: grid; gap: 36px; align-items: center; }
@@ -908,12 +881,6 @@ textarea { min-height: 140px; resize: vertical; }
 .status-new { color: var(--on-amber); background: var(--amber); }
 .status-new::before { background: var(--on-amber); }
 
-/* Executive dashboard KPI wall (sample values) */
-.kpi-wall { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (min-width: 560px) { .kpi-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.kpi-wall .kpi { border-left-color: var(--amber); }
-.kpi-wall .kpi.k-safe { border-left-color: var(--safety); }
-.kpi-wall .kpi strong { font-size: 1.5rem; }
 
 /* Standards compliance matrix */
 .std-matrix { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); margin: 0; padding: 0; list-style: none; }
@@ -939,8 +906,7 @@ textarea { min-height: 140px; resize: vertical; }
 /* =====================================================================
    v2 "livelier" layer (Oct 2026). Same tokens and single-line language,
    with one orchestrated moment per page: the home hero's sun arc and
-   energised busbar, product screens that draw themselves when they come
-   into view, and plan cards with a charged edge. Everything below that
+   energised busbar, and plan cards with a charged edge. Everything below that
    moves is inside prefers-reduced-motion: no-preference.
    ===================================================================== */
 
@@ -1032,82 +998,6 @@ html:not(.js) .tour-panel + .tour-panel { margin-top: 56px; }
 .shot img { display: block; width: 100%; height: auto; }
 .stack { display: grid; gap: 18px; min-width: 0; }
 
-/* ---------- Illustrative app screens ---------- */
-.screen { container-type: inline-size; }
-.screen svg text { font-family: var(--font-body); }
-.dan-ax { fill: var(--text-3); font-size: 11px; font-weight: 600; }
-.dan-grid, .sc-grid { stroke: var(--border); stroke-width: 1; }
-.dan-chart, .sc-chart { display: block; width: 100%; height: auto; margin-top: 4px; }
-@container (max-width: 460px) { .dan-ax { font-size: 17px; } .sc-ddl { display: none; } }
-
-/* EAM: weather strip + day-ahead nomination */
-.wx-strip { list-style: none; margin: 0 0 6px; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
-.wx-strip li { display: grid; justify-items: center; gap: 1px; padding: 6px 2px; border-radius: 8px; background: var(--well); font-size: var(--fs-xs); color: var(--text-2); }
-.wx-strip svg { width: 22px; height: 22px; color: var(--text-2); }
-.wx-strip .wx-sun svg, .wx-strip .wx-part svg { color: var(--amber-ink); }
-.wx-strip b { color: var(--text); font-size: .82rem; }
-.dan-bar { fill: var(--primary); opacity: .78; transform-box: fill-box; transform-origin: 50% 100%; }
-.dan-nom { fill: none; stroke: var(--amber-ink); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 0; }
-.dan-foot, .pb-foot, .sc-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 8px; font-size: .82rem; color: var(--text-2); }
-.dan-foot b, .pb-foot b, .sc-foot b { font-family: var(--font-display); font-size: 1.1rem; color: var(--text); font-variant-numeric: tabular-nums; }
-.dan-key { display: inline-flex; align-items: center; gap: 7px; }
-.dan-key::before { content: ""; width: 14px; height: 10px; border-radius: 2px; background: var(--primary); opacity: .78; }
-.dan-key.k-nom::before { height: 3px; background: var(--amber-ink); opacity: 1; }
-.dan-foot .pill { margin-left: auto; }
-
-/* Safety: permit board */
-.pb-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-@container (min-width: 540px) { .pb-cols { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-.pb-col { background: var(--well); border-radius: 10px; padding: 8px; min-width: 0; }
-.pb-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin: 0 2px 7px; font-size: var(--fs-xs); font-weight: 700; color: var(--text-2); }
-.pb-head b { min-width: 22px; padding: 0 6px; border-radius: 999px; background: var(--surface); color: var(--text); text-align: center; }
-.pb-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.pb-card { display: grid; gap: 2px; padding: 8px 9px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--border-strong); font-size: var(--fs-xs); min-width: 0; }
-.pb-card strong { font-size: .85rem; line-height: 1.25; }
-.pb-card span { color: var(--text-2); }
-.c-app .pb-card { border-left-color: var(--primary); }
-.c-act .pb-card { border-left-color: var(--amber-ink); }
-.c-done .pb-card { border-left-color: var(--safety); }
-.pb-chip { justify-self: start; margin-top: 3px; padding: 1px 8px; border-radius: 999px; background: var(--well); color: var(--text); font-style: normal; font-weight: 700; font-size: .72rem; display: inline-flex; align-items: center; gap: 5px; }
-.pb-chip.live { background: var(--amber); color: var(--on-amber); }
-.pb-chip.live::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.pb-chip.done { color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, var(--surface)); }
-@media (prefers-reduced-motion: no-preference) {
-  .pb-chip.live::before { animation: pulse 2.2s ease-out infinite; }
-}
-
-/* Construction: S-curve */
-.sc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
-.sc-chip { display: inline-flex; align-items: baseline; gap: 6px; padding: 3px 11px; border-radius: 999px; background: var(--well); font-size: .8rem; font-weight: 700; color: var(--text-2); }
-.sc-chip b { font-family: var(--font-display); font-size: 1.05rem; color: var(--text); font-variant-numeric: tabular-nums; }
-.sc-chip.k-plan { box-shadow: inset 0 0 0 1.5px var(--text-3); }
-.sc-chip.k-act { box-shadow: inset 0 0 0 1.5px var(--ok); }
-.sc-plan, .sc-act, .sc-rev, .sc-dd { fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.sc-plan { stroke: var(--text-3); stroke-width: 2.2; }
-.sc-act { stroke: var(--ok); stroke-width: 3.4; stroke-dasharray: 100; stroke-dashoffset: 0; }
-.sc-rev { stroke: var(--amber-ink); stroke-width: 2.4; stroke-dasharray: 6 5; }
-.sc-dd { stroke: var(--text-3); stroke-width: 1.5; stroke-dasharray: 3 4; }
-.sc-dot { fill: var(--ok); stroke: var(--surface); stroke-width: 2; }
-.sc-legend { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: .8rem; color: var(--text-2); }
-.sc-legend li { display: inline-flex; align-items: center; gap: 7px; }
-.sc-legend li::before { content: ""; width: 18px; height: 3px; border-radius: 2px; background: var(--text-3); }
-.sc-legend .l-act::before { background: var(--ok); height: 4px; }
-.sc-legend .l-rev::before { background: repeating-linear-gradient(90deg, var(--amber-ink) 0 5px, transparent 5px 9px); }
-.sc-foot { justify-content: flex-start; padding-top: 7px; border-top: 1px solid var(--border); }
-.sc-foot span:first-child { font-weight: 700; }
-
-/* Screens draw themselves once in view (final state is the default) */
-@media (prefers-reduced-motion: no-preference) {
-  .js .screen .dan-bar { transition: transform .7s var(--ease) calc(var(--i, 0) * 45ms); }
-  .js .screen:not(.in-view) .dan-bar { transform: scaleY(.04); }
-  .js .screen.in-view .dan-nom { animation: draw 1.4s var(--ease) .65s both; }
-  .js .screen.in-view .sc-plan, .js .screen.in-view .sc-dd { animation: fade-in .6s ease both; }
-  .js .screen.in-view .sc-act { animation: draw 1.5s var(--ease) .3s both; }
-  .js .screen.in-view .sc-rev, .js .screen.in-view .sc-dot { animation: fade-in .6s ease 1.7s both; }
-  .js .screen .pb-card { transition: opacity .45s var(--ease) calc(var(--i, 0) * 110ms), transform .45s var(--ease) calc(var(--i, 0) * 110ms); }
-  .js .screen:not(.in-view) .pb-card { opacity: 0; transform: translateY(8px) scale(.98); }
-  .js .screen:not(.in-view) .dan-nom, .js .screen:not(.in-view) .sc-act { stroke-dashoffset: 100; }
-}
 
 /* ---------- Plans: a charged edge on the featured plan ---------- */
 @property --ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
@@ -1243,7 +1133,7 @@ html:not(.js) .tour-panel + .tour-panel { margin-top: 56px; }
   a { color: #000; }
   main a[href^="http"]::after, main a[href^="mailto:"]::after { content: " (" attr(href) ")"; font-size: .85em; }
   .site-footer { background: #fff !important; }
-  .hero-sky, .hero-pv, .tour-tabs, .bus-stats::after, .demo-pick, .screen { display: none !important; }
+  .hero-sky, .hero-pv, .tour-tabs, .bus-stats::after, .demo-pick { display: none !important; }
   .chrome-band { background: none !important; }
   .tour-panel[hidden] { display: grid !important; }
 }

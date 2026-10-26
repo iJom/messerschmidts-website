@@ -641,10 +641,10 @@
     });
   }
 
-  /* Marks [data-inview] blocks (and .platform) once visible, so their CSS
+  /* Marks [data-inview] blocks once visible, so their CSS
      animations start when seen rather than off-screen. */
   function initInView() {
-    var nodes = doc.querySelectorAll('.platform, [data-inview]');
+    var nodes = doc.querySelectorAll('[data-inview]');
     if (!nodes.length) return;
     if (reduceMotion || !hasIO) { nodes.forEach(function (n) { n.classList.add('in-view'); }); return; }
     var io = new IntersectionObserver(function (entries) {
