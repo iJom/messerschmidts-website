@@ -1,6 +1,6 @@
 # Messerschmidts marketing website
 
-Static site for **Messerschmidts EAM**, **Messerschmidts Safety** and **Messerschmidts Construction**. Plain HTML, one CSS file and one JS file. No build step, no external CDNs, fonts, analytics or trackers. All code is our own.
+Static site for **Messerschmidts EAM**, **Messerschmidts Safety** and **Messerschmidts Construction**. Plain HTML, one CSS file and one JS file. No build step, no external CDNs, analytics or trackers; the one web font is self-hosted. All code is our own; the headline font is OFL-licensed (see Design notes).
 
 ## Pages
 
@@ -66,7 +66,7 @@ If plans are returned for an app, the cards in `[data-plans="safety"]` / `[data-
 
 ## Design notes (v2, Oct 2026)
 
-The look is an "energised single-line diagram": grid-navy chrome, high-vis amber for action, cyan for EAM, emerald for Safety, rebar rust and hazard stripes for Construction. Display type is Bahnschrift (DIN-style, falls back to other condensed system faces), body is the system UI font. No web fonts, no CDNs.
+The look is an "energised single-line diagram": grid-navy chrome, high-vis amber for action, cyan for EAM, emerald for Safety, rebar rust and hazard stripes for Construction. Display type is **Barlow Semi Condensed Bold** by The Barlow Project Authors (github.com/jpt/barlow), licensed under the **SIL Open Font License 1.1** (`assets/fonts/OFL.txt`). It is self-hosted as a Latin subset, `assets/fonts/BarlowSemiCondensed-Bold-latin.woff2` (about 20 KB: Basic Latin, Latin-1, dashes, curly quotes, bullet, ellipsis), loaded with `font-display: swap` and preloaded on every page. Barlow has no peso sign, so the browser draws ₱ from the fallback font. Fallbacks: Bahnschrift and other condensed system faces. Body is the system UI font. No CDNs.
 
 - **Tokens** live at the top of `assets/site.css` (colours, light and dark via `prefers-color-scheme`) plus a type scale in the v2 block (`--fs-*`, `--amber-ink` for amber lines/text on light surfaces). The header, heroes, CTA bands and `.chrome` sections are always navy.
 - **One moment per page.** Home: a sun travelling a dotted arc over a PV array with a glint (`.hero-sky`, `.hero-pv`) and the energised busbar of key facts (`.bus-stats`, counters via `data-count`). Elsewhere the existing single-line hero art.

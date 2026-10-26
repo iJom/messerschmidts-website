@@ -2,9 +2,20 @@
    Design: "energised single-line". The look borrows from substation single-line
    diagrams and site safety signage: a deep grid-navy chrome, busbars and nodes,
    high-vis amber for action, electric cyan for EAM, safe-condition emerald for Safety.
-   System fonts only, no external resources. Light/dark via prefers-color-scheme.
+   Self-hosted headline font (Barlow Semi Condensed), system body font, no external resources. Light/dark via prefers-color-scheme.
    Eye comfort: no pure white page, no pure black anywhere.
    Prints are always light. All motion honours prefers-reduced-motion. */
+
+/* Headline font: Barlow Semi Condensed Bold (SIL OFL 1.1, assets/fonts/OFL.txt),
+   self-hosted Latin subset. System condensed faces stay as fallbacks. */
+@font-face {
+  font-family: "Barlow Semi Condensed";
+  src: url("fonts/BarlowSemiCondensed-Bold-latin.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026;
+}
 
 /* ---------- Tokens: light (anti-glare, cool steel) ---------- */
 :root {
@@ -63,7 +74,7 @@
 
   /* Type */
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  --font-display: "Bahnschrift", "Avenir Next Condensed", "DIN Alternate", "Roboto Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-display: "Barlow Semi Condensed", "Bahnschrift", "Avenir Next Condensed", "DIN Alternate", "Roboto Condensed", "Arial Narrow", system-ui, sans-serif;
 
   /* Elevation, shape, motion */
   --shadow: 0 1px 2px rgba(14, 28, 47, .05), 0 6px 18px rgba(14, 28, 47, .06);
