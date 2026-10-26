@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Subscription and prices in pesos | Messerschmidts</title>
-<meta name="description" content="Messerschmidts EAM Standard at &#8369;20,000 per organisation per month with 25 users included, and the companion Messerschmidts Safety Premium at &#8369;1,000 per user per month with a free first month and &#8369;100 subcontractor accounts, and Messerschmidts Construction at &#8369;50,000 per organisation per month with a 30-day free trial and Safety included. Pay by GCash, e-wallet, bank or crypto.">
+<meta name="description" content="Messerschmidts EAM Standard at &#8369;20,000 per organisation per month with 25 users included, and the companion Messerschmidts Safety Premium at &#8369;1,000 per user per month with a free first month and &#8369;100 subcontractor accounts, and Messerschmidts Construction at &#8369;50,000 per organisation per month including the first site, &#8369;15,000 per extra site, with a 30-day free trial and Safety included. Pay by GCash, e-wallet, bank or crypto.">
 <link rel="canonical" href="https://messerschmidts.online/pricing.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Messerschmidts">
 <meta property="og:locale" content="en_PH">
 <meta property="og:title" content="Subscription and prices in pesos | Messerschmidts">
-<meta property="og:description" content="Messerschmidts EAM Standard at &#8369;20,000 per organisation per month with 25 users included, and the companion Messerschmidts Safety Premium at &#8369;1,000 per user per month with a free first month and &#8369;100 subcontractor accounts, and Messerschmidts Construction at &#8369;50,000 per organisation per month with a 30-day free trial and Safety included. Pay by GCash, e-wallet, bank or crypto.">
+<meta property="og:description" content="Messerschmidts EAM Standard at &#8369;20,000 per organisation per month with 25 users included, and the companion Messerschmidts Safety Premium at &#8369;1,000 per user per month with a free first month and &#8369;100 subcontractor accounts, and Messerschmidts Construction at &#8369;50,000 per organisation per month including the first site, &#8369;15,000 per extra site, with a 30-day free trial and Safety included. Pay by GCash, e-wallet, bank or crypto.">
 <meta property="og:url" content="https://messerschmidts.online/pricing.html">
 <meta property="og:image" content="https://messerschmidts.online/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -25,6 +25,7 @@
 <!-- Application base for Sign in / sign-up links; empty = same origin. -->
 <meta name="msm-app" content="https://app.messerschmidts.online">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
 </head>
@@ -97,7 +98,7 @@
           <li>Budget, incidents and reports</li>
           <li>Offline devices with sync</li>
         </ul>
-        <a class="btn btn-primary" href="contact.html">Talk to us</a>
+        <a class="btn btn-primary" href="contact.html?topic=eam">Talk to us</a>
       </article>
 <article class="plan">
         <p class="app-name">Messerschmidts EAM</p>
@@ -239,6 +240,23 @@
         <p class="muted small">One price covers your users, your subcontractors and the security gate. Not in this release: 3D BIM viewer, design submittal review and stamped PDF export. <a href="construction.html">Explore Construction</a></p>
       </div>
     </div>
+    <div id="calc-build" data-base="50000" data-site="15000" hidden class="panel calc-panel mt-lg">
+      <h3>Estimate your Construction price</h3>
+      <div class="calc">
+        <div>
+          <div class="field"><label for="calc-build-sites">Sites in your organisation</label>
+            <div class="stepper"><button type="button" data-step="-1" aria-label="One site fewer" aria-controls="calc-build-sites">&minus;</button><input id="calc-build-sites" type="number" min="1" max="200" inputmode="numeric" value="3"><button type="button" data-step="1" aria-label="One site more" aria-controls="calc-build-sites">+</button></div>
+            <span class="hint">Your first site is included. Each additional site starts when it is paid; its first month is prorated to your renewal date.</span></div>
+          <ul class="site-pins" id="calc-build-pins" aria-hidden="true"></ul>
+        </div>
+        <div aria-live="polite">
+          <ul class="calc-lines" id="calc-build-lines"></ul>
+          <p class="muted small m-0">Estimated total per month</p>
+          <p class="calc-total" id="calc-build-total">&#8369;80,000</p>
+          <p class="muted small">Your own Safety users and subcontractor accounts on your sites are included. Before payment fees and taxes; the app shows the exact total at checkout.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -283,7 +301,7 @@
       <div><h2 id="cta-title">See it on your own site</h2><p>Talk to us about Messerschmidts EAM for your plant, start a one-month Premium demo of Messerschmidts Safety, or try Messerschmidts Construction free for 30 days.</p></div>
       <div class="btn-row">
         <a class="btn btn-light" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a>
-        <a class="btn btn-outline-light" href="contact.html">Talk to us</a>
+        <a class="btn btn-outline-light" href="contact.html?topic=pricing">Talk to us</a>
       </div>
     </div>
   </div>

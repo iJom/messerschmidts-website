@@ -266,7 +266,53 @@
       [more + ' additional user' + (more === 1 ? '' : 's') + ' × ' + peso(extra), more * extra]
     ]);
   }
+  // Construction: the organisation and its first site, plus a price per additional site.
+  var PIN_MAX = 12;
+  var lastSites = 0;
+  function updateCalcBuild() {
+    var calc = doc.getElementById('calc-build');
+    if (!calc) return;
+    var base = numOr(calc.getAttribute('data-base'), 50000);
+    var site = numOr(calc.getAttribute('data-site'), 15000);
+    var n = Math.max(1, Math.min(num('calc-build-sites'), 200));
+    var more = n - 1;
+    renderCalc('calc-build-lines', 'calc-build-total', [
+      ['Organisation and its first site', base],
+      [more + ' additional site' + (more === 1 ? '' : 's') + ' × ' + peso(site), more * site]
+    ]);
+    var pins = doc.getElementById('calc-build-pins');
+    if (pins) {
+      while (pins.firstChild) pins.removeChild(pins.firstChild);
+      var shown = Math.min(n, PIN_MAX);
+      for (var i = 1; i <= shown; i++) {
+        var li = el('li', null, i === 1 ? '1st' : String(i));
+        if (i === 1) li.className = 'inc';
+        if (i > lastSites) li.classList.add('new');
+        pins.appendChild(li);
+      }
+      if (n > PIN_MAX) pins.appendChild(el('li', { 'class': 'more' }, '+' + (n - PIN_MAX)));
+    }
+    lastSites = n;
+  }
+  function initCalcBuild() {
+    var calc = doc.getElementById('calc-build');
+    if (!calc) return;
+    calc.hidden = false;
+    var input = doc.getElementById('calc-build-sites');
+    calc.addEventListener('input', updateCalcBuild);
+    calc.querySelectorAll('[data-step]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (!input) return;
+        var v = Math.max(1, Math.min((parseInt(input.value, 10) || 1) + Number(b.getAttribute('data-step')), 200));
+        input.value = String(v);
+        updateCalcBuild();
+      });
+    });
+    updateCalcBuild();
+  }
+
   function initCalc() {
+    initCalcBuild();
     var calc = doc.getElementById('calc');
     if (calc) {
       calc.hidden = false;
@@ -282,9 +328,88 @@
   }
 
   /* ---------- Contact form -> mailto ---------- */
+  /* contact.html?topic=eam|safety|construction|pricing|server|support preselects the topic,
+     and the demo buttons above the form set it with one tap. */
+  var TOPICS = {
+    eam: 'Messerschmidts EAM',
+    safety: 'Messerschmidts Safety demo',
+    construction: 'Messerschmidts Construction demo',
+    pricing: 'Pricing and payment',
+    server: 'Running on our own server',
+    support: 'Support'
+  };
+  function setTopic(form, value) {
+    var sel = form.elements.topic;
+    if (!sel) return false;
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].text === value) { sel.selectedIndex = i; break; }
+    }
+    form.querySelectorAll('[data-topic]').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-topic') === sel.value ? 'true' : 'false');
+    });
+    return true;
+  }
+  function initTopic(form) {
+    var m = /[?&]topic=([a-z]+)/.exec(window.location.search);
+    if (m && TOPICS[m[1]]) setTopic(form, TOPICS[m[1]]);
+    var pick = form.querySelector('[data-demo-pick]');
+    if (pick) {
+      pick.hidden = false;
+      pick.querySelectorAll('[data-topic]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          setTopic(form, b.getAttribute('data-topic'));
+          var msg = form.elements.message;
+          if (msg) msg.focus();
+        });
+      });
+    }
+    var sel = form.elements.topic;
+    if (sel) sel.addEventListener('change', function () { setTopic(form, sel.value); });
+    if (sel) setTopic(form, sel.value);
+  }
+
+  /* ---------- Product tour tabs (WAI-ARIA tabs; without JS every panel shows) ---------- */
+  function initTabs() {
+    doc.querySelectorAll('[data-tabs]').forEach(function (box) {
+      var tabs = Array.prototype.slice.call(box.querySelectorAll('[role="tab"]'));
+      if (!tabs.length) return;
+      function select(tab, focus) {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+          var p = doc.getElementById(t.getAttribute('aria-controls'));
+          if (!p) return;
+          if (on && p.hidden) {
+            p.hidden = false;
+            p.classList.remove('is-entering');
+            void p.offsetWidth; // restart the entrance animation
+            p.classList.add('is-entering');
+          } else if (!on) {
+            p.hidden = true;
+          }
+        });
+        if (focus) tab.focus();
+      }
+      tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { select(t, false); });
+        t.addEventListener('keydown', function (e) {
+          var k = e.key, j = null;
+          if (k === 'ArrowRight' || k === 'ArrowDown') j = (i + 1) % tabs.length;
+          else if (k === 'ArrowLeft' || k === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
+          else if (k === 'Home') j = 0;
+          else if (k === 'End') j = tabs.length - 1;
+          if (j !== null) { e.preventDefault(); select(tabs[j], true); }
+        });
+      });
+      select(tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0], false);
+    });
+  }
+
   function initContact() {
     var form = doc.getElementById('contact-form');
     if (!form) return;
+    initTopic(form);
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var v = function (n) { var f = form.elements[n]; return f ? String(f.value || '').trim() : ''; };
@@ -483,6 +608,7 @@
   }
 
   function init() {
+    initTabs();
     initMenus();
     initCounters();
     initInView();

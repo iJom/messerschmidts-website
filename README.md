@@ -18,6 +18,7 @@ Static site for **Messerschmidts EAM**, **Messerschmidts Safety** and **Messersc
 | `disclaimer.html` | Disclaimer v1.0: accuracy, use, damages, other users, safety (RA 11058 / DOLE), weather and Day Ahead Nominations, regulatory reports (ERC / DOE / NGCP / IEMOP), permits lists (LGU), calculations (EVM, billing, tax) |
 | `404.html` | Not-found page (uses root-relative links, so it works at any path) |
 | `assets/site.css`, `assets/site.js`, `assets/logo.svg` | Shared styles, script, logo/favicon |
+| `favicon.ico`, `assets/apple-touch-icon.png` | Fallback favicon (16/32/48 px) and 180 px home-screen icon, drawn from the logo |
 
 ## Legal pages
 
@@ -34,7 +35,7 @@ Current prices (owner, 2026-10-23):
 - Subcontractor account invited by a user, working only on the inviter's site(s): ₱100 per month.
 - Subcontractor account that opens a new site of its own (for example an EPC or main contractor registered as a subcontractor): full ₱1,000.
 - Messerschmidts EAM Standard: ₱20,000 per month per organisation, up to 25 users included, ₱750 per month for each additional user. Bigger organisations: quote via customerservice@messerschmidts.online.
-- Messerschmidts Construction (release 4.13.0): ₱50,000 per month per organisation, any number of sites, 30-day free trial. Includes Safety for the organisation's own users on its sites; Subcontractor accounts on the organisation's sites are included too. Not yet: 3D BIM viewer, design submittal review, stamped PDF export.
+- Messerschmidts Construction (release 4.13.0): ₱50,000 per month per organisation including its first site; each additional site ₱15,000 a month, activated when paid (first month prorated to the renewal date); 30-day free trial. Includes Safety for the organisation's own users on its sites; Subcontractor accounts on the organisation's sites are included too. Not yet: 3D BIM viewer, design submittal review, stamped PDF export.
 - Payment: GCash, Maya, cards, QR Ph and online banking through PayMongo, and USDT on TRON (detected automatically). Payments are verified automatically by the system and the plan activates instantly, with no manual confirmation.
 - Renewal: an administrator subscribes or renews in Settings > Subscription; the app reminds administrators by e-mail and with a banner 7, 3 and 1 days before the free trial or paid month ends.
 
@@ -62,6 +63,18 @@ If plans are returned for an app, the cards in `[data-plans="safety"]` / `[data-
 - **Any static host** (GitHub Pages, Cloudflare Pages, Netlify free tier, etc.): upload this folder as-is; set `msm-api` and `msm-app` to the application's address. Configure `404.html` as the not-found page if the host asks.
 - **Behind the same server** as the application: serve this folder as static files (for example at `www.messerschmidts.online`, or at the root with the app's paths routed separately). Leave both meta tags empty.
 - Local preview: `python3 -m http.server 8080` in this folder, then open http://localhost:8080/.
+
+## Design notes (v2, Oct 2026)
+
+The look is an "energised single-line diagram": grid-navy chrome, high-vis amber for action, cyan for EAM, emerald for Safety, rebar rust and hazard stripes for Construction. Display type is Bahnschrift (DIN-style, falls back to other condensed system faces), body is the system UI font. No web fonts, no CDNs.
+
+- **Tokens** live at the top of `assets/site.css` (colours, light and dark via `prefers-color-scheme`) plus a type scale in the v2 block (`--fs-*`, `--amber-ink` for amber lines/text on light surfaces). The header, heroes, CTA bands and `.chrome` sections are always navy.
+- **One moment per page.** Home: a sun travelling a dotted arc over a PV array with a glint (`.hero-sky`, `.hero-pv`) and the energised busbar of key facts (`.bus-stats`, counters via `data-count`). Elsewhere the existing single-line hero art.
+- **App screens** are illustrative HTML/SVG mock-ups with sample data, always captioned as such: EAM day-ahead nomination (`.screen-eam`, on Home and `eam.html#forecast`), Safety permit board (`.screen-safety`, Home and `safety.html#permits`), Construction S-curve (`.screen-build`, Home and `construction.html#dashboard`). They draw themselves once in view (`data-inview`). The Home tour is a WAI-ARIA tab set (`data-tabs`); without JS all three panels show.
+- **Plans**: the featured plan has a slowly turning charged edge (`@property --ang`). Construction has a site estimator on `pricing.html` (`#calc-build`, `data-base="50000" data-site="15000"`).
+- **Demo paths**: `contact.html?topic=eam|safety|construction|pricing|server|support` preselects the form topic; demo buttons above the form do the same. Legal pages end with a small "Looking for the apps?" strip (their texts are unchanged).
+- **Motion** is always inside `prefers-reduced-motion: no-preference`; the default CSS state is the finished picture, so with reduced motion or no JS everything simply shows.
+- Weight: CSS ~87 KB, JS ~28 KB, uncompressed; GitHub Pages serves them gzipped.
 
 ## Checks
 

@@ -25,6 +25,7 @@
 <!-- Application base for Sign in / sign-up links; empty = same origin. -->
 <meta name="msm-app" content="https://app.messerschmidts.online">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
 </head>
@@ -88,7 +89,7 @@
       <div class="card mt-md">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M16 7l3 3M14 9l2 2"/></svg></div>
         <h2 class="card-title">Already know what you need?</h2>
-        <p>Request an account and start the one-month free Premium demo of Messerschmidts Safety.</p>
+        <p>Request an account and start the one-month free Premium demo of Messerschmidts Safety, or the 30-day free trial of Messerschmidts Construction.</p>
         <div class="btn-row"><a class="btn btn-primary" href="/#/account/signup" data-app-link="/#/account/signup">Request an account</a><a class="btn btn-ghost" href="/" data-app-link="/">Sign in</a></div>
       </div>
     </div>
@@ -96,6 +97,7 @@
       <h2 class="card-title">Write a message</h2>
       <p class="muted small">This form does not send anything over the internet by itself. It opens your own e-mail app with the message filled in, and you press send.</p>
       <form id="contact-form" action="mailto:customerservice@messerschmidts.online" method="post" enctype="text/plain">
+        <div class="demo-pick" data-demo-pick hidden><p id="pick-label">Asking for a demo? Pick the app:</p><div class="btn-row" role="group" aria-labelledby="pick-label"><button type="button" data-topic="Messerschmidts EAM" aria-pressed="false">EAM</button><button type="button" data-topic="Messerschmidts Safety demo" aria-pressed="false">Safety</button><button type="button" data-topic="Messerschmidts Construction demo" aria-pressed="false">Construction</button></div></div>
         <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
         <div class="field"><label for="f-org">Organisation</label><input id="f-org" name="org" autocomplete="organization"></div>
         <div class="field"><label for="f-phone">Phone (optional)</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>

@@ -25,6 +25,7 @@
 <!-- Application base for Sign in / sign-up links; empty = same origin. -->
 <meta name="msm-app" content="https://app.messerschmidts.online">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
 </head>
@@ -120,6 +121,14 @@
   <div class="container">
     <div class="section-head"><span class="eyebrow safety">Permits to work</span><h2 id="ptw-title">From request to close&#8209;out, every signature on record</h2>
       <p class="lead">Hot work, confined space, work at height, electrical isolation and more, with approvals, extensions and close-out.</p></div>
+<div class="board-wrap">
+<div class="mock screen screen-safety" data-inview role="img" aria-label="Illustration with sample data: a permit board for a sample plant. One confined space permit is requested, one work at height permit is approved, a hot work permit and an electrical isolation permit are active, and one hot work permit was closed out at 11:40.">
+  <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Permit board</b><span class="pill ok live">Synced</span></div>
+  <div class="pb-cols" aria-hidden="true"><div class="pb-col c-req"><p class="pb-head"><span>Requested</span><b>1</b></p><ul><li class="pb-card" style="--i:0"><strong>Confined space</strong><span>Cooling water basin</span><em class="pb-chip ">Waiting for approval</em></li></ul></div><div class="pb-col c-app"><p class="pb-head"><span>Approved</span><b>1</b></p><ul><li class="pb-card" style="--i:1"><strong>Work at height</strong><span>Inverter station 4</span><em class="pb-chip ">Starts 13:00</em></li></ul></div><div class="pb-col c-act"><p class="pb-head"><span>Active</span><b>2</b></p><ul><li class="pb-card" style="--i:2"><strong>Hot work</strong><span>Transformer bay</span><em class="pb-chip live">Until 17:00</em></li><li class="pb-card" style="--i:3"><strong>Electrical isolation</strong><span>Switchyard bay 2</span><em class="pb-chip live">3 locks on</em></li></ul></div><div class="pb-col c-done"><p class="pb-head"><span>Closed out</span><b>1</b></p><ul><li class="pb-card" style="--i:4"><strong>Hot work</strong><span>Workshop</span><em class="pb-chip done">Closed 11:40</em></li></ul></div></div>
+  <div class="pb-foot" aria-hidden="true"><span><b data-count>412,000</b> safe man-hours</span><span><b data-count>38</b> people on site</span></div>
+  <p class="mock-caption" aria-hidden="true">Illustration with sample data.</p>
+</div>
+</div>
 <figure class="flow safety" style="--n:4" data-flow aria-labelledby="ptw-title">
 <ol class="flow-steps">
 <li class="flow-step"><span class="flow-node" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M8.5 12h7M8.5 16h5"/></svg><span class="flow-num">1</span></span><svg class="flow-link" aria-hidden="true" focusable="false"><line class="w h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="p h" pathLength="100" x1="0" y1="50%" x2="100%" y2="50%"/><line class="w v" x1="50%" y1="0" x2="50%" y2="100%"/><line class="p v" pathLength="100" x1="50%" y1="0" x2="50%" y2="100%"/></svg><h3>Requested</h3><p>The permit is raised for the job, the area and the type of work.</p></li>
@@ -236,7 +245,7 @@
       <div><h2 id="cta-title">Try Safety Premium free for a month</h2><p>New organisations get one month of Premium free. No card details. Pay later in pesos by GCash, Maya, card or online banking.</p></div>
       <div class="btn-row">
         <a class="btn btn-light" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a>
-        <a class="btn btn-outline-light" href="contact.html">Talk to us</a>
+        <a class="btn btn-outline-light" href="contact.html?topic=safety">Talk to us</a>
       </div>
     </div>
   </div>
