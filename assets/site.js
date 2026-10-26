@@ -127,7 +127,7 @@
     }
     var cta;
     if (hasPrice && p.unit === 'org' && !(trial > 0)) {
-      cta = el('a', { 'class': 'btn btn-primary', href: 'contact.html' }, 'Talk to us');
+      cta = el('a', { 'class': 'btn btn-primary', href: 'contact.html?topic=' + p.app }, 'Talk to us');
     } else if (hasPrice) {
       cta = el('a', { 'class': 'btn btn-primary', href: '/#/account/signup', 'data-app-link': '/#/account/signup' },
         trial > 0 ? 'Start free demo' : 'Request an account');
