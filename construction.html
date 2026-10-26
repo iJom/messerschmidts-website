@@ -162,36 +162,25 @@
       </ul>
     </div>
     <div class="stack">
-    <div class="mock" role="img" aria-label="Illustration with sample data: the executive dashboard with 62% completion, SPI 0.96, CPI 1.03, 7 pending inspections, 4 deliveries today and 412,000 LTI-free man-hours, and a long-lead alert for switchgear">
-      <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Executive dashboard</b><span class="pill ok live">Synced</span></div>
-      <div class="kpi-wall" aria-hidden="true">
-        <div class="kpi"><strong>62%</strong><span>Completion</span></div>
-        <div class="kpi"><strong>0.96</strong><span>SPI</span></div>
-        <div class="kpi"><strong>1.03</strong><span>CPI</span></div>
-        <div class="kpi"><strong>7</strong><span>Pending inspections</span></div>
-        <div class="kpi"><strong>4</strong><span>Deliveries today</span></div>
-        <div class="kpi k-safe"><strong>412,000</strong><span>LTI-free man-hours</span></div>
-      </div>
-      <ul class="mock-list" aria-hidden="true">
-        <li><span>Switchgear - delivery after the planned install date</span><span class="pill warn">Long lead</span></li>
-        <li><span>Budget burn - 58% of the budget</span><span class="pill info">Budget</span></li>
-        <li><span>Contractor view - Sample company, zone B</span><span class="pill">View</span></li>
-      </ul>
-      <p class="mock-caption" aria-hidden="true">Illustration with sample data.</p>
-    </div>
-<div class="mock screen screen-build" data-inview role="img" aria-label="Illustration with sample data: the progress S-curve of a sample project at the data date, planned vs actual vs revised progress. Actual progress is 60%, a little below the planned 65%. A dashed revised line rises from today's actual progress to 100% at the planned finish, the pace needed to meet the plan. Below the chart, the earned value table (cost, PHP) shows SPI 0.92 and CPI 1.03.">
+    <div class="mock shot-frame">
+  <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Executive dashboard</b><span class="pill ok live">Synced</span></div>
+  <picture class="shot">
+    <source type="image/webp" media="(prefers-color-scheme: dark)" srcset="assets/screens/construction-dashboard-dark-640.webp 640w, assets/screens/construction-dashboard-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
+    <source type="image/jpeg" media="(prefers-color-scheme: dark)" srcset="assets/screens/construction-dashboard-dark-640.jpg 640w, assets/screens/construction-dashboard-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw">
+    <source type="image/webp" srcset="assets/screens/construction-dashboard-light-640.webp 640w, assets/screens/construction-dashboard-light-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
+    <img src="assets/screens/construction-dashboard-light-640.jpg" srcset="assets/screens/construction-dashboard-light-640.jpg 640w, assets/screens/construction-dashboard-light-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="312" loading="lazy" decoding="async" alt="Screenshot with sample data: the Construction executive dashboard of a sample project, with 36.0% overall completion against 41.3% planned, the critical path 12 days behind, 35.9% budget burn, 3 pending inspections, 4 site deliveries today, 75.0% standards compliance, 170,622 LTI-free man-hours, SPI 0.87 and CPI 1.00, and the HSSE status read from Safety.">
+  </picture>
+  <p class="mock-caption" aria-hidden="true">Screenshot of the app with sample data.</p>
+</div>
+<div class="mock shot-frame">
   <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>S-curve, sample project</b><span class="pill ok live">Synced</span></div>
-  <div class="sc-chips" aria-hidden="true"><span class="sc-chip k-plan">Planned <b data-count>65%</b></span><span class="sc-chip k-act">Actual <b data-count>60%</b></span><span class="sc-chip">Behind plan <b data-count>5 pts</b></span></div>
-  <svg class="sc-chart" viewBox="0 0 540 222" aria-hidden="true" focusable="false"><path class="sc-grid" d="M48 196H520"/><text class="dan-ax" x="40" y="200" text-anchor="end">0%</text><path class="sc-grid" d="M48 154H520"/><text class="dan-ax" x="40" y="158" text-anchor="end">25%</text><path class="sc-grid" d="M48 111H520"/><text class="dan-ax" x="40" y="115" text-anchor="end">50%</text><path class="sc-grid" d="M48 68H520"/><text class="dan-ax" x="40" y="72" text-anchor="end">75%</text><path class="sc-grid" d="M48 26H520"/><text class="dan-ax" x="40" y="30" text-anchor="end">100%</text>
-    <path class="sc-plan" d="M48.0 196.0 L59.8 195.1 L71.6 194.1 L83.4 192.9 L95.2 191.4 L107.0 189.7 L118.8 187.7 L130.6 185.3 L142.4 182.6 L154.2 179.4 L166.0 175.8 L177.8 171.6 L189.6 166.9 L201.4 161.6 L213.2 155.8 L225.0 149.3 L236.8 142.4 L248.6 135.0 L260.4 127.2 L272.2 119.2 L284.0 111.0 L295.8 102.8 L307.6 94.8 L319.4 87.0 L331.2 79.6 L343.0 72.7 L354.8 66.2 L366.6 60.4 L378.4 55.1 L390.2 50.4 L402.0 46.2 L413.8 42.6 L425.6 39.4 L437.4 36.7 L449.2 34.3 L461.0 32.3 L472.8 30.6 L484.6 29.1 L496.4 27.9 L508.2 26.9 L520.0 26.0"/>
-    <path class="sc-act" pathLength="100" d="M48.0 196.0 L59.8 196.0 L71.6 195.2 L83.4 194.2 L95.2 193.0 L107.0 191.6 L118.8 189.9 L130.6 187.9 L142.4 185.6 L154.2 182.9 L166.0 179.8 L177.8 176.2 L189.6 172.1 L201.4 167.4 L213.2 162.2 L225.0 156.4 L236.8 150.0 L248.6 143.1 L260.4 135.8 L272.2 128.0 L284.0 120.0 L295.8 111.8 L307.6 103.7 L319.4 95.6 L321.8 94.0"/>
-    <path class="sc-rev" d="M321.8 94.0 L331.7 86.9 L341.6 80.3 L351.5 74.0 L361.4 68.2 L371.4 62.8 L381.3 57.9 L391.2 53.5 L401.1 49.5 L411.0 45.9 L420.9 42.7 L430.8 39.9 L440.7 37.4 L450.6 35.2 L460.5 33.3 L470.4 31.6 L480.4 30.2 L490.3 28.9 L500.2 27.8 L510.1 26.8 L520.0 26.0"/>
-    <path class="sc-dd" d="M321.8 14V196"/>
-    <circle class="sc-dot" cx="321.8" cy="94.0" r="5"/>
-    <text class="dan-ax sc-ddl" x="327.8" y="14">Data date</text><text class="dan-ax" x="48" y="212" text-anchor="middle">Jan</text><text class="dan-ax" x="166" y="212" text-anchor="middle">Jun</text><text class="dan-ax" x="284" y="212" text-anchor="middle">Nov</text><text class="dan-ax" x="402" y="212" text-anchor="middle">Apr</text><text class="dan-ax" x="520" y="212" text-anchor="middle">Sep</text></svg>
-  <ul class="sc-legend" aria-hidden="true"><li class="l-plan">Planned progress</li><li class="l-act">Actual progress</li><li class="l-rev">Revised progress, to meet the plan</li></ul>
-  <div class="sc-foot" aria-hidden="true"><span>Earned value (cost, PHP)</span><span>SPI <b>0.92</b></span><span>CPI <b>1.03</b></span></div>
-  <p class="mock-caption" aria-hidden="true">Illustration with sample data.</p>
+  <picture class="shot">
+    <source type="image/webp" media="(prefers-color-scheme: dark)" srcset="assets/screens/construction-scurve-dark-640.webp 640w, assets/screens/construction-scurve-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
+    <source type="image/jpeg" media="(prefers-color-scheme: dark)" srcset="assets/screens/construction-scurve-dark-640.jpg 640w, assets/screens/construction-scurve-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw">
+    <source type="image/webp" srcset="assets/screens/construction-scurve-light-640.webp 640w, assets/screens/construction-scurve-light-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
+    <img src="assets/screens/construction-scurve-light-640.jpg" srcset="assets/screens/construction-scurve-light-640.jpg 640w, assets/screens/construction-scurve-light-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="413" loading="lazy" decoding="async" alt="Screenshot with sample data: the S-curve of a sample project, planned vs actual vs revised progress by month from June 2026 to February 2027, with the data date in October. Actual progress runs below plan; warnings show SPI 0.87 and a finish on 2 Mar 2027 at the current pace against the planned 3 Feb 2027. The earned value table in pesos sits below the chart.">
+  </picture>
+  <p class="mock-caption" aria-hidden="true">Screenshot of the app with sample data.</p>
 </div>
     </div>
   </div>
