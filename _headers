@@ -1,0 +1,5 @@
+# Cloudflare Pages response headers (ignored by GitHub Pages)
+/*
+  X-Robots-Tag: noai, noimageai
+  TDM-Reservation: 1
+  TDM-Policy: https://messerschmidts.online/terms.html#ai
