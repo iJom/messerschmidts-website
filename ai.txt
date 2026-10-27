@@ -1,0 +1,8 @@
+# Messerschmidts — AI and text-and-data-mining policy
+# All content on messerschmidts.online is reserved. AI training, AI ingestion, dataset building,
+# downloading or copying this website or its content by or for an AI system is NOT permitted
+# without the prior written permission of Messerschmidts.
+# Policy: https://messerschmidts.online/terms.html#ai
+# Requests: customerservice@messerschmidts.online
+User-Agent: *
+Disallow: /
