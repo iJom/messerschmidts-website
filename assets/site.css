@@ -834,7 +834,7 @@ textarea { min-height: 140px; resize: vertical; }
 .site-footer a:hover { color: var(--primary); text-decoration: underline; }
 .bir-seal { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; padding: 18px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); }
 .bir-seal img { display: block; width: 300px; max-width: 100%; height: auto; border-radius: 6px; background: #fff; }
-.bir-seal p { margin: 0; flex: 1 1 320px; max-width: none; }
+.bir-seal p { margin: 0; flex: 1 1 320px; min-width: 0; max-width: none; font-size: .95rem; }
 .footer-bottom { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; color: var(--text-2); font-size: .88rem; }
 .email { overflow-wrap: anywhere; }
 
