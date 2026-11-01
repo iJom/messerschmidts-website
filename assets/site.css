@@ -56,9 +56,6 @@
   --amber: #FFB000;            /* high-vis amber: the action */
   --amber-strong: #FFC233;
   --on-amber: #0A1628;
-  --cyan: #00B4D8;
-  --emerald: #10B981;
-  --hazard: #FFB000;
 
   --primary: #005870;          /* links and EAM text on light (7:1+) */
   --primary-strong: #003F51;
@@ -72,15 +69,18 @@
   --safety-fill: #03643F;
   --on-safety: #F4F8FB;
   --safety-tint: #D6EDE3;
-  --build: #9A3412;            /* Construction: rebar rust */
-  --amber-ink: #8F5200;        /* amber as text or a line on light surfaces (4.5:1+) */
+  --amber-ink: #8A4F00;        /* accessible amber: small labels, icons and lines on light (5.6:1+) */
+  --build: var(--amber-ink);   /* Construction = the amber family; text/icons use the ink */
 
   /* Semantic */
   --ok: #03643F;
-  --warn: #7A4E00;
+  --warn: var(--amber-ink);
   --danger: #A61B10;
   --info: var(--primary);
-  --focus: #A84300;            /* focus ring on light grounds: 5:1+ */
+  /* Focus: a three-layer ring that reads on any ground: gap | ring | halo */
+  --focus: #0B1E38;            /* navy ring on light grounds: 15:1 */
+  --focus-gap: #FFFFFF;
+  --focus-halo: #FFB000;
 
   /* Type */
   --font-body: system-ui, "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
@@ -113,7 +113,7 @@
   --t-fast: 150ms;
   --t-med: 280ms;
   --ring: 3px;
-  --ring-offset: 3px;
+  --ring-offset: 2px;
   color-scheme: light dark;
   interpolate-size: allow-keywords;
 }
@@ -150,13 +150,13 @@
     --safety-fill: #2BC48A;
     --on-safety: #04261A;
     --safety-tint: #123A33;
-    --build: #FFA270;
     --amber-ink: #FFB800;
 
     --ok: #4ADE9B;
-    --warn: #FFC23D;
     --danger: #FF9A8C;
     --focus: #FFB800;
+    --focus-gap: #0A1322;
+    --focus-halo: #F2F6FB;
   }
 }
 
@@ -171,11 +171,11 @@
   --safety: #4BE3A8;
   --safety-fill: #2BC48A;
   --on-safety: #04261A;
-  --build: #FFA270;
   --ok: #4BE3A8;
-  --warn: #FFC94D;
   --danger: #FFA89C;
   --amber-ink: #FFB800;
+  --build: #FFB800;
+  --warn: #FFB800;
   --border: #2B4670;
   --border-strong: #6B87B0;
   --well: #17365F;
@@ -185,6 +185,8 @@
   --primary-tint: #12405A;
   --safety-tint: #11423F;
   --focus: #FFB800;
+  --focus-gap: #0B1E38;
+  --focus-halo: #FFFFFF;
   color: var(--text);
 }
 
@@ -208,7 +210,7 @@ a { color: var(--primary); text-underline-offset: .2em; text-decoration-thicknes
 a:hover { color: var(--primary-strong); text-decoration-thickness: 2.5px; }
 
 /* ---------- Focus: one ring, everywhere ---------- */
-:focus-visible { outline: var(--ring) solid var(--focus); outline-offset: var(--ring-offset); }
+:focus-visible { outline: var(--ring) solid var(--focus); outline-offset: var(--ring-offset); box-shadow: 0 0 0 var(--ring-offset) var(--focus-gap), 0 0 0 calc(var(--ring-offset) + var(--ring) + 4px) var(--focus-halo) !important; }
 :focus:not(:focus-visible) { outline: none; }
 :focus { scroll-margin-top: 96px; scroll-margin-bottom: 24px; }
 main:focus { outline: none; }
@@ -653,10 +655,10 @@ a.chip:hover { color: var(--text); background: var(--surface-hover); box-shadow:
 
 /* Domains */
 .domain { border-top: 8px solid var(--border-strong); overflow: hidden; }
-.domain.health { border-top-color: #D9473A; }
-.domain.safety-d { border-top-color: var(--amber); }
-.domain.env { border-top-color: var(--emerald); }
-.domain.sec { border-top-color: #5B7CFA; }
+.domain.health { border-top-color: var(--danger); }
+.domain.safety-d { border-top-color: var(--amber-ink); }
+.domain.env { border-top-color: var(--safety); }
+.domain.sec { border-top-color: var(--primary); }
 .domain h3 { font-size: 1.75rem; }
 
 /* Gate and permit panels (Safety) */
@@ -665,18 +667,15 @@ a.chip:hover { color: var(--text); background: var(--surface-hover); box-shadow:
 
 /* ---------- Industries: one distinct block per industry ---------- */
 .ind { --a: var(--primary); }
-.ind-solar { --a: #B76E00; }
+/* One palette role per industry: EAM-led = secondary (cyan), site/people-led = success
+   (green), project/solar-led = the accessible amber. No extra hues. */
+.ind-solar { --a: var(--amber-ink); }
 .ind-power { --a: var(--primary); }
-.ind-grid { --a: #3D5BD0; }
+.ind-grid { --a: var(--primary); }
 .ind-records { --a: var(--text-2); }
-.ind-build { --a: #B76E00; }
+.ind-build { --a: var(--amber-ink); }
 .ind-fac { --a: var(--safety); }
-.ind-mfg { --a: #C2410C; }
-@media (prefers-color-scheme: dark) {
-  .ind-solar, .ind-build { --a: #FFB800; }
-  .ind-grid { --a: #9DB0FF; }
-  .ind-mfg { --a: #FF9A5C; }
-}
+.ind-mfg { --a: var(--amber-ink); }
 .ind-head { display: grid; gap: 32px; align-items: center; margin-bottom: 44px; }
 @media (min-width: 900px) { .ind-head { grid-template-columns: 1.2fr .8fr; gap: 72px; } .ind:nth-of-type(odd) .ind-head > .art { order: -1; } .ind:nth-of-type(odd) .ind-head { grid-template-columns: .8fr 1.2fr; } }
 .ind-head > * { min-width: 0; }
@@ -1171,7 +1170,8 @@ html:not(.js) .tour-panel + .tour-panel { margin-top: 64px; }
   .hero .fm-hero > :nth-child(3), .page-hero .hero-split > div > :nth-child(3), .page-hero > .container:not(.hero-split) > :nth-child(3) { animation-delay: 160ms; }
   .hero .fm-hero > :nth-child(n+4), .page-hero .hero-split > div > :nth-child(n+4), .page-hero > .container:not(.hero-split) > :nth-child(n+4) { animation-delay: 240ms; }
 }
-@keyframes rise { from { opacity: 0; transform: translateY(22px); } }
+/* Transform only: first-screen text is painted at once (no opacity fade), so FCP/LCP are not held back. */
+@keyframes rise { from { transform: translateY(14px); } }
 
 /* Offer tag: the one glass panel in the hero */
 .fm-card { background: var(--glass); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 176, 0, .25), 0 0 48px -12px rgba(255, 176, 0, .35); }
@@ -1327,6 +1327,73 @@ html:not(.js) .tour-panel + .tour-panel { margin-top: 64px; }
 /* Footer seal panel and the rest keep their flat ground. */
 .bir-seal { box-shadow: inset 0 0 0 1px var(--glass-edge); }
 
+/* =====================================================================
+   v5 "clear grid" layer (Nov 2026): accessibility and cohesion pass.
+   One palette, one role per token:
+     primary ground   --navy  #0B1E38 (chrome, hero bands, footer)
+     primary action   --amber #FFB000 fill with a navy label; never amber text on light
+     secondary        --primary (cyan family: links, info, EAM)
+     success          --safety / --ok (green: live, done, Safety)
+     warning          --amber-ink (accessible amber: small labels, icons, Construction)
+     danger           --danger (errors only)
+     neutral          steel greys (--text, --text-2, --well, --border...)
+   Product identities keep one accent each: EAM = secondary, Safety = success,
+   Construction = amber (fills) / amber-ink (text, icons).
+   Focus: gap | 3px ring | halo, so it reads on navy, amber, white and pictures.
+   Navigation is <a> and ends in an arrow; actions are <button> and never do.
+   Every target is at least 44 x 44 px; stacked CTAs get 16px between rows.
+   ===================================================================== */
+
+/* Scoped grounds get matching focus layers */
+.calc > div:last-child, .bento-hero { --focus: #FFB800; --focus-gap: #0B1E38; --focus-halo: #FFFFFF; }
+.cta-band { --focus: #0A1628; --focus-gap: #FFFFFF; --focus-halo: #0A1628; }
+/* Rings must not be clipped by containers that clip for the open/close animation */
+.faq details::details-content { overflow: clip; overflow-clip-margin: 14px; }
+.skip-link:focus { outline: 3px solid var(--on-amber); outline-offset: -7px; box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 7px #0A1628 !important; }
+/* The menu control, nav links and tabs also fill when focused */
+.nav-toggle:focus-visible, .menu-toggle:focus-visible, .site-nav a:not(.btn):focus-visible, .tour-tab:not([aria-selected="true"]):focus-visible { background: var(--well); }
+.btn-primary:focus-visible { background: var(--amber-strong); }
+
+/* Primary action: amber fill, navy label, a navy edge where the ground is light */
+.btn-primary { border-color: var(--navy); }
+.site-header .btn-primary, .hero .btn-primary, .page-hero .btn-primary, .chrome .btn-primary, .chrome-band .btn-primary, .site-footer .btn-primary, .bento-hero .btn-primary { border-color: var(--amber); }
+@media (prefers-color-scheme: dark) { .btn-primary { border-color: var(--amber); } }
+/* The green fill is retired: every secondary action uses the one outline look */
+.btn-accent { background: transparent; color: var(--text); border-color: var(--text); }
+.btn-accent:hover { background: var(--text); color: var(--bg); box-shadow: none; }
+
+/* Navigation cue: every button-styled link ends in an arrow; <button>s never do. */
+a.btn::before { content: ""; order: 2; flex: none; width: .95em; height: .95em; margin-right: -.15em; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform var(--t-fast) var(--ease); }
+@media (prefers-reduced-motion: no-preference) { a.btn:hover::before, a.btn:focus-visible::before { transform: translateX(3px); } }
+
+/* Stacked CTAs: more air between rows; full width on phones */
+.btn-row, .demo-pick .btn-row { gap: 16px 12px; }
+@media (max-width: 520px) {
+  main .btn-row > .btn { flex: 1 1 100%; }
+}
+
+/* Touch targets: 44 x 44 minimum everywhere */
+.brand { min-height: 48px; }
+.site-footer li a { min-height: 44px; min-width: 44px; }
+.footer-bottom a, .bir-seal p a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
+.faq-nav a, .link-arrow, .tour-tab, .chip, .flow-replay, .demo-pick button, .stepper button, .nav-toggle, .menu-toggle, .site-nav a { min-height: 48px; }
+.demo-pick button, .stepper button, .nav-toggle { min-width: 48px; }
+a.email { display: inline-block; padding: 8px 0; min-height: 44px; max-width: 100%; }
+@media (max-width: 1140px) { .nav-actions { gap: 16px; } }
+
+/* Small labels and icons on light grounds use the accessible variants */
+.chip svg { color: var(--amber-ink); }
+.mock-bar i:nth-child(n) { background: var(--border-strong); }
+.data-chips b { color: var(--amber); }
+.data-chips .dc-b b { color: #4BE3A8; }
+.data-chips .dc-c b { color: #5FD8F0; }
+.eyebrow.amber, .eyebrow.build { color: var(--amber-ink); }
+.offer.build .offer-num, .product-card.build .product-tag { color: var(--amber-ink); }
+.std-matrix li::before, .two-sides i { background: var(--amber-ink); }
+
 /* ---------- Forced colors (Windows high contrast) ----------
    System colours replace ours; keep every control outlined and the focus ring thick. */
 @media (forced-colors: active) {
@@ -1353,6 +1420,7 @@ html:not(.js) .tour-panel + .tour-panel { margin-top: 64px; }
   .data-chips li, .feature-card, .tour-tabs, .hero-price { border: 1px solid CanvasText; }
   .sld .cloud { fill: Canvas; stroke: CanvasText; }
   .tour-panel .mock, .platform .mock { transform: none; }
+  a.btn::before { forced-color-adjust: none; background: ButtonText; }
 }
 
 /* ---------- Reduced motion: stop everything decorative ---------- */
