@@ -18,7 +18,8 @@ Static site for **Messerschmidts EAM**, **Messerschmidts Safety** and **Messersc
 | `disclaimer.html` | Disclaimer v1.0: accuracy, use, damages, other users, safety (RA 11058 / DOLE), weather and Day Ahead Nominations, regulatory reports (ERC / DOE / NGCP / IEMOP), permits lists (LGU), calculations (EVM, billing, tax) |
 | `404.html` | Not-found page (uses root-relative links, so it works at any path) |
 | `assets/site.css`, `assets/site.js`, `assets/logo.svg` | Shared styles, script, logo/favicon |
-| `assets/stage.js` | v7 animated stage: home particle globe (`canvas[data-stage="globe"]`) and the quiet constellation behind every `.page-hero` / `.notfound` window |
+| `assets/screens/` | Real app screenshots with sample data (`<name>-1280|640.webp|jpg`) and `previews.json`, the manifest the slideshows read |
+| `tools/capture-previews.mjs` | Regenerates the screenshots and the manifest from a built app server (see "App previews") |
 | `favicon.ico`, `assets/apple-touch-icon.png` | Fallback favicon (16/32/48 px) and 180 px home-screen icon, drawn from the logo |
 
 ## Legal pages
@@ -66,9 +67,31 @@ If plans are returned for an app, the cards in `[data-plans="safety"]` / `[data-
 - **Behind the same server** as the application: serve this folder as static files (for example at `www.messerschmidts.online`, or at the root with the app's paths routed separately). Leave both meta tags empty.
 - Local preview: `python3 -m http.server 8080` in this folder, then open http://localhost:8080/.
 
-## Design notes (v7 "window", Nov 2026)
+## App previews (slideshows)
 
-Each page is a set of calm, rounded windows floating over a soft violet bokeh (`body::before/::after`, CSS only, fixed). Navy is the ground, amber is the one action colour; violet/lilac (`--violet`, `--lilac`, `--rim`) is light only: glows, window rims, micro-labels. Nav and short labels are widely tracked uppercase in Barlow Semi Condensed (the only weight we ship is Bold, so "thin" comes from size and tracking); the home wordmark uses the system UI face at weight 200; running text stays the system sans at 18px. Text never sits on raw bokeh: sections carry a 0.72-0.84 scrim of the ground, windows 0.86. The home hero is a window with a particle-network globe (nodes = plants and sites, amber pulses = sites) whose streams dissolve into the MESSERSCHMIDTS wordmark, the three apps orbiting it in their colours (`assets/stage.js`, vanilla canvas): max 60 fps (30 on phones / 4-core CPUs, fewer particles, DPR capped), paused off-screen and in hidden tabs, one static frame under `prefers-reduced-motion`, hidden in forced colours. The older notes below describe the v2 base it builds on.
+Every app's real screens run as a slideshow: on the home page (one per app, behind the EAM / Safety / Construction switcher), on `eam.html#screens`, `safety.html#permits` and `construction.html#dashboard`. The slides come from **`assets/screens/previews.json`**, read by `assets/site.js` at load:
+
+```json
+{"version":1,"captured":"2026-11-01","caption":"Screenshot of the app with sample data",
+ "apps":{"eam":{"label":"EAM","short":"Assets, PM and work orders",
+   "slides":[{"file":"eam-dashboard","title":"Operations dashboard","alt":"Screenshot with sample data: ...","width":1280,"height":800,"captured":"2026-11-01"}]}}}
+```
+
+Each `file` has four images next to it: `<file>-1280.webp`, `<file>-640.webp`, `<file>-1280.jpg`, `<file>-640.jpg`. The HTML holds the first slide of each show as a plain picture, so without JS (or if the manifest cannot be read) one real screen still shows. Slides after the first load only when needed. The show follows the WAI-ARIA carousel pattern: it moves on every 5 s, pauses on hover and while focus is inside, has a stop/start button, previous/next, one button per slide and swipe on touch screens, and never moves by itself under `prefers-reduced-motion`. A picture marked `data-preview="app/file"` (the home "Every site on one screen" band) takes its alt text and date from the manifest too.
+
+**Refreshing after an app release** (no HTML edits):
+
+```sh
+node tools/capture-previews.mjs --server <app repo>/eam-safety/server --python <python with the app's requirements> --label 4.19.2
+```
+
+The script starts the built server on a free 127.0.0.1 port with a new temporary data folder (`HSE_SMTP_*` and `PAYMONGO_*` removed from its environment), creates a demo organisation with the demo loader and turns on all three apps (as the console's NEW DEMO does), activates one device, signs in with the demo's own sample account, captures 9 screens (EAM: dashboard, work orders, asset register; Safety: permit board, My Day, ID card; Construction: S-curve, transmittals, deliveries) in headless Chrome at 1280x800 @2x, encodes them in the browser as webp and jpg at 1280 and 640 px, writes `previews.json` with the capture date, then stops the server and deletes the temporary data and Chrome profile. The browser may only reach 127.0.0.1. It needs Node 22+, Python with the app's requirements, and Chrome, Chromium or Edge (`--chrome <path>` if not found); it installs nothing. The screens, their alt texts and titles live in `PLAN` at the top of the script: alt texts only name what the demo seed always contains. Check the new images before committing, then bump `?v=` on `site.css`/`site.js` only if those files changed.
+
+**In CI on each app release** (not set up): a job in the app repository's release workflow builds the server, checks out this website repository with a token that may push to it (for example a fine-grained personal access token or GitHub App token with *Contents: read and write* and *Pull requests: read and write* on this repository only, stored as a secret such as `WEBSITE_REPO_TOKEN`), runs the script with `--label <release>`, and opens a pull request with the changed `assets/screens/` files for review. Headless Chrome is preinstalled on GitHub's Ubuntu runners.
+
+## Design notes (v10, Nov 2026)
+
+v10 restores the v2 "livelier" design (below) on all 13 pages and drops v3-v9's canvas stage, globe and HUD. On top of v2: the apps' short descriptions everywhere (EAM "Assets, PM and work orders", Safety "Permits, people and gates", Construction "Project control") in the nav, the home product cards, the diagram and the product heroes; current flowing along the home single-line diagram; the app preview slideshows and the home product switcher; the FAQ finder; and the accessibility floor: one 3px focus ring with a 3px gap, 44px targets (footer links, small buttons, slideshow controls), 16px between stacked actions, forced-colours rules, reduced motion, no layout shift.
 
 ## Design notes (v2, Oct 2026)
 

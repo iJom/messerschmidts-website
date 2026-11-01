@@ -20,8 +20,9 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Messerschmidts: software for Philippine industries, EAM for power plants and HSSE">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#040A14">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0B1E38" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E2340" media="(prefers-color-scheme: dark)">
 <!-- API base for live prices; empty = same origin as this page. -->
 <meta name="msm-api" content="https://app.messerschmidts.online">
 <!-- Application base for Sign in / sign-up links; empty = same origin. -->
@@ -29,23 +30,22 @@
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/BarlowSemiCondensed-Bold-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css?v=9">
-<script src="assets/site.js?v=9" defer></script>
-<script src="assets/stage.js?v=9" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=10">
+<script src="assets/site.js?v=10" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="Messerschmidts Philippine industrial software, home"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts <small>Philippine industrial software</small></span></a>
+    <a class="brand" href="index.html"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts<small>Philippine industrial software</small></span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span></button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul class="nav-list">
         <li class="has-menu"><button class="menu-toggle is-current" type="button" aria-expanded="false" aria-controls="menu-products">Products<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="menu" id="menu-products"><ul>
-            <li><a class="mi-eam" href="eam.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span><span><strong>EAM</strong><small>Maintenance for power plants and substations</small></span></a></li>
-            <li><a class="mi-safety" href="safety.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span><strong>Safety</strong><small>HSSE: permits, people and gates</small></span></a></li>
-            <li><a class="mi-build" href="construction.html" aria-current="page"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></span><span><strong>Construction</strong><small>Schedule, inspections, deliveries and payments</small></span></a></li>
+            <li><a class="mi-eam" href="eam.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span><span><strong>EAM</strong><small>Assets, PM and work orders</small></span></a></li>
+            <li><a class="mi-safety" href="safety.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span><strong>Safety</strong><small>Permits, people and gates</small></span></a></li>
+            <li><a class="mi-build" href="construction.html" aria-current="page"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></span><span><strong>Construction</strong><small>Project control</small></span></a></li>
           </ul></div></li>
         <li class="has-menu"><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-industries">Industries<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="menu menu-mega" id="menu-industries"><ul>
@@ -71,43 +71,72 @@
         <a class="btn btn-primary btn-sm" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a>
       </div>
     </nav>
-    <a class="header-search" href="faq.html#faq-find" aria-label="Search the FAQ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
   </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="v9-phero hud-grid acc-build" aria-labelledby="build-title" data-hud>
-  <div class="container">
-    <p class="hud-label"><span>Messerschmidts Construction</span><span>Project control</span><span>Safety included</span></p>
+<section class="page-hero build-hero" aria-labelledby="build-title">
+  <div class="container hero-split">
+    <div>
+    <span class="eyebrow build">Messerschmidts Construction</span>
     <h1 id="build-title">Construction project control, from the S&#8209;curve to the site gate</h1>
-    <div class="v9-phero-body">
-      <div>
-        <p class="lead-brief">Plan the work, inspect it, receive the materials and pay for it in one app.</p>
-        <p class="lead">Messerschmidts Construction has its own name, icon and install, beside EAM and Safety on the same server, sign-in and data. Safety Monitoring is included and one switch away.</p>
-        <p class="hero-price build"><strong>&#8369;50,000 per month per organisation</strong>, including your first site, with a <span data-trial="construction" data-trial-fmt="day">7-day</span> free trial. Each additional site is &#8369;15,000 a month. Safety is included for your organisation's own users on its sites.</p>
-        <div class="btn-row">
+    <p class="hero-short">Project control</p>
+    <p class="lead">Plan the work, inspect it, receive the materials and pay for it in one app. Messerschmidts Construction has its own name, icon and install, beside EAM and Safety on the same server, sign-in and data. Safety Monitoring is included and one switch away.</p>
+    <p class="hero-price build"><strong>&#8369;50,000 per month per organisation</strong>, including your first site, with a <span data-trial="construction" data-trial-fmt="day">7-day</span> free trial. Each additional site is &#8369;15,000 a month. Safety is included for your organisation's own users on its sites.</p>
+    <div class="btn-row">
       <a class="btn btn-primary" href="/#/account/signup" data-app-link="/#/account/signup"><span>Start <span data-trial="construction" data-trial-fmt="day">7-day</span> free trial</span></a>
       <a class="btn btn-secondary" href="pricing.html#construction">See Construction prices</a>
     </div>
-      </div>
-      <aside class="hud-readout hud-frame" aria-label="Construction in one app">
-        <p class="hud-label"><span>In one app</span></p>
-        <ul><li>Plan the work</li><li>Inspect it</li><li>Receive the materials</li><li>Pay for it</li><li>Safety: one switch away</li></ul>
-        <div class="hud-trace" aria-hidden="true"></div>
-      </aside>
     </div>
+    <figure class="hero-art">
+<svg class="sld" viewBox="0 0 560 524" role="img" aria-labelledby="build-art-title" focusable="false"><title id="build-art-title">Illustration with sample data: a progress S-curve for a sample company project with planned vs actual vs revised progress. At the data date actual progress is 56%, a little below the planned 61%, and a dashed revised line rises from there to 100% at the planned finish; below it a Gantt chart with the 2- and 6-week lookahead, and a work inspection request moving from raised to hold point to approved, which updates WBS progress.</title>
+<defs><pattern id="hzc" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="24" fill="#FFB000"/><rect x="12" width="12" height="24" fill="#1A1405"/></pattern></defs>
+<g class="pop" style="--d:.05s">
+<rect x="20" y="14" width="520" height="258" rx="16" class="f-panel" stroke="rgba(170,195,225,.3)"/>
+<path d="M20 30a16 16 0 0 1 16-16h488a16 16 0 0 1 16 16v4H20z" fill="url(#hzc)"/>
+<text x="44" y="62">S-curve, sample company project</text>
+<g class="sub-detail">
+<path d="M44 80h18" stroke="#A8B8CC" stroke-width="2.5" stroke-linecap="round"/><text class="t-sub" x="68" y="85">Planned</text>
+<path d="M142 80h18" stroke="#3EE0A1" stroke-width="3.5" stroke-linecap="round"/><text class="t-sub" x="166" y="85">Actual</text>
+<path d="M236 80h18" stroke="#FFB000" stroke-width="2.5" stroke-dasharray="5 4"/><text class="t-sub" x="260" y="85">Revised, to meet the plan</text>
+</g>
+<path class="wire" d="M64 232H520M64 100V232"/>
+</g>
+<g class="pop" style="--d:.35s">
+<path d="M64.0 232.0 L83.0 230.7 L102.0 229.0 L121.0 226.8 L140.0 223.9 L159.0 220.1 L178.0 215.3 L197.0 209.4 L216.0 202.1 L235.0 193.6 L254.0 183.8 L273.0 173.2 L292.0 162.0 L311.0 150.8 L330.0 140.2 L349.0 130.4 L368.0 121.9 L387.0 114.6 L406.0 108.7 L425.0 103.9 L444.0 100.1 L463.0 97.2 L482.0 95.0 L501.0 93.3 L520.0 92.0" fill="none" stroke="#A8B8CC" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M64.0 232.0 L83.0 231.6 L102.0 230.3 L121.0 228.4 L140.0 226.0 L159.0 222.8 L178.0 218.8 L197.0 213.6 L216.0 207.3 L235.0 199.6 L254.0 190.7 L273.0 180.6 L292.0 169.8 L311.0 158.5 L319.4 153.6" fill="none" stroke="#3EE0A1" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M319.4 153.6 L329.4 147.3 L339.5 141.2 L349.5 135.5 L359.5 130.2 L369.5 125.3 L379.6 120.8 L389.6 116.8 L399.6 113.1 L409.7 109.8 L419.7 106.9 L429.7 104.4 L439.8 102.1 L449.8 100.1 L459.8 98.4 L469.8 96.9 L479.9 95.6 L489.9 94.5 L499.9 93.5 L510.0 92.7 L520.0 92.0" fill="none" stroke="#FFB000" stroke-width="2.5" stroke-dasharray="6 5" stroke-linecap="round"/>
+</g>
+<path d="M319.4 96V232" stroke="#FFB000" stroke-width="1.5" stroke-dasharray="3 4"/>
+<g class="pop" style="--d:.7s"><circle class="blink" cx="319.4" cy="153.6" r="6" fill="#3EE0A1"/><text class="t-sub sub-detail" x="319.4" y="256" text-anchor="middle">Data date</text></g>
+<g class="pop" style="--d:.9s"><rect x="404" y="166" width="108" height="28" rx="14" fill="rgba(168,184,204,.14)" stroke="#A8B8CC" stroke-width="1.5"/><text x="458" y="185" text-anchor="middle">Planned 61%</text>
+<rect x="404" y="202" width="108" height="28" rx="14" fill="rgba(62,224,161,.14)" stroke="#3EE0A1" stroke-width="1.5"/><text x="458" y="221" text-anchor="middle">Actual 56%</text></g>
+
+<g class="pop" style="--d:1.1s">
+<rect x="20" y="288" width="520" height="132" rx="16" class="f-panel" stroke="rgba(170,195,225,.3)"/>
+<rect x="319.4" y="296" width="111" height="116" fill="rgba(255,176,0,.08)"/>
+<rect x="319.4" y="296" width="37" height="116" fill="rgba(255,176,0,.16)"/>
+<text x="44" y="318">Gantt</text><text class="t-sub sub-detail" x="364" y="318">2- and 6-week lookahead</text>
+<rect x="64" y="328" width="186" height="18" rx="5" fill="#6F8DB5"/><text x="72" y="342" class="bar-l" style="fill:#0E1C2F">Substructure</text>
+<rect x="180" y="352" width="220" height="18" rx="5" fill="#FFB000"/><text x="188" y="366" class="bar-l" style="fill:#1A1405">Superstructure, critical</text>
+<rect x="300" y="376" width="170" height="18" rx="5" fill="#6F8DB5"/><text x="308" y="390" class="bar-l" style="fill:#0E1C2F">MEP rough-in</text>
+<rect x="400" y="398" width="120" height="18" rx="5" fill="#FFB000"/><text x="408" y="412" class="bar-l" style="fill:#1A1405">Facade</text>
+<path d="M319.4 296V414" stroke="#FFB000" stroke-width="1.5" stroke-dasharray="3 4"/>
+</g>
+
+<path class="wire" d="M180 476H201M359 476H382"/>
+<path class="pulse p-amber" pathLength="100" style="--d:1.8s" d="M180 476H201"/>
+<path class="pulse p-green" pathLength="100" style="--d:2.2s" d="M359 476H382"/>
+<g class="pop" style="--d:1.4s"><rect class="node-build" x="20" y="442" width="160" height="68" rx="12"/><text x="100" y="472" text-anchor="middle">WIR raised</text><text class="t-sub sub-detail" x="100" y="494" text-anchor="middle">Level 5 slab</text></g>
+<g class="pop" style="--d:1.6s"><rect class="node" x="201" y="442" width="158" height="68" rx="12"/><circle class="blink" cx="226" cy="467" r="6" fill="#FFB000"/><text x="290" y="472" text-anchor="middle">Hold point</text><text class="t-sub sub-detail" x="280" y="494" text-anchor="middle">Witness on site</text></g>
+<g class="pop" style="--d:2s"><rect class="node-safe" x="382" y="442" width="158" height="68" rx="12"/><text x="461" y="472" text-anchor="middle">Approved</text><text class="t-sub sub-detail" x="461" y="494" text-anchor="middle">WBS progress updated</text></g>
+</svg>
+    </figure>
   </div>
-  <figure class="v9-shot hud-frame acc-build" data-hud>
-    <picture class="shot">
-      <source type="image/webp" srcset="assets/screens/construction-scurve-dark-640.webp 640w, assets/screens/construction-scurve-dark-1280.webp 1280w" sizes="(min-width: 1360px) 1296px, 94vw">
-      <img src="assets/screens/construction-scurve-dark-1280.jpg" srcset="assets/screens/construction-scurve-dark-640.jpg 640w, assets/screens/construction-scurve-dark-1280.jpg 1280w" sizes="(min-width: 1360px) 1296px, 94vw" width="1280" height="826" loading="lazy" decoding="async" alt="Screenshot with sample data: the S-curve of a sample project, planned vs actual vs revised progress by month from June 2026 to February 2027, with the data date in October. Actual progress runs below plan; warnings show SPI 0.87 and a finish on 2 Mar 2027 at the current pace against the planned 3 Feb 2027. The earned value table in pesos sits below the chart.">
-    </picture>
-    <figcaption><span class="spec"><span>Construction</span><span>S-curve, sample project</span><span>Synced</span></span><span class="mock-caption">Screenshot of the app with sample data.</span></figcaption>
-  </figure>
 </section>
 
 <section class="section" aria-labelledby="cmod-title">
   <div class="container">
-    <div class="section-head"><h2 id="cmod-title">What the project office runs in it</h2><p class="lead">One filter for contractor, zone and scope cross-filters every page, so each team sees its own part of the project.</p></div>
+    <div class="section-head"><span class="eyebrow build">Modules</span><h2 id="cmod-title">What the project office runs in it</h2><p class="lead">One filter for contractor, zone and scope cross-filters every page, so each team sees its own part of the project.</p></div>
     <div class="grid grid-3">
 <article class="card feature-card build"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 20h18M3 20V4"/><path d="M6 17c4 0 5-9 9-10s4-2 6-3"/></svg></div><h3>Executive dashboard</h3><p>Completion, critical path, budget burn and long-lead alerts, with an S-curve of planned vs actual vs revised progress and an earned value table with SPI and CPI.</p></article>
 <article class="card feature-card build"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18M6 6h7M9 11h9M12 16h6"/></svg></div><h3>Planning</h3><p>Scopes of work and the WBS, with a Gantt chart and 2- and 6-week lookaheads.</p></article>
@@ -136,22 +165,23 @@
         <li>Long-lead alerts</li>
       </ul>
     </div>
-    <div class="stack">
-    <div class="mock shot-frame">
-  <picture class="shot">
-    <source type="image/webp" srcset="assets/screens/construction-dashboard-dark-640.webp 640w, assets/screens/construction-dashboard-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <img src="assets/screens/construction-dashboard-dark-640.jpg" srcset="assets/screens/construction-dashboard-dark-640.jpg 640w, assets/screens/construction-dashboard-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="312" loading="lazy" decoding="async" alt="Screenshot with sample data: the Construction executive dashboard of a sample project, with 36.0% overall completion against 41.3% planned, the critical path 12 days behind, 35.9% budget burn, 3 pending inspections, 4 site deliveries today, 75.0% standards compliance, 170,622 LTI-free man-hours, SPI 0.87 and CPI 1.00, and the HSSE status read from Safety.">
-  </picture>
-  <p class="spec" aria-hidden="true"><span>Construction</span><span>Executive dashboard</span><span>Synced</span></p>
-  <p class="mock-caption" aria-hidden="true">Screenshot of the app with sample data.</p>
+    <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Construction screens" data-carousel="construction" data-sizes="(min-width: 1100px) 720px, 94vw">
+<div class="car-viewport" id="car-build">
+<div class="car-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3: Progress S-curve">
+<figure class="mock shot-frame">
+  <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Progress S-curve</b><span class="pill info">Sample data</span></div>
+  <picture class="shot"><source type="image/webp" srcset="assets/screens/construction-scurve-640.webp 640w, assets/screens/construction-scurve-1280.webp 1280w" sizes="(min-width: 1100px) 720px, 94vw"><img src="assets/screens/construction-scurve-640.jpg" srcset="assets/screens/construction-scurve-640.jpg 640w, assets/screens/construction-scurve-1280.jpg 1280w" sizes="(min-width: 1100px) 720px, 94vw" width="1280" height="800" loading="lazy" decoding="async" alt="Screenshot with sample data: the Construction dashboard S-curve of a sample solar farm project, planned against actual monthly progress with a revised line after the data date, and the earned value figures below it with SPI, CPI, budget at completion in pesos and the forecast finish against the planned finish."></picture>
+  <figcaption class="mock-caption">Screenshot of the app with sample data. Captured 1 Nov 2026.</figcaption>
+</figure>
 </div>
-    </div>
+</div>
+</div>
   </div>
 </section>
 
 <section class="section" id="inspections" aria-labelledby="insp-title">
   <div class="container">
-    <div class="section-head"><h2 id="insp-title">Every WIR, MIR and T&amp;C inspection, from request to verdict</h2>
+    <div class="section-head"><span class="eyebrow build">Inspections</span><h2 id="insp-title">Every WIR, MIR and T&amp;C inspection, from request to verdict</h2>
       <p class="lead">Work, material, and testing and commissioning inspections with hold, witness, review and surveillance points. The verdict moves WBS progress.</p></div>
 <figure class="flow build" style="--n:5" data-flow aria-labelledby="insp-title">
 <ol class="flow-steps">
@@ -225,7 +255,7 @@
 
 <section class="section section-alt" id="money" aria-labelledby="money-title">
   <div class="container">
-    <div class="section-head"><h2 id="money-title">Request it, receive it, pay for it</h2>
+    <div class="section-head"><span class="eyebrow build">Money and materials</span><h2 id="money-title">Request it, receive it, pay for it</h2>
       <p class="lead">Purchase requests, requests for payment and stocks sit next to the schedule and the inspections they depend on. The procurement and drawings registers use the same filter as every other page.</p></div>
     <div class="grid grid-3">
       <article class="card build"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg></div><h3>Purchase requests</h3><p class="muted">Each request is either issued from stock or sent to procurement as an RFQ.</p>
@@ -280,7 +310,7 @@
 
 <section class="section section-alt" id="price" aria-labelledby="cprice-title">
   <div class="container">
-    <div class="section-head"><h2 id="cprice-title">One price for the organisation, &#8369;15,000 for each extra site</h2></div>
+    <div class="section-head"><span class="eyebrow build">Price</span><h2 id="cprice-title">One price for the organisation, &#8369;15,000 for each extra site</h2></div>
     <div class="split top plans build-plan">
       <article class="plan build featured">
         <span class="badge"><span data-trial="construction" data-trial-fmt="day">7-day</span> free trial</span>
@@ -314,7 +344,7 @@
       <div><h2 id="cta-title">Try Construction free for <span data-trial="construction">7 days</span></h2><p>Request an account for your organisation and run your own project in it. Pay later in pesos by GCash, Maya, card or online banking.</p></div>
       <div class="btn-row">
         <a class="btn btn-light" href="/#/account/signup" data-app-link="/#/account/signup">Request an account</a>
-        <a class="btn btn-outline-light" href="contact.html?topic=construction" aria-label="Ask for a demo of Messerschmidts Construction">Ask for a demo</a>
+        <a class="btn btn-outline-light" href="contact.html?topic=construction">Ask for a demo</a>
       </div>
     </div>
   </div>
@@ -324,7 +354,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="index.html" aria-label="Messerschmidts Philippine industrial software, home"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts <small>Philippine industrial software</small></span></a>
+        <a class="brand" href="index.html"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts<small>Philippine industrial software</small></span></a>
         <p class="muted small footer-blurb">Maintenance for Philippine power plants, project control for construction, and a safety app for every site. Runs on your server or ours, works offline, syncs when it can.</p>
         <p class="small"><a class="email" href="mailto:customerservice@messerschmidts.online">customerservice@messerschmidts.online</a></p>
       </div>

@@ -20,8 +20,9 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Messerschmidts: software for Philippine industries, EAM for power plants and HSSE">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#040A14">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0B1E38" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E2340" media="(prefers-color-scheme: dark)">
 <!-- API base for live prices; empty = same origin as this page. -->
 <meta name="msm-api" content="https://app.messerschmidts.online">
 <!-- Application base for Sign in / sign-up links; empty = same origin. -->
@@ -31,23 +32,22 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/BarlowSemiCondensed-Bold-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css?v=9">
-<script src="assets/site.js?v=9" defer></script>
-<script src="assets/stage.js?v=9" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=10">
+<script src="assets/site.js?v=10" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="Messerschmidts Philippine industrial software, home"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts <small>Philippine industrial software</small></span></a>
+    <a class="brand" href="index.html"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts<small>Philippine industrial software</small></span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span></button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul class="nav-list">
         <li class="has-menu"><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-products">Products<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="menu" id="menu-products"><ul>
-            <li><a class="mi-eam" href="eam.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span><span><strong>EAM</strong><small>Maintenance for power plants and substations</small></span></a></li>
-            <li><a class="mi-safety" href="safety.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span><strong>Safety</strong><small>HSSE: permits, people and gates</small></span></a></li>
-            <li><a class="mi-build" href="construction.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></span><span><strong>Construction</strong><small>Schedule, inspections, deliveries and payments</small></span></a></li>
+            <li><a class="mi-eam" href="eam.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span><span><strong>EAM</strong><small>Assets, PM and work orders</small></span></a></li>
+            <li><a class="mi-safety" href="safety.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span><strong>Safety</strong><small>Permits, people and gates</small></span></a></li>
+            <li><a class="mi-build" href="construction.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></span><span><strong>Construction</strong><small>Project control</small></span></a></li>
           </ul></div></li>
         <li class="has-menu"><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-industries">Industries<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="menu menu-mega" id="menu-industries"><ul>
@@ -73,45 +73,85 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <a class="btn btn-primary btn-sm" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a>
       </div>
     </nav>
-    <a class="header-search" href="faq.html#faq-find" aria-label="Search the FAQ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
   </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="v9-hero hud-grid" aria-labelledby="hero-title" data-hud>
-  <div class="container">
-  <div class="v9-hero-grid">
-    <div class="v9-hero-copy">
-      <p class="hud-label"><span>Messerschmidts</span><span>EAM, Safety, Construction</span></p>
-      <h1 id="hero-title"><span>Designed for</span> <span>power plants</span></h1>
-      <p class="lead">Maintenance, safety and project control for power plants, substations and construction sites in the Philippines. Three apps on the same server, sign-in and data, that keep working offline where the signal is weak.</p>
-      <div class="btn-row"><a class="btn btn-primary fm-cta" href="/#/account/signup" data-app-link="/#/account/signup"><span>Start free, up to <span data-trial="safety">14 days</span></span></a><a class="btn btn-secondary" href="contact.html?topic=eam">Ask for an EAM demo</a></div>
-      <div class="hud-trace" aria-hidden="true"></div>
+<section class="hero" aria-labelledby="hero-title">
+<svg class="hero-sky" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMin meet" aria-hidden="true" focusable="false">
+<defs><radialGradient id="sun-halo"><stop offset="0" stop-color="#FFC233" stop-opacity=".5"/><stop offset=".35" stop-color="#FFB000" stop-opacity=".16"/><stop offset="1" stop-color="#FFB000" stop-opacity="0"/></radialGradient></defs>
+<path class="sky-arc" d="M155 460A640 640 0 0 1 1285 460"/>
+<g class="sky-orbit"><circle class="sky-halo" cx="720" cy="120" r="120" fill="url(#sun-halo)"/><circle cx="720" cy="120" r="17" fill="#FFC233"/></g>
+</svg>
+<svg class="hero-pv" viewBox="0 0 1440 70" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+<defs>
+<pattern id="pv-a" width="84" height="30" patternUnits="userSpaceOnUse" y="36"><path d="M6 28 18 2h62L68 28Z" fill="rgba(63,211,238,.13)" stroke="rgba(170,200,230,.30)"/><path d="M12 15h62M43 2 37 28" fill="none" stroke="rgba(170,200,230,.16)"/></pattern>
+<pattern id="pv-b" width="66" height="24" patternUnits="userSpaceOnUse" x="30" y="6"><path d="M5 22 14 2h48L53 22Z" fill="rgba(63,211,238,.09)" stroke="rgba(170,200,230,.22)"/></pattern>
+<pattern id="pv-aw" width="84" height="30" patternUnits="userSpaceOnUse" y="36"><path d="M6 28 18 2h62L68 28Z" fill="#fff"/></pattern>
+<pattern id="pv-bw" width="66" height="24" patternUnits="userSpaceOnUse" x="30" y="6"><path d="M5 22 14 2h48L53 22Z" fill="#fff"/></pattern>
+<linearGradient id="pv-glint" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".38"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<mask id="pv-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="70"><rect x="0" y="6" width="1440" height="24" fill="url(#pv-bw)"/><rect x="0" y="36" width="1440" height="30" fill="url(#pv-aw)"/></mask>
+</defs>
+<rect x="0" y="6" width="1440" height="24" fill="url(#pv-b)"/>
+<rect x="0" y="36" width="1440" height="30" fill="url(#pv-a)"/>
+<g mask="url(#pv-mask)"><rect class="sky-shine" x="0" y="0" width="420" height="70" fill="url(#pv-glint)"/></g>
+</svg>
+  <div class="container hero-grid">
+    <div class="fm-hero">
+      <span class="eyebrow safety">Messerschmidts Safety Premium</span>
+      <h1 id="hero-title" class="fm-title">Get <span data-trial="safety" data-trial-fmt="Days">14 Days</span> of Premium Free upon Sign-Up</h1>
+      <p class="lead">Permits to work, incidents, man-hours, ID cards and gate passes for everyone on your site. Use the full Premium plan with your own team before you pay anything.</p>
+      <div class="fm-card" data-inview>
+        <p class="fm-price"><span class="fm-amount">&#8369;0</span><span class="fm-for">for your first <span data-trial="safety">14 days</span> of Premium</span></p>
+        <a class="btn btn-primary fm-cta" href="/#/account/signup" data-app-link="/#/account/signup"><span>Start free, up to <span data-trial="safety">14 days</span></span></a>
+        <ul class="fm-perks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M3 3l18 18"/></svg>No credit card required</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>Instant access &mdash; no complex account setup needed</li>
+        </ul>
+        <p class="fm-fine">Confirm your e-mail, set your password and activate your device &mdash; that&rsquo;s it. A paid subscription (<span data-live-price="safety">&#8369;1,000</span> per user per month) is only needed after the <span data-trial="safety" data-trial-fmt="day">14-day</span> free trial ends. Without one, the site turns read-only after a 7&#8209;day grace period; your data is kept. At sign-up a new organisation picks one app, once: Safety only (<span data-trial="safety">14 days</span> free), Construction with Safety (<span data-trial="construction">7 days</span>) or EAM (<span data-trial="eam">7 days</span>).</p>
+      </div>
+      <p class="fm-also">Also from Messerschmidts: <a href="contact.html?topic=eam">Ask for an EAM demo</a> for your power plant, or <a href="/#/account/signup" data-app-link="/#/account/signup">start a <span data-trial="construction" data-trial-fmt="day">7-day</span> Construction trial</a>.</p>
     </div>
-    <figure class="v9-platform hud-frame">
-      <svg viewBox="0 0 600 600" role="img" aria-labelledby="pf-cap" focusable="false"><path class="pf-frame" d="M2 26V2h24M574 2h24v24M598 574v24h-24M26 598H2v-24"/><circle class="pf-ring" cx="300" cy="300" r="236"/><path class="pf-tick" d="M534.7 324.7L542.7 325.5M530.8 349.1L538.7 350.7M524.4 372.9L532.1 375.4M515.6 396.0L522.9 399.2M490.9 438.7L497.4 443.4M475.4 457.9L481.3 463.3M457.9 475.4L463.3 481.3M438.7 490.9L443.4 497.4M396.0 515.6L399.2 522.9M372.9 524.4L375.4 532.1M349.1 530.8L350.7 538.7M324.7 534.7L325.5 542.7M275.3 534.7L274.5 542.7M250.9 530.8L249.3 538.7M227.1 524.4L224.6 532.1M204.0 515.6L200.8 522.9M161.3 490.9L156.6 497.4M142.1 475.4L136.7 481.3M124.6 457.9L118.7 463.3M109.1 438.7L102.6 443.4M84.4 396.0L77.1 399.2M75.6 372.9L67.9 375.4M69.2 349.1L61.3 350.7M65.3 324.7L57.3 325.5M65.3 275.3L57.3 274.5M69.2 250.9L61.3 249.3M75.6 227.1L67.9 224.6M84.4 204.0L77.1 200.8M109.1 161.3L102.6 156.6M124.6 142.1L118.7 136.7M142.1 124.6L136.7 118.7M161.3 109.1L156.6 102.6M204.0 84.4L200.8 77.1M227.1 75.6L224.6 67.9M250.9 69.2L249.3 61.3M275.3 65.3L274.5 57.3M324.7 65.3L325.5 57.3M349.1 69.2L350.7 61.3M372.9 75.6L375.4 67.9M396.0 84.4L399.2 77.1M438.7 109.1L443.4 102.6M457.9 124.6L463.3 118.7M475.4 142.1L481.3 136.7M490.9 161.3L497.4 156.6M515.6 204.0L522.9 200.8M524.4 227.1L532.1 224.6M530.8 250.9L538.7 249.3M534.7 275.3L542.7 274.5"/><path class="pf-tick-major" d="M536.0 300.0L552.0 300.0M504.4 418.0L518.2 426.0M418.0 504.4L426.0 518.2M300.0 536.0L300.0 552.0M182.0 504.4L174.0 518.2M95.6 418.0L81.8 426.0M64.0 300.0L48.0 300.0M95.6 182.0L81.8 174.0M182.0 95.6L174.0 81.8M300.0 64.0L300.0 48.0M418.0 95.6L426.0 81.8M504.4 182.0L518.2 174.0"/><g class="pf-spin"><circle class="pf-ring-dash" cx="300" cy="300" r="176"/></g><g class="pf-spin-rev"><path class="pf-arc" d="M375.0 170.1A150 150 0 0 1 450.0 300.0M225.0 429.9A150 150 0 0 1 150.0 300.0" stroke-opacity=".8"/></g><g class="pf-sweep-g"><path class="pf-sweep" d="M300 300V64"/></g><path class="pf-link" d="M300.0 100.0L300 300"/><path class="pf-pk c-eam d1" pathLength="100" d="M300.0 100.0L300 300"/><path class="pf-pk r c-eam d1" pathLength="100" d="M300.0 100.0L300 300"/><path class="pf-link" d="M473.2 400.0L300 300"/><path class="pf-pk c-safety d2" pathLength="100" d="M473.2 400.0L300 300"/><path class="pf-pk r c-safety d2" pathLength="100" d="M473.2 400.0L300 300"/><path class="pf-link" d="M126.8 400.0L300 300"/><path class="pf-pk c-build d3" pathLength="100" d="M126.8 400.0L300 300"/><path class="pf-pk r c-build d3" pathLength="100" d="M126.8 400.0L300 300"/><path class="pf-switch" d="M126.8 437.0Q300 548 473.2 437.0"/><polygon class="pf-core" points="300.0,214.0 374.5,257.0 374.5,343.0 300.0,386.0 225.5,343.0 225.5,257.0"/><polygon class="pf-core-in" points="300.0,226.0 364.1,263.0 364.1,337.0 300.0,374.0 235.9,337.0 235.9,263.0"/><text class="pf-t" x="300" y="262" text-anchor="middle" font-size="14">SAME</text><text class="pf-t big" x="300" y="290" text-anchor="middle" font-size="23">SERVER</text><text class="pf-t big" x="300" y="318" text-anchor="middle" font-size="23">SIGN-IN</text><text class="pf-t big" x="300" y="346" text-anchor="middle" font-size="23">DATA</text><rect class="pf-node c-eam" x="216.0" y="63.0" width="168" height="74" stroke-opacity=".45"/><path class="pf-arc c-eam" d="M216.0 63.0h12M216.0 63.0v12M384.0 63.0h-12M384.0 63.0v12M216.0 137.0h12M216.0 137.0v-12M384.0 137.0h-12M384.0 137.0v-12"/><text class="pf-t big f-eam" x="300.0" y="102.0" text-anchor="middle" font-size="25">EAM</text><text class="pf-t" x="300.0" y="124.0" text-anchor="middle" font-size="14">MAINTENANCE</text><rect class="pf-node c-safety" x="389.2" y="363.0" width="168" height="74" stroke-opacity=".45"/><path class="pf-arc c-safety" d="M389.2 363.0h12M389.2 363.0v12M557.2 363.0h-12M557.2 363.0v12M389.2 437.0h12M389.2 437.0v-12M557.2 437.0h-12M557.2 437.0v-12"/><text class="pf-t big f-safety" x="473.2" y="402.0" text-anchor="middle" font-size="25">SAFETY</text><text class="pf-t" x="473.2" y="424.0" text-anchor="middle" font-size="14">HSSE</text><rect class="pf-node c-build" x="42.8" y="363.0" width="168" height="74" stroke-opacity=".45"/><path class="pf-arc c-build" d="M42.8 363.0h12M42.8 363.0v12M210.8 363.0h-12M210.8 363.0v12M42.8 437.0h12M42.8 437.0v-12M210.8 437.0h-12M210.8 437.0v-12"/><text class="pf-t big f-build" x="126.8" y="402.0" text-anchor="middle" font-size="25">CONSTRUCTION</text><text class="pf-t" x="126.8" y="424.0" text-anchor="middle" font-size="14">PROJECT CONTROL</text><text class="pf-t f-safety" x="300" y="528" text-anchor="middle" font-size="15">SAFETY MONITORING: ONE SWITCH</text><text class="pf-t" x="24" y="42" font-size="15">14.60&#176;N 120.98&#176;E</text><text class="pf-t" x="576" y="42" text-anchor="end" font-size="15">UTC+8</text><circle class="f-safety pf-live" cx="31" cy="571" r="5"/><text class="pf-t" x="44" y="576" font-size="15">OFFLINE / SYNC</text><text class="pf-t" x="576" y="576" text-anchor="end" font-size="15">PH</text></svg>
-      <figcaption id="pf-cap">The platform: EAM, Safety and Construction around one server, sign-in and data. Safety Monitoring is included in Construction and one switch away; phones and tablets keep recording offline and sync later.</figcaption>
+    <figure class="hero-art">
+<svg class="sld" viewBox="0 0 560 500" role="img" aria-labelledby="sld-title" focusable="false"><title id="sld-title">Diagram: solar, wind, hydro and thermal plants and substations all connect to one Messerschmidts platform, which runs EAM for assets, PM and work orders, Safety for permits, people and gates, and Construction for project control.</title>
+<path class="wire" d="M64 88V140M172 88V140M280 88V140M388 88V140M496 88V140"/>
+<path class="bus pop" style="--d:.55s" d="M36 140H524"/>
+<path class="pulse p-amber" pathLength="100" style="--d:1.2s" d="M64 88V140"/>
+<path class="pulse p-amber" pathLength="100" style="--d:1.5s" d="M172 88V140"/>
+<path class="pulse p-amber" pathLength="100" style="--d:1.8s" d="M280 88V140"/>
+<path class="pulse p-amber" pathLength="100" style="--d:2.1s" d="M388 88V140"/>
+<path class="pulse p-amber" pathLength="100" style="--d:2.4s" d="M496 88V140"/>
+<path class="wire" d="M280 140V196M280 266V300M280 300H140V330M280 300H420V330"/>
+<path class="wire" d="M280 300V420"/>
+<path class="pulse p-amber" pathLength="100" style="--d:1.4s" d="M36 140H524"/>
+<path class="pulse p-amber" pathLength="100" style="--d:1.6s" d="M280 140V196"/>
+<path class="pulse p-cyan" pathLength="100" style="--d:1.9s" d="M280 266V300H140V330"/>
+<path class="pulse p-green" pathLength="100" style="--d:2.2s" d="M280 266V300H420V330"/>
+<path class="pulse p-amber" pathLength="100" style="--d:2.5s" d="M280 300V420"/>
+<path class="current" d="M36 140H524"/>
+<path class="current" d="M280 140V196"/>
+<path class="current c-cyan" d="M280 266V300H140V330"/>
+<path class="current c-green" d="M280 300H420V330"/>
+<path class="current" d="M280 300V420"/>
+<g class="pop" style="--d:.05s"><circle class="node" cx="64" cy="58" r="30"/><circle class="glyph g-amber" cx="64" cy="58" r="8"/><path class="glyph g-amber" d="M64 40v5M64 71v5M46 58h5M77 58h5M51.3 45.3l3.5 3.5M73.2 67.2l3.5 3.5M51.3 70.7l3.5-3.5M73.2 48.8l3.5-3.5"/></g>
+<g class="pop" style="--d:.15s"><circle class="node" cx="172" cy="58" r="30"/><path class="glyph" d="M172 56V82"/><g class="rotor"><circle cx="172" cy="52" r="18" fill="none"/><path class="glyph g-cyan" d="M172 52V35M172 52l14.7 8.5M172 52l-14.7 8.5"/></g><circle class="f-cyan" cx="172" cy="52" r="2.6"/></g>
+<g class="pop" style="--d:.25s"><circle class="node" cx="280" cy="58" r="30"/><path class="glyph" d="M266 44h10l8 30h-18z"/><path class="glyph g-cyan" d="M287 62c3-2 5-2 8 0s5 2 8 0M287 69c3-2 5-2 8 0s5 2 8 0"/></g>
+<g class="pop" style="--d:.35s"><circle class="node" cx="388" cy="58" r="30"/><path class="glyph" d="M376 78V52h8v26M392 78V60h8v18M372 78h32"/><path class="glyph g-amber blink" d="M380 46c-3-3 0-6 3-8M396 54c-3-3 0-6 3-8"/></g>
+<g class="pop" style="--d:.45s"><circle class="node" cx="496" cy="58" r="30"/><path class="glyph" d="M488 80l8-40 8 40M484 52h24M482 62h28M491 70h10"/><path class="glyph g-amber" d="M478 46l-8 4M514 46l8 4"/></g>
+<text x="64" y="112" text-anchor="middle">Solar</text>
+<text x="172" y="112" text-anchor="middle">Wind</text>
+<text x="280" y="112" text-anchor="middle">Hydro</text>
+<text x="388" y="112" text-anchor="middle">Thermal</text>
+<text x="496" y="112" text-anchor="middle">Substations</text>
+<text class="t-sub sub-detail" x="36" y="166">Your plants and sites</text>
+<g class="pop" style="--d:.75s"><rect class="node-hot" x="140" y="196" width="280" height="70" rx="14"/><text class="t-big" x="280" y="228" text-anchor="middle">Messerschmidts</text><text class="t-sub sub-detail" x="280" y="252" text-anchor="middle">One sign-in for sites, people, devices</text></g>
+<g class="pop" style="--d:.95s"><rect class="node-eam" x="36" y="330" width="208" height="80" rx="14"/><text class="t-big" x="140" y="364" text-anchor="middle">EAM</text><text class="t-sub sub-detail" x="140" y="388" text-anchor="middle">Assets, PM and work orders</text></g>
+<g class="pop" style="--d:1.05s"><rect class="node-safe" x="316" y="330" width="208" height="80" rx="14"/><text class="t-big" x="420" y="364" text-anchor="middle">Safety</text><text class="t-sub sub-detail" x="420" y="388" text-anchor="middle">Permits, people and gates</text></g>
+<g class="pop" style="--d:1.15s"><rect class="node-build" x="166" y="420" width="228" height="72" rx="14"/><text class="t-big" x="280" y="452" text-anchor="middle">Construction</text><text class="t-sub sub-detail" x="280" y="476" text-anchor="middle">Project control</text></g>
+</svg>
     </figure>
   </div>
-  <div class="fm-card fm-sheet">
-    <div class="fm-head"><p class="hud-label acc-safety"><span>Messerschmidts Safety Premium</span><span>Free trial</span></p>
-    <h2 class="offer-title" id="offer-free">Get <span data-trial="safety" data-trial-fmt="Days">14 Days</span> of Premium Free upon Sign-Up</h2></div>
-    <p class="fm-price"><span class="fm-amount">&#8369;0</span><span class="fm-for">for your first <span data-trial="safety">14 days</span> of Premium</span></p>
-    <ul class="fm-perks">
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M3 3l18 18"/></svg>No credit card required</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>Instant access &mdash; no complex account setup needed</li>
-    </ul>
-    <p class="fm-fine">Confirm your e-mail, set your password and activate your device &mdash; that&rsquo;s it. A paid subscription (<span data-live-price="safety">&#8369;1,000</span> per user per month) is only needed after the <span data-trial="safety" data-trial-fmt="day">14-day</span> free trial ends. Without one, the site turns read-only after a 7&#8209;day grace period; your data is kept. At sign-up a new organisation picks one app, once: Safety only (<span data-trial="safety">14 days</span> free), Construction with Safety (<span data-trial="construction">7 days</span>) or EAM (<span data-trial="eam">7 days</span>).</p>
-      <p class="fm-also">Also from Messerschmidts: <a href="contact.html?topic=eam">Ask for an EAM demo</a> for your power plant, or <a href="/#/account/signup" data-app-link="/#/account/signup">start a <span data-trial="construction" data-trial-fmt="day">7-day</span> Construction trial</a>.</p>
-  </div>
-  <div class="hero-meta">
-    <ul class="hero-live" aria-label="Apps on the platform"><li class="hl-eam">EAM: live</li><li>Safety: live</li><li class="hl-build">Construction: live</li></ul>
-    <ul class="window-rail" aria-label="Get in touch">
-      <li><a href="mailto:customerservice@messerschmidts.online" aria-label="E-mail customer service"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></a></li>
-      <li><a href="contact.html" aria-label="Contact us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg></a></li>
-      <li><a href="faq.html" aria-label="Frequently asked questions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.6"/><path d="M12 16.8v.2"/></svg></a></li>
-    </ul>
-  </div>
-  <ul class="bus-stats" aria-label="Key facts" data-inview>
+  <div class="container">
+    <ul class="bus-stats" aria-label="Key facts">
       <li><strong data-count>3</strong><span>apps on one sign-in: EAM, Safety and Construction</span></li>
       <li><strong data-count>25</strong><span>users included in Messerschmidts EAM Standard</span></li>
       <li><strong data-count data-trial="construction" data-trial-fmt="n">7</strong><span>day free trial of Messerschmidts Construction</span></li>
@@ -120,20 +160,20 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
   </div>
 </section>
 
-<section class="section" id="offerings" aria-labelledby="offer-title" data-hud>
+<section class="section" id="offerings" aria-labelledby="offer-title">
   <div class="container">
-    <div class="section-head">
-      <p class="hud-label"><span>Platform</span><span>Three apps</span><span>One sign-in</span></p>
-      <h2 id="offer-title">Three apps, one platform</h2>
+    <div class="section-head center">
+      <span class="eyebrow">What we do</span>
+      <h2 id="offer-title">Three ways we help Philippine industries</h2>
       <p class="lead">Start with the one you need today. All three run on the same server, sign-in and data.</p>
     </div>
-    <div class="v9-pillars">
-      <article class="pillar hud-frame acc-eam">
-        <div class="pillar-top"><p class="hud-label"><span>Messerschmidts EAM</span></p><span class="status status-live">Live</span></div>
+    <div class="offers">
+      <article class="card offer">
+        <div class="offer-top"><span class="offer-num">Messerschmidts EAM</span><span class="status status-live">Live</span></div>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div>
         <h3>EAM for Power Plants</h3>
-        <p class="pillar-brief">Maintenance management for solar, wind, hydro, geothermal, biomass and diesel plants and substations.</p>
-        <ul class="hud-tags" aria-label="Plant types"><li>Solar</li><li>Wind</li><li>Hydro</li><li>Geothermal</li><li>Biomass</li><li>Diesel</li><li>Substations</li></ul>
-        <div class="hud-trace" aria-hidden="true"></div>
+        <p class="offer-short">Assets, PM and work orders</p>
+        <p class="muted">Maintenance management for solar, wind, hydro, geothermal, biomass and diesel plants and substations.</p>
         <ul class="check-list">
           <li>Asset register with history and documents</li>
           <li>Preventive maintenance by calendar, run hours or meter</li>
@@ -141,13 +181,14 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
           <li>Spare parts, stores and procurement</li>
           <li>Downtime and failure reports</li>
         </ul>
-        <div class="btn-row"><a class="btn btn-secondary" href="eam.html">Explore EAM</a></div>
+        <div class="btn-row"><a class="btn btn-primary" href="eam.html">Explore EAM</a></div>
       </article>
-      <article class="pillar hud-frame acc-safety">
-        <div class="pillar-top"><p class="hud-label"><span>Messerschmidts Safety</span></p><span class="status status-live">Live</span></div>
-        <h3>Safety</h3>
-        <p class="pillar-brief">Permits to work, man-hours, incidents, competency and medical records, ID badges, gates, security and typhoon preparedness. Built for power plants, substations and construction sites in the Philippines, as the companion app to Messerschmidts EAM or on its own, and it keeps working offline where the signal is weak.</p>
-        <div class="hud-trace" aria-hidden="true"></div>
+      <article class="card offer safety">
+        <div class="offer-top"><span class="offer-num">Messerschmidts Safety</span><span class="status status-live">Live</span></div>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div>
+        <h3>HSSE</h3>
+        <p class="offer-short">Permits, people and gates</p>
+        <p class="muted">Health, safety, security and environment for the people on your site.</p>
         <ul class="check-list">
           <li>Permits to work and toolbox talks</li>
           <li>Incidents and man-hours</li>
@@ -155,14 +196,14 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
           <li>ID cards with QR badges</li>
           <li>Helps you keep the records for DOLE safety rules (RA 11058, DO 198-18)</li>
         </ul>
-        <div class="btn-row"><a class="btn btn-secondary" href="safety.html">Explore Safety</a></div>
+        <div class="btn-row"><a class="btn btn-accent" href="safety.html">Explore Safety</a></div>
       </article>
-      <article class="pillar hud-frame acc-build">
-        <div class="pillar-top"><p class="hud-label"><span>Messerschmidts Construction</span></p><span class="status status-live">Live</span></div>
+      <article class="card offer build">
+        <div class="offer-top"><span class="offer-num">Messerschmidts Construction</span><span class="status status-live">Live</span></div>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></div>
         <h3>Construction</h3>
-        <p class="pillar-brief">Plan the work, inspect it, receive the materials and pay for it in one app. Messerschmidts Construction has its own name, icon and install, beside EAM and Safety on the same server, sign-in and data. Safety Monitoring is included and one switch away.</p>
-        <ul class="hud-tags" aria-label="In one app"><li>Plan</li><li>Inspect</li><li>Receive</li><li>Pay</li></ul>
-        <div class="hud-trace" aria-hidden="true"></div>
+        <p class="offer-short">Project control</p>
+        <p class="muted">Project control for construction: schedule, inspections, deliveries and payments, with Safety included.</p>
         <ul class="check-list">
           <li>Executive dashboard: planned vs actual vs revised progress, SPI and CPI</li>
           <li>WBS, Gantt and 2- and 6-week lookaheads</li>
@@ -170,125 +211,123 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
           <li>Deliveries, purchase requests and requests for payment</li>
           <li>Standards compliance matrix</li>
         </ul>
-        <div class="btn-row"><a class="btn btn-secondary" href="construction.html">Explore Construction</a><a class="btn btn-secondary" href="contact.html?topic=construction" aria-label="Ask for a demo of Messerschmidts Construction">Ask for a demo</a></div>
+        <div class="btn-row"><a class="btn btn-primary" href="construction.html">Explore Construction</a><a class="btn btn-secondary" href="contact.html?topic=construction">Ask for a demo</a></div>
       </article>
     </div>
   </div>
 </section>
 
-<section class="section hud-grid" id="screens" aria-labelledby="tour-title" data-hud>
+<section class="section chrome chrome-band" id="screens" aria-labelledby="tour-title">
   <div class="container">
-    <div class="section-head"><p class="hud-label"><span>Screens</span><span>Sample data</span></p><h2 id="tour-title">See what your teams will work with</h2><p class="lead">One real screen from each app, captured with sample data.</p></div>
-    <div data-tabs>
-      <div class="tour-tabs" role="tablist" aria-label="Sample app screens" aria-orientation="horizontal">
-        <button class="tour-tab" type="button" role="tab" id="tab-eam" aria-controls="panel-eam" aria-selected="true">EAM: day-ahead nomination</button>
-        <button class="tour-tab t-safety" type="button" role="tab" id="tab-safety" aria-controls="panel-safety" aria-selected="false" tabindex="-1">Safety: permit board</button>
-        <button class="tour-tab t-build" type="button" role="tab" id="tab-build" aria-controls="panel-build" aria-selected="false" tabindex="-1">Construction: S-curve</button>
+    <div class="section-head"><span class="eyebrow">Inside the apps</span><h2 id="tour-title">See what your teams will work with</h2><p class="lead">Real screens of each app, running a demo organisation with sample data. Pick an app; its screens change every few seconds, and you can pause them.</p></div>
+    <div class="switcher" data-tabs>
+      <div class="tour-tabs" role="tablist" aria-label="Choose an app">
+        <button class="tour-tab" type="button" role="tab" id="tab-eam" aria-controls="panel-eam" aria-selected="true"><strong>EAM</strong><small>Assets, PM and work orders</small></button>
+        <button class="tour-tab t-safety" type="button" role="tab" id="tab-safety" aria-controls="panel-safety" aria-selected="false" tabindex="-1"><strong>Safety</strong><small>Permits, people and gates</small></button>
+        <button class="tour-tab t-build" type="button" role="tab" id="tab-construction" aria-controls="panel-construction" aria-selected="false" tabindex="-1"><strong>Construction</strong><small>Project control</small></button>
       </div>
-      <div class="tour-panel" id="panel-eam" role="tabpanel" aria-labelledby="tab-eam" tabindex="0">
+      <div class="tour-panel" id="panel-eam" role="tabpanel" aria-labelledby="tab-eam">
         <div>
-          <h3>Tomorrow's generation, with the weather in view</h3>
-          <p>Weather forecasts from MET Norway and history from NASA POWER feed a generation forecast for your plant, which you use to prepare the day-ahead nomination. Maintenance, assets and work orders sit in the same app.</p>
-          <div class="btn-row"><a class="btn btn-secondary" href="eam.html">Explore EAM</a><a class="btn btn-secondary" href="contact.html?topic=eam">Ask for an EAM demo</a></div>
+          <h3>The maintenance team&rsquo;s day, on one platform</h3>
+          <p>The operations dashboard, corrective work orders and the asset register of a demo company&rsquo;s sample solar plant. Preventive maintenance, spare parts, procurement and the day-ahead nomination sit in the same app.</p>
+          <div class="btn-row"><a class="btn btn-primary" href="eam.html">Explore EAM</a><a class="btn btn-secondary" href="contact.html?topic=eam">Ask for an EAM demo</a></div>
         </div>
-        <div class="mock shot-frame">
-  <picture class="shot">
-    <source type="image/webp" srcset="assets/screens/eam-nomination-dark-640.webp 640w, assets/screens/eam-nomination-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <img src="assets/screens/eam-nomination-dark-640.jpg" srcset="assets/screens/eam-nomination-dark-640.jpg 640w, assets/screens/eam-nomination-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="387" loading="lazy" decoding="async" alt="Screenshot with sample data: the EAM Weather forecast page for a sample 8 MW solar plant on 27 Oct 2026. The hourly P10, P50 and P90 output peaks at about 5.2 MW around noon and drops when rain arrives from 14:00; the day totals 35.0 MWh at P50. Below the chart are the hourly sky, temperature, cloud, rain, irradiance and estimated MW that the day-ahead nomination starts from.">
-  </picture>
-  <p class="spec spec-eam" aria-hidden="true"><span>EAM</span><span>Weather forecast and day-ahead output</span><span>Sample plant</span></p>
-  <p class="mock-caption" aria-hidden="true">Screenshot of the app with sample data. Always check NGCP and IEMOP instructions before you nominate.</p>
+<div class="carousel" role="region" aria-roledescription="carousel" aria-label="EAM screens" data-carousel="eam" data-sizes="(min-width: 1100px) 680px, 94vw">
+<div class="car-viewport" id="car-home-eam">
+<div class="car-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3: Operations dashboard">
+<figure class="mock shot-frame">
+  <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Operations dashboard</b><span class="pill info">Sample data</span></div>
+  <picture class="shot"><source type="image/webp" srcset="assets/screens/eam-dashboard-640.webp 640w, assets/screens/eam-dashboard-1280.webp 1280w" sizes="(min-width: 1100px) 680px, 94vw"><img src="assets/screens/eam-dashboard-640.jpg" srcset="assets/screens/eam-dashboard-640.jpg 640w, assets/screens/eam-dashboard-1280.jpg 1280w" sizes="(min-width: 1100px) 680px, 94vw" width="1280" height="800" loading="lazy" decoding="async" alt="Screenshot with sample data: the EAM operations dashboard of Demo Company&#x27;s sample solar plant, with live AC output and irradiance, open and overdue work orders, active alarms, MTTR and preventive jobs to dispatch, OEE and availability gauges, open work by priority and asset health by tier."></picture>
+  <figcaption class="mock-caption">Screenshot of the app with sample data. Captured 1 Nov 2026.</figcaption>
+</figure>
+</div>
+</div>
 </div>
       </div>
-      <div class="tour-panel" id="panel-safety" role="tabpanel" aria-labelledby="tab-safety" tabindex="0">
+      <div class="tour-panel" id="panel-safety" role="tabpanel" aria-labelledby="tab-safety">
         <div>
-          <h3>Every permit on site, on one board</h3>
-          <p>Requested, approved, active and closed out: the safety office sees every permit to work, who signed it and until when it runs. Gates and guards keep recording when the signal drops.</p>
-          <div class="btn-row"><a class="btn btn-secondary" href="safety.html">Explore Safety</a><a class="btn btn-secondary" href="contact.html?topic=safety">Ask for a Safety demo</a></div>
+          <h3>Every permit, person and gate pass on site</h3>
+          <p>The live permit-to-work board, My Day with the permits waiting for a signature, and the worker ID card that the gate scans. Gates and guards keep recording when the signal drops.</p>
+          <div class="btn-row"><a class="btn btn-primary" href="safety.html">Explore Safety</a><a class="btn btn-secondary" href="contact.html?topic=safety">Ask for a Safety demo</a></div>
         </div>
-        <div class="mock shot-frame">
-  <picture class="shot">
-    <source type="image/webp" srcset="assets/screens/safety-permit-board-dark-640.webp 640w, assets/screens/safety-permit-board-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <img src="assets/screens/safety-permit-board-dark-640.jpg" srcset="assets/screens/safety-permit-board-dark-640.jpg 640w, assets/screens/safety-permit-board-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="416" loading="lazy" decoding="async" alt="Screenshot with sample data: the Safety live permit-to-work board for a sample site, with the site plot plan on the left and the permits by status: one draft, two pending approval, one approved hot work permit, one active and one extended permit that expire soon, and one work at height permit suspended automatically because the wind is above its limit.">
-  </picture>
-  <p class="spec" aria-hidden="true"><span>Safety</span><span>Live permit-to-work board</span><span>Synced</span></p>
-  <p class="mock-caption" aria-hidden="true">Screenshot of the app with sample data.</p>
+<div class="carousel" role="region" aria-roledescription="carousel" aria-label="Safety screens" data-carousel="safety" data-sizes="(min-width: 1100px) 680px, 94vw">
+<div class="car-viewport" id="car-home-safety">
+<div class="car-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3: Live permit-to-work board">
+<figure class="mock shot-frame">
+  <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Live permit-to-work board</b><span class="pill info">Sample data</span></div>
+  <picture class="shot"><source type="image/webp" srcset="assets/screens/safety-permits-640.webp 640w, assets/screens/safety-permits-1280.webp 1280w" sizes="(min-width: 1100px) 680px, 94vw"><img src="assets/screens/safety-permits-640.jpg" srcset="assets/screens/safety-permits-640.jpg 640w, assets/screens/safety-permits-1280.jpg 1280w" sizes="(min-width: 1100px) 680px, 94vw" width="1280" height="800" loading="lazy" decoding="async" alt="Screenshot with sample data: the Safety live permit-to-work board for a sample solar plant, with the zoned site plot plan beside columns for draft, pending approval, approved, active, extended and suspended permits, including a hot work permit for a weld repair and a lifting permit for an inverter module."></picture>
+  <figcaption class="mock-caption">Screenshot of the app with sample data. Captured 1 Nov 2026.</figcaption>
+</figure>
+</div>
+</div>
 </div>
       </div>
-      <div class="tour-panel" id="panel-build" role="tabpanel" aria-labelledby="tab-build" tabindex="0">
+      <div class="tour-panel" id="panel-construction" role="tabpanel" aria-labelledby="tab-construction">
         <div>
           <h3>Where the project stands at the data date</h3>
-          <p>The executive dashboard draws planned vs actual vs revised progress on one S-curve, so you see the pace needed to finish on the planned date. SPI and CPI sit in the earned value table under it. Verdicts of WIR, MIR and T&amp;C inspections move WBS progress.</p>
-          <div class="btn-row"><a class="btn btn-secondary" href="construction.html">Explore Construction</a><a class="btn btn-secondary" href="contact.html?topic=construction">Ask for a Construction demo</a></div>
+          <p>The S-curve of planned vs actual vs revised progress with SPI and CPI, the transmittals register with its overdue replies, and the delivery board from scheduled to inspected and stored.</p>
+          <div class="btn-row"><a class="btn btn-primary" href="construction.html">Explore Construction</a><a class="btn btn-secondary" href="contact.html?topic=construction">Ask for a Construction demo</a></div>
         </div>
-        <div class="mock shot-frame">
-  <picture class="shot">
-    <source type="image/webp" srcset="assets/screens/construction-scurve-dark-640.webp 640w, assets/screens/construction-scurve-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <img src="assets/screens/construction-scurve-dark-640.jpg" srcset="assets/screens/construction-scurve-dark-640.jpg 640w, assets/screens/construction-scurve-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="413" loading="lazy" decoding="async" alt="Screenshot with sample data: the S-curve of a sample project, planned vs actual vs revised progress by month from June 2026 to February 2027, with the data date in October. Actual progress runs below plan; warnings show SPI 0.87 and a finish on 2 Mar 2027 at the current pace against the planned 3 Feb 2027. The earned value table in pesos sits below the chart.">
-  </picture>
-  <p class="spec" aria-hidden="true"><span>Construction</span><span>S-curve, sample project</span><span>Synced</span></p>
-  <p class="mock-caption" aria-hidden="true">Screenshot of the app with sample data.</p>
+<div class="carousel" role="region" aria-roledescription="carousel" aria-label="Construction screens" data-carousel="construction" data-sizes="(min-width: 1100px) 680px, 94vw">
+<div class="car-viewport" id="car-home-construction">
+<div class="car-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3: Progress S-curve">
+<figure class="mock shot-frame">
+  <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Progress S-curve</b><span class="pill info">Sample data</span></div>
+  <picture class="shot"><source type="image/webp" srcset="assets/screens/construction-scurve-640.webp 640w, assets/screens/construction-scurve-1280.webp 1280w" sizes="(min-width: 1100px) 680px, 94vw"><img src="assets/screens/construction-scurve-640.jpg" srcset="assets/screens/construction-scurve-640.jpg 640w, assets/screens/construction-scurve-1280.jpg 1280w" sizes="(min-width: 1100px) 680px, 94vw" width="1280" height="800" loading="lazy" decoding="async" alt="Screenshot with sample data: the Construction dashboard S-curve of a sample solar farm project, planned against actual monthly progress with a revised line after the data date, and the earned value figures below it with SPI, CPI, budget at completion in pesos and the forecast finish against the planned finish."></picture>
+  <figcaption class="mock-caption">Screenshot of the app with sample data. Captured 1 Nov 2026.</figcaption>
+</figure>
+</div>
+</div>
 </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section globe-sec" id="why" aria-labelledby="why-title" data-hud>
-  <div class="globe-track">
-    <div class="globe-sticky">
-      <canvas class="globe-canvas" data-stage="earth" role="img" aria-label="Illustration: the Philippines at night on a dark globe, with its cities lit and amber points of light marking example power plants and project sites (illustrative, not actual installations) across Luzon, the Visayas, Mindanao and Palawan."></canvas>
-      <div class="container globe-copy">
-        <p class="hud-label"><span>14.60&#176;N 120.98&#176;E</span><span>Manila time, UTC+8</span></p>
-        <h2 id="why-title">Made for Philippine sites, not just offices</h2>
-        <p class="statement" data-statement>Solar farms far from town, hydro plants up in the mountains, island diesel plants, project sites with no fibre yet. The software has to keep up with where the work actually happens.</p>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="grid bento">
-      <article class="card feature-card bento-hero"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 21V4M5 4h12l-2 4 2 4H5"/></svg></div><h3>Philippine-made</h3><p>Built in the Philippines for Philippine sites, in the plain English site teams use. Dates and reports in Manila time.</p>
-        <p class="ph-clock" data-manila-clock hidden><span class="ph-clock-label">Manila time now</span><strong class="ph-clock-time">--:--</strong><span class="ph-clock-date"></span></p></article>
-      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12a10 10 0 0 1 3-2M2 8.5A15 15 0 0 1 6 6M19 12a10 10 0 0 0-5-2.8M22 8.5A15 15 0 0 0 11 4.1M8.5 15.5a5 5 0 0 1 5-1"/><circle cx="12" cy="19" r="1"/><path d="M3 3l18 18"/></svg></div><h3>Works offline at remote sites</h3><p>Phones and tablets keep recording with weak or no signal, and sync with the server when the connection comes back.</p><span class="sync-viz" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></article>
-      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 20V4h5a4 4 0 0 1 0 8H8M6 7h12M6 10h12"/></svg></div><h3>Prices in pesos</h3><p>Clear monthly prices in Philippine peso. No foreign currency, no surprises on the exchange rate.</p></article>
-      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></div><h3>GCash, card and bank payment</h3><p>Pay by GCash, Maya, card, QR Ph, online banking or USDT on TRON. Payments are verified automatically and your plan activates instantly.</p></article>
-      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M8 9h8M8 12h5"/></svg></div><h3>Filipino customer service</h3><p>Questions, demos, payments and support go to our Filipino customer service team, by e-mail.</p></article>
-      <article class="card feature-card bento-wide"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="7" rx="1.5"/><rect x="4" y="13" width="16" height="7" rx="1.5"/><path d="M8 7.5h.01M8 16.5h.01M12 7.5h5M12 16.5h5"/></svg></div><h3>Your server or ours</h3><p>Run it on your own server inside your network, or let us host it. Updates are signed.</p></article>
-    </div>
-  </div>
-</section>
-
-<section class="section showcase-sec" aria-labelledby="platform-title" data-hud>
-  <div class="container">
-    <div class="section-head center showcase-head">
+<section class="section section-alt" aria-labelledby="platform-title">
+  <div class="container platform">
+    <div>
+      <span class="eyebrow">One platform</span>
       <h2 id="platform-title">Every site on one screen</h2>
       <p class="lead">Work orders, preventive maintenance, spare parts and permits side by side, the way your site teams see them.</p>
-    </div>
-  </div>
-  <figure class="showcase showcase-eam v9-shot hud-frame acc-eam" data-hud>
-    <picture class="shot">
-      <source type="image/webp" srcset="assets/screens/eam-dashboard-dark-640.webp 640w, assets/screens/eam-dashboard-dark-1280.webp 1280w" sizes="(min-width: 1320px) 1240px, 96vw">
-      <img src="assets/screens/eam-dashboard-dark-640.jpg" srcset="assets/screens/eam-dashboard-dark-640.jpg 640w, assets/screens/eam-dashboard-dark-1280.jpg 1280w" sizes="(min-width: 1320px) 1240px, 96vw" width="640" height="428" loading="lazy" decoding="async" alt="Screenshot with sample data: the EAM operations dashboard of a demo company's sample solar plant, with 4.10 MW live AC output, 5 open work orders, 4 active alarms, a 30-day MTTR of 182.2 hours, 5 low-stock items, 3 preventive maintenance jobs awaiting approval, plant OEE of 96.3%, open work by priority and asset health by tier.">
-    </picture>
-    <figcaption class="spec spec-eam"><span>EAM</span><span><span data-live-price="eam">&#8369;20,000</span> / organisation / month</span><span>25 users included</span></figcaption>
-  </figure>
-  <div class="container showcase-foot">
-    <ul class="data-chips" aria-hidden="true">
-        <li class="dc-a"><b>4.10 MW</b><span>live AC output</span></li>
-        <li class="dc-b"><b>96.3%</b><span>plant OEE</span></li>
-        <li class="dc-c"><b>5</b><span>open work orders</span></li>
-      </ul>
-    <ul class="check-list">
+      <ul class="check-list">
         <li>EAM and Safety share the same sites, people and sign-in</li>
         <li>Phones and tablets keep recording offline and sync when the connection comes back</li>
         <li>Dates and reports in Manila time</li>
       </ul>
+    </div>
+    <div class="hero-visual">
+<figure class="mock shot-frame" data-preview="eam/eam-dashboard">
+  <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Operations dashboard</b><span class="pill info">Sample data</span></div>
+  <picture class="shot"><source type="image/webp" srcset="assets/screens/eam-dashboard-640.webp 640w, assets/screens/eam-dashboard-1280.webp 1280w" sizes="(min-width: 1100px) 680px, 94vw"><img src="assets/screens/eam-dashboard-640.jpg" srcset="assets/screens/eam-dashboard-640.jpg 640w, assets/screens/eam-dashboard-1280.jpg 1280w" sizes="(min-width: 1100px) 680px, 94vw" width="1280" height="800" loading="lazy" decoding="async" alt="Screenshot with sample data: the EAM operations dashboard of Demo Company&#x27;s sample solar plant, with live AC output and irradiance, open and overdue work orders, active alarms, MTTR and preventive jobs to dispatch, OEE and availability gauges, open work by priority and asset health by tier."></picture>
+  <figcaption class="mock-caption">Screenshot of the app with sample data. Captured 1 Nov 2026.</figcaption>
+</figure>
+    </div>
   </div>
 </section>
 
-<section class="section hud-grid" aria-labelledby="price-title">
+<section class="section" aria-labelledby="why-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Why Messerschmidts</span>
+      <h2 id="why-title">Made for Philippine sites, not just offices</h2>
+      <p class="lead">Solar farms far from town, hydro plants up in the mountains, island diesel plants, project sites with no fibre yet. The software has to keep up with where the work actually happens.</p>
+    </div>
+    <div class="grid grid-3">
+      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 21V4M5 4h12l-2 4 2 4H5"/></svg></div><h3>Philippine-made</h3><p>Built in the Philippines for Philippine sites, in the plain English site teams use. Dates and reports in Manila time.</p></article>
+      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12a10 10 0 0 1 3-2M2 8.5A15 15 0 0 1 6 6M19 12a10 10 0 0 0-5-2.8M22 8.5A15 15 0 0 0 11 4.1M8.5 15.5a5 5 0 0 1 5-1"/><circle cx="12" cy="19" r="1"/><path d="M3 3l18 18"/></svg></div><h3>Works offline at remote sites</h3><p>Phones and tablets keep recording with weak or no signal, and sync with the server when the connection comes back.</p></article>
+      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 20V4h5a4 4 0 0 1 0 8H8M6 7h12M6 10h12"/></svg></div><h3>Prices in pesos</h3><p>Clear monthly prices in Philippine peso. No foreign currency, no surprises on the exchange rate.</p></article>
+      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></div><h3>GCash, card and bank payment</h3><p>Pay by GCash, Maya, card, QR Ph, online banking or USDT on TRON. Payments are verified automatically and your plan activates instantly.</p></article>
+      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M8 9h8M8 12h5"/></svg></div><h3>Filipino customer service</h3><p>Questions, demos, payments and support go to our Filipino customer service team, by e-mail.</p></article>
+      <article class="card feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="7" rx="1.5"/><rect x="4" y="13" width="16" height="7" rx="1.5"/><path d="M8 7.5h.01M8 16.5h.01M12 7.5h5M12 16.5h5"/></svg></div><h3>Your server or ours</h3><p>Run it on your own server inside your network, or let us host it. Updates are signed.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="price-title">
   <div class="container">
     <div class="section-head center">
+      <span class="eyebrow">Subscription</span>
       <h2 id="price-title">Simple prices in Philippine peso</h2>
       <p class="lead">Pay by GCash, Maya, card, QR Ph, online banking or USDT on TRON. Verified automatically, active instantly.</p>
     </div>
@@ -303,7 +342,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
           <li><span><span data-trial="eam" data-trial-fmt="day">7-day</span> free trial for a new organisation</span></li>
           <li>Bigger organisation? Ask us for a quote</li>
         </ul>
-        <div class="btn-row"><a class="btn btn-primary" href="contact.html?topic=eam" aria-label="Talk to us about EAM">Talk to us</a><a class="btn btn-secondary" href="pricing.html#eam" aria-label="Details of EAM pricing">Details</a></div>
+        <div class="btn-row"><a class="btn btn-primary" href="contact.html?topic=eam">Talk to us</a><a class="btn btn-secondary" href="pricing.html#eam">EAM details</a></div>
       </article>
       <article class="card product-card safety">
         <span class="product-tag">Messerschmidts Safety</span>
@@ -314,7 +353,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
           <li>Invited subcontractor on your site(s) only: &#8369;100 / month</li>
           <li>Subcontractor that opens its own site: full &#8369;1,000</li>
         </ul>
-        <div class="btn-row"><a class="btn btn-primary" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a><a class="btn btn-secondary" href="pricing.html" aria-label="Details of Safety pricing">Details</a></div>
+        <div class="btn-row"><a class="btn btn-primary" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a><a class="btn btn-secondary" href="pricing.html">Safety details</a></div>
       </article>
       <article class="card product-card build">
         <span class="product-tag">Messerschmidts Construction</span>
@@ -325,7 +364,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
           <li><span><span data-trial="construction" data-trial-fmt="day">7-day</span> free trial</span></li>
           <li>Safety included for your own users</li>
         </ul>
-        <div class="btn-row"><a class="btn btn-primary" href="/#/account/signup" data-app-link="/#/account/signup">Start free trial</a><a class="btn btn-secondary" href="pricing.html#construction" aria-label="Details of Construction pricing">Details</a></div>
+        <div class="btn-row"><a class="btn btn-primary" href="/#/account/signup" data-app-link="/#/account/signup">Start free trial</a><a class="btn btn-secondary" href="pricing.html#construction">Construction details</a></div>
       </article>
     </div>
     <p class="muted small center-text mt-md">With Construction, one price covers everyone on your sites: your own users, your subcontractors and the security gate.</p>
@@ -348,7 +387,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="index.html" aria-label="Messerschmidts Philippine industrial software, home"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts <small>Philippine industrial software</small></span></a>
+        <a class="brand" href="index.html"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts<small>Philippine industrial software</small></span></a>
         <p class="muted small footer-blurb">Maintenance for Philippine power plants, project control for construction, and a safety app for every site. Runs on your server or ours, works offline, syncs when it can.</p>
         <p class="small"><a class="email" href="mailto:customerservice@messerschmidts.online">customerservice@messerschmidts.online</a></p>
       </div>

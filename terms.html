@@ -20,8 +20,9 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Messerschmidts: software for Philippine industries, EAM for power plants and HSSE">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#040A14">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0B1E38" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E2340" media="(prefers-color-scheme: dark)">
 <!-- API base for live prices; empty = same origin as this page. -->
 <meta name="msm-api" content="https://app.messerschmidts.online">
 <!-- Application base for Sign in / sign-up links; empty = same origin. -->
@@ -29,23 +30,22 @@
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/BarlowSemiCondensed-Bold-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css?v=9">
-<script src="assets/site.js?v=9" defer></script>
-<script src="assets/stage.js?v=9" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=10">
+<script src="assets/site.js?v=10" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="Messerschmidts Philippine industrial software, home"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts <small>Philippine industrial software</small></span></a>
+    <a class="brand" href="index.html"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts<small>Philippine industrial software</small></span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span></button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul class="nav-list">
         <li class="has-menu"><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-products">Products<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="menu" id="menu-products"><ul>
-            <li><a class="mi-eam" href="eam.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span><span><strong>EAM</strong><small>Maintenance for power plants and substations</small></span></a></li>
-            <li><a class="mi-safety" href="safety.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span><strong>Safety</strong><small>HSSE: permits, people and gates</small></span></a></li>
-            <li><a class="mi-build" href="construction.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></span><span><strong>Construction</strong><small>Schedule, inspections, deliveries and payments</small></span></a></li>
+            <li><a class="mi-eam" href="eam.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span><span><strong>EAM</strong><small>Assets, PM and work orders</small></span></a></li>
+            <li><a class="mi-safety" href="safety.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span><strong>Safety</strong><small>Permits, people and gates</small></span></a></li>
+            <li><a class="mi-build" href="construction.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></span><span><strong>Construction</strong><small>Project control</small></span></a></li>
           </ul></div></li>
         <li class="has-menu"><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-industries">Industries<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="menu menu-mega" id="menu-industries"><ul>
@@ -71,7 +71,6 @@
         <a class="btn btn-primary btn-sm" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a>
       </div>
     </nav>
-    <a class="header-search" href="faq.html#faq-find" aria-label="Search the FAQ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
   </div>
 </header>
 <main id="main" tabindex="-1">
@@ -158,7 +157,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="index.html" aria-label="Messerschmidts Philippine industrial software, home"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts <small>Philippine industrial software</small></span></a>
+        <a class="brand" href="index.html"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts<small>Philippine industrial software</small></span></a>
         <p class="muted small footer-blurb">Maintenance for Philippine power plants, project control for construction, and a safety app for every site. Runs on your server or ours, works offline, syncs when it can.</p>
         <p class="small"><a class="email" href="mailto:customerservice@messerschmidts.online">customerservice@messerschmidts.online</a></p>
       </div>

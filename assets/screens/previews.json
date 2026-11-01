@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "captured": "2026-11-01",
+  "source": "Messerschmidts 4.19.2 demo organisation with sample data",
+  "caption": "Screenshot of the app with sample data",
+  "apps": {
+    "eam": {
+      "label": "EAM",
+      "short": "Assets, PM and work orders",
+      "slides": [
+        {
+          "file": "eam-dashboard",
+          "title": "Operations dashboard",
+          "alt": "Screenshot with sample data: the EAM operations dashboard of Demo Company's sample solar plant, with live AC output and irradiance, open and overdue work orders, active alarms, MTTR and preventive jobs to dispatch, OEE and availability gauges, open work by priority and asset health by tier.",
+          "width": 1280,
+          "height": 800,
+          "captured": "2026-11-01"
+        },
+        {
+          "file": "eam-workorders",
+          "title": "Corrective work orders",
+          "alt": "Screenshot with sample data: the EAM corrective maintenance list with tabs for open, high-priority and completed work orders, and sample jobs such as an inverter cooling fan failure raised by an IoT alarm and a string inverter fault reported by QR scan, each with its source, priority, status and due date.",
+          "width": 1280,
+          "height": 800,
+          "captured": "2026-11-01"
+        },
+        {
+          "file": "eam-assets",
+          "title": "Asset register",
+          "alt": "Screenshot with sample data: the EAM asset register with the sample plant's hierarchy and Block 1 Inverter Station opened; the detail panel of string inverter IS1-SINV-01 shows its model, commissioning date, health index, remaining life and book value in pesos.",
+          "width": 1280,
+          "height": 800,
+          "captured": "2026-11-01"
+        }
+      ]
+    },
+    "safety": {
+      "label": "Safety",
+      "short": "Permits, people and gates",
+      "slides": [
+        {
+          "file": "safety-permits",
+          "title": "Live permit-to-work board",
+          "alt": "Screenshot with sample data: the Safety live permit-to-work board for a sample solar plant, with the zoned site plot plan beside columns for draft, pending approval, approved, active, extended and suspended permits, including a hot work permit for a weld repair and a lifting permit for an inverter module.",
+          "width": 1280,
+          "height": 800,
+          "captured": "2026-11-01"
+        },
+        {
+          "file": "safety-myday",
+          "title": "My Day",
+          "alt": "Screenshot with sample data: the Safety My Day page for the site administrator, with today's heat index, the number of people on site and a queue of permits to work waiting for a signature, each with an Open to sign button.",
+          "width": 1280,
+          "height": 800,
+          "captured": "2026-11-01"
+        },
+        {
+          "file": "safety-idcards",
+          "title": "Worker ID card",
+          "alt": "Screenshot with sample data: the Safety ID card editor for a sample cleaning-crew worker of a sample subcontractor, marked valid, showing the printable front with photo and the back with emergency contact, fit-to-work date and QR code for the gate.",
+          "width": 1280,
+          "height": 800,
+          "captured": "2026-11-01"
+        }
+      ]
+    },
+    "construction": {
+      "label": "Construction",
+      "short": "Project control",
+      "slides": [
+        {
+          "file": "construction-scurve",
+          "title": "Progress S-curve",
+          "alt": "Screenshot with sample data: the Construction dashboard S-curve of a sample solar farm project, planned against actual monthly progress with a revised line after the data date, and the earned value figures below it with SPI, CPI, budget at completion in pesos and the forecast finish against the planned finish.",
+          "width": 1280,
+          "height": 800,
+          "captured": "2026-11-01"
+        },
+        {
+          "file": "construction-transmittals",
+          "title": "Transmittals and correspondence",
+          "alt": "Screenshot with sample data: the Construction transmittals and correspondence register with an alert for overdue replies, counters for open items, documents awaiting review and transmittals, and sample transmittals for a method statement and the issued-for-construction drawings of footings and columns.",
+          "width": 1280,
+          "height": 800,
+          "captured": "2026-11-01"
+        },
+        {
+          "file": "construction-deliveries",
+          "title": "Site deliveries",
+          "alt": "Screenshot with sample data: the Construction delivery board moving sample deliveries of rebar, ready-mix concrete and main switchgear from scheduled to inspected and stored, with late deliveries flagged, and crane bookings with a tower crane clash beside the laydown yard allocation.",
+          "width": 1280,
+          "height": 800,
+          "captured": "2026-11-01"
+        }
+      ]
+    }
+  }
+}

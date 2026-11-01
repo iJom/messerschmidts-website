@@ -20,8 +20,9 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Messerschmidts: software for Philippine industries, EAM for power plants and HSSE">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#040A14">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0B1E38" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E2340" media="(prefers-color-scheme: dark)">
 <!-- API base for live prices; empty = same origin as this page. -->
 <meta name="msm-api" content="https://app.messerschmidts.online">
 <!-- Application base for Sign in / sign-up links; empty = same origin. -->
@@ -29,23 +30,22 @@
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/BarlowSemiCondensed-Bold-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css?v=9">
-<script src="assets/site.js?v=9" defer></script>
-<script src="assets/stage.js?v=9" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=10">
+<script src="assets/site.js?v=10" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="Messerschmidts Philippine industrial software, home"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts <small>Philippine industrial software</small></span></a>
+    <a class="brand" href="index.html"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts<small>Philippine industrial software</small></span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span></button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul class="nav-list">
         <li class="has-menu"><button class="menu-toggle is-current" type="button" aria-expanded="false" aria-controls="menu-products">Products<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="menu" id="menu-products"><ul>
-            <li><a class="mi-eam" href="eam.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span><span><strong>EAM</strong><small>Maintenance for power plants and substations</small></span></a></li>
-            <li><a class="mi-safety" href="safety.html" aria-current="page"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span><strong>Safety</strong><small>HSSE: permits, people and gates</small></span></a></li>
-            <li><a class="mi-build" href="construction.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></span><span><strong>Construction</strong><small>Schedule, inspections, deliveries and payments</small></span></a></li>
+            <li><a class="mi-eam" href="eam.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span><span><strong>EAM</strong><small>Assets, PM and work orders</small></span></a></li>
+            <li><a class="mi-safety" href="safety.html" aria-current="page"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span><strong>Safety</strong><small>Permits, people and gates</small></span></a></li>
+            <li><a class="mi-build" href="construction.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></span><span><strong>Construction</strong><small>Project control</small></span></a></li>
           </ul></div></li>
         <li class="has-menu"><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-industries">Industries<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="menu menu-mega" id="menu-industries"><ul>
@@ -71,42 +71,40 @@
         <a class="btn btn-primary btn-sm" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a>
       </div>
     </nav>
-    <a class="header-search" href="faq.html#faq-find" aria-label="Search the FAQ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
   </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="v9-phero hud-grid acc-safety" aria-labelledby="safety-title" data-hud>
-  <div class="container">
-    <p class="hud-label"><span>Messerschmidts Safety</span><span>HSSE</span><span>Works offline</span></p>
+<section class="page-hero safety-hero" aria-labelledby="safety-title">
+  <div class="container hero-split">
+    <div>
+    <span class="eyebrow safety">Messerschmidts Safety</span>
     <h1 id="safety-title">HSSE monitoring for the people on your site</h1>
-    <div class="v9-phero-body">
-      <div>
-        <p class="lead-brief">Permits to work, man-hours, incidents, competency and medical records, ID badges, gates, security and typhoon preparedness.</p>
-        <p class="lead">Built for power plants, substations and construction sites in the Philippines, as the companion app to Messerschmidts EAM or on its own, and it keeps working offline where the signal is weak.</p>
-        <div class="btn-row">
+    <p class="hero-short">Permits, people and gates</p>
+    <p class="lead">Permits to work, man-hours, incidents, competency and medical records, ID badges, gates, security and typhoon preparedness. Built for power plants, substations and construction sites in the Philippines, as the companion app to Messerschmidts EAM or on its own, and it keeps working offline where the signal is weak.</p>
+    <div class="btn-row">
       <a class="btn btn-primary" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a>
       <a class="btn btn-secondary" href="pricing.html#safety">&#8369;1,000 per user / month</a>
     </div>
-      </div>
-      <aside class="hud-readout hud-frame" aria-label="Safety records">
-        <p class="hud-label"><span>On one app</span></p>
-        <ul><li>Permits to work</li><li>Man-hours</li><li>Incidents</li><li>Competency &amp; medical</li><li>ID badges</li><li>Gates</li><li>Security</li><li>Typhoon preparedness</li></ul>
-        <div class="hud-trace" aria-hidden="true"></div>
-      </aside>
     </div>
+    <figure class="hero-art">
+<svg class="sld" viewBox="0 0 480 440" role="img" aria-labelledby="permit-art-title" focusable="false"><title id="permit-art-title">Illustration with sample data: a hot work permit for a transformer bay, requested by a contractor, approved by the safety officer, active on site until 17:00 and waiting to be closed out.</title>
+<defs><pattern id="hz" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="24" fill="#FFB000"/><rect x="12" width="12" height="24" fill="#1A1405"/></pattern></defs>
+<g class="pop" style="--d:.05s">
+<rect x="40" y="24" width="400" height="392" rx="18" fill="#EEF3F8"/>
+<path d="M40 42a18 18 0 0 1 18-18h364a18 18 0 0 1 18 18v20H40z" fill="url(#hz)"/>
+<text x="64" y="98" style="fill:#3D4B5E;font-size:14px;font-weight:600">Permit to work, sample</text>
+<text x="64" y="128" style="fill:#0E1C2F;font-family:var(--font-display);font-size:27px;font-weight:700">Hot work, transformer bay</text>
+</g>
+<line x1="86" y1="188" x2="86" y2="208" stroke="#A9B6C6" stroke-width="2"/><g class="stamp" style="--d:.5s"><circle cx="86" cy="168" r="16" fill="#04704F"/><path d="M79 168.5l5 5 9-10" fill="none" stroke="#F4F8FB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><text x="116" y="166" style="fill:#0E1C2F;font-size:17px;font-weight:700">Requested</text><text x="116" y="185" style="fill:#3D4B5E;font-size:14px;font-weight:500">Contractor, 07:10</text><line x1="86" y1="248" x2="86" y2="268" stroke="#A9B6C6" stroke-width="2"/><g class="stamp" style="--d:.9s"><circle cx="86" cy="228" r="16" fill="#04704F"/><path d="M79 228.5l5 5 9-10" fill="none" stroke="#F4F8FB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><text x="116" y="226" style="fill:#0E1C2F;font-size:17px;font-weight:700">Approved</text><text x="116" y="245" style="fill:#3D4B5E;font-size:14px;font-weight:500">Safety officer, 07:32</text><line x1="86" y1="308" x2="86" y2="328" stroke="#A9B6C6" stroke-width="2"/><g class="pop" style="--d:1.3s"><circle class="blink" cx="86" cy="288" r="16" fill="#FFB000"/><circle cx="86" cy="288" r="5" fill="#0E1C2F"/></g><text x="116" y="286" style="fill:#0E1C2F;font-size:17px;font-weight:700">Active on site</text><text x="116" y="305" style="fill:#3D4B5E;font-size:14px;font-weight:500">Valid until 17:00</text><circle cx="86" cy="348" r="15" fill="none" stroke="#6B7A8D" stroke-width="2" stroke-dasharray="4 4"/><text x="116" y="346" style="fill:#0E1C2F;font-size:17px;font-weight:700">Closed out</text><text x="116" y="365" style="fill:#3D4B5E;font-size:14px;font-weight:500">When the work is done</text>
+<g class="pop" style="--d:1.9s"><rect x="290" y="364" width="126" height="34" rx="17" fill="#04704F"/><text x="353" y="386" text-anchor="middle" style="fill:#F4F8FB;font-size:14px;font-weight:800">Works offline</text></g>
+</svg>
+    </figure>
   </div>
-  <figure class="v9-shot hud-frame acc-safety" data-hud>
-    <picture class="shot">
-      <source type="image/webp" srcset="assets/screens/safety-permit-board-dark-640.webp 640w, assets/screens/safety-permit-board-dark-1280.webp 1280w" sizes="(min-width: 1360px) 1296px, 94vw">
-      <img src="assets/screens/safety-permit-board-dark-1280.jpg" srcset="assets/screens/safety-permit-board-dark-640.jpg 640w, assets/screens/safety-permit-board-dark-1280.jpg 1280w" sizes="(min-width: 1360px) 1296px, 94vw" width="1280" height="832" loading="lazy" decoding="async" alt="Screenshot with sample data: the Safety live permit-to-work board for a sample site, with the site plot plan on the left and the permits by status: one draft, two pending approval, one approved hot work permit, one active and one extended permit that expire soon, and one work at height permit suspended automatically because the wind is above its limit.">
-    </picture>
-    <figcaption><span class="spec"><span>Safety</span><span>Live permit-to-work board</span><span>Synced</span></span><span class="mock-caption">Screenshot of the app with sample data.</span></figcaption>
-  </figure>
 </section>
 
 <section class="section" aria-labelledby="smod-title">
   <div class="container">
-    <div class="section-head"><h2 id="smod-title">Everything the safety office runs</h2></div>
+    <div class="section-head"><span class="eyebrow safety">Modules</span><h2 id="smod-title">Everything the safety office runs</h2></div>
     <div class="grid grid-3">
       <article class="card feature-card safety"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M8.5 12l2 2 4-4M8.5 17h7"/></svg></div><h3>Permits to work</h3><p>Hot work, confined space, work at height, electrical isolation and more, with approvals, extensions and close-out.</p></article>
 <article class="card feature-card safety"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Man-hours</h3><p>Daily headcount and hours by company and site, with safe man-hours counted automatically.</p></article>
@@ -128,6 +126,19 @@
   <div class="container">
     <div class="section-head"><span class="eyebrow safety">Permits to work</span><h2 id="ptw-title">From request to close&#8209;out, every signature on record</h2>
       <p class="lead">Hot work, confined space, work at height, electrical isolation and more, with approvals, extensions and close-out.</p></div>
+<div class="board-wrap">
+<div class="carousel" role="region" aria-roledescription="carousel" aria-label="Safety screens" data-carousel="safety" data-sizes="(min-width: 1100px) 720px, 94vw">
+<div class="car-viewport" id="car-safety">
+<div class="car-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3: Live permit-to-work board">
+<figure class="mock shot-frame">
+  <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Live permit-to-work board</b><span class="pill info">Sample data</span></div>
+  <picture class="shot"><source type="image/webp" srcset="assets/screens/safety-permits-640.webp 640w, assets/screens/safety-permits-1280.webp 1280w" sizes="(min-width: 1100px) 720px, 94vw"><img src="assets/screens/safety-permits-640.jpg" srcset="assets/screens/safety-permits-640.jpg 640w, assets/screens/safety-permits-1280.jpg 1280w" sizes="(min-width: 1100px) 720px, 94vw" width="1280" height="800" loading="lazy" decoding="async" alt="Screenshot with sample data: the Safety live permit-to-work board for a sample solar plant, with the zoned site plot plan beside columns for draft, pending approval, approved, active, extended and suspended permits, including a hot work permit for a weld repair and a lifting permit for an inverter module."></picture>
+  <figcaption class="mock-caption">Screenshot of the app with sample data. Captured 1 Nov 2026.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 <figure class="flow safety" style="--n:4" data-flow aria-labelledby="ptw-title">
 <ol class="flow-steps">
 <li class="flow-step"><span class="flow-node" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M8.5 12h7M8.5 16h5"/></svg><span class="flow-num">1</span></span><svg class="flow-link" aria-hidden="true" focusable="false"><line class="w h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="p h" pathLength="100" x1="0" y1="50%" x2="100%" y2="50%"/><line class="w v" x1="50%" y1="0" x2="50%" y2="100%"/><line class="p v" pathLength="100" x1="50%" y1="0" x2="50%" y2="100%"/></svg><h3>Requested</h3><p>The permit is raised for the job, the area and the type of work.</p></li>
@@ -142,7 +153,7 @@
 
 <section class="section" aria-labelledby="dom-title">
   <div class="container">
-    <div class="section-head"><h2 id="dom-title">Health, Safety, Security and Environment in one view</h2><p class="lead">Records are grouped by domain, so each specialist has a home and management sees the whole picture.</p><p>It helps you keep the records that DOLE occupational safety and health rules ask for under RA 11058 and DO 198-18: permits to work, toolbox talks, incident reports and man-hours.</p></div>
+    <div class="section-head"><span class="eyebrow safety">HSSE</span><h2 id="dom-title">Health, Safety, Security and Environment in one view</h2><p class="lead">Records are grouped by domain, so each specialist has a home and management sees the whole picture.</p><p>It helps you keep the records that DOLE occupational safety and health rules ask for under RA 11058 and DO 198-18: permits to work, toolbox talks, incident reports and man-hours.</p></div>
     <div class="grid grid-4">
       <article class="card domain health"><div class="icon safety"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20s-8-4.6-8-10.2A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.8C20 15.4 12 20 12 20Z"/><path d="M8 12h2l1-2 2 4 1-2h2"/></svg></div><h3>Health</h3><p class="muted">Medical clearances, fitness to work, first aid cases and health campaigns.</p></article>
       <article class="card domain safety-d"><div class="icon safety"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 17h18M5 17v-3a7 7 0 0 1 14 0v3"/><path d="M10 7v5M14 7v5M9 7h6"/></svg></div><h3>Safety</h3><p class="muted">Permits, inspections, incidents, toolbox talks and man-hours.</p></article>
@@ -244,7 +255,7 @@
       <div><h2 id="cta-title">Try Safety Premium free for <span data-trial="safety">14 days</span></h2><p>A new organisation that picks Safety at sign-up gets <span data-trial="safety">14 days</span> of Premium free. No card details. Pay later in pesos by GCash, Maya, card or online banking.</p></div>
       <div class="btn-row">
         <a class="btn btn-light" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a>
-        <a class="btn btn-outline-light" href="contact.html?topic=safety" aria-label="Talk to us about Safety">Talk to us</a>
+        <a class="btn btn-outline-light" href="contact.html?topic=safety">Talk to us</a>
       </div>
     </div>
   </div>
@@ -254,7 +265,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="index.html" aria-label="Messerschmidts Philippine industrial software, home"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts <small>Philippine industrial software</small></span></a>
+        <a class="brand" href="index.html"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M60 6 104 21v39c0 27-18 45-44 56C34 105 16 87 16 60V21z" fill="#FFB81C"/><path d="M33 80V33h11.5L60 52.5 75.5 33H87v47H76V51.5L60 70 44 51.5V80z" fill="#10213A"/><path d="M28 88h64" stroke="#10213A" stroke-width="4" stroke-linecap="round"/></svg><span>Messerschmidts<small>Philippine industrial software</small></span></a>
         <p class="muted small footer-blurb">Maintenance for Philippine power plants, project control for construction, and a safety app for every site. Runs on your server or ours, works offline, syncs when it can.</p>
         <p class="small"><a class="email" href="mailto:customerservice@messerschmidts.online">customerservice@messerschmidts.online</a></p>
       </div>

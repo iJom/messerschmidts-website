@@ -298,35 +298,7 @@
     }
     var total = lines.reduce(function (a, l) { return a + l[1]; }, 0);
     var out = doc.getElementById(totalId);
-    if (out) {
-      var txt = peso(total);
-      if (out.textContent !== txt) {
-        out.textContent = txt;
-        // A short bump shows the figure changed (transform only; nothing under reduced motion).
-        if (!reduceMotion) { out.classList.remove('bump'); void out.offsetWidth; out.classList.add('bump'); }
-      }
-    }
-  }
-  /* Every estimator number field gets a - / + stepper (48px targets); the
-     Construction one already has its own in the HTML. */
-  function addSteppers(calc) {
-    calc.querySelectorAll('input[type="number"]').forEach(function (input) {
-      if (input.closest('.stepper')) return;
-      var label = doc.querySelector('label[for="' + input.id + '"]');
-      var name = label ? label.textContent.trim() : 'value';
-      var box = el('div', { 'class': 'stepper' });
-      var minus = el('button', { type: 'button', 'aria-label': 'One fewer: ' + name, 'aria-controls': input.id }, '−');
-      var plus = el('button', { type: 'button', 'aria-label': 'One more: ' + name, 'aria-controls': input.id }, '+');
-      input.parentNode.insertBefore(box, input);
-      box.appendChild(minus); box.appendChild(input); box.appendChild(plus);
-      function step(d) {
-        var min = Number(input.min) || 0, max = Number(input.max) || 100000;
-        input.value = String(Math.max(min, Math.min((parseInt(input.value, 10) || 0) + d, max)));
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-      minus.addEventListener('click', function () { step(-1); });
-      plus.addEventListener('click', function () { step(1); });
-    });
+    if (out) out.textContent = peso(total);
   }
   // EAM: one price per organisation with users included, plus a price per extra user.
   function updateCalcEam() {
@@ -390,7 +362,6 @@
   function initCalc() {
     initCalcBuild();
     var calc = doc.getElementById('calc');
-    ['calc', 'calc-eam'].forEach(function (id) { var c = doc.getElementById(id); if (c) addSteppers(c); });
     if (calc) {
       calc.hidden = false;
       calc.addEventListener('input', updateCalc);
@@ -457,7 +428,6 @@
           t.tabIndex = on ? 0 : -1;
           var p = doc.getElementById(t.getAttribute('aria-controls'));
           if (!p) return;
-          p.setAttribute('aria-hidden', on ? 'false' : 'true');
           if (on && p.hidden) {
             p.hidden = false;
             p.classList.remove('is-entering');
@@ -572,7 +542,7 @@
   function initReveal() {
     // Deep links (#section) jump straight to content: never hide it there.
     if (reduceMotion || !hasIO || window.location.hash) return;
-    var sel = '.section .section-head, .section .grid > *, .offers > *, .plans > *, .flow, .split > *, .platform > *, .tour-tabs, .cta-band, .table-wrap, .faq-group, .section .panel, .std-matrix, .included-band, .switch-list > *, .switch-stage, .ind-head > *, .price-strip, .cta-strip, .footer-grid > *, .bir-seal';
+    var sel = '.section .section-head, .section .grid > *, .offers > *, .plans > *, .flow, .split > *, .cta-band, .table-wrap, .faq-group, .section .panel';
     var vh = window.innerHeight || doc.documentElement.clientHeight;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -685,10 +655,6 @@
     nodes.forEach(function (n) { io.observe(n); });
   }
 
-  /* ---------- Energy lines (decoration) ----------
-     Adds a layer of thin grid lines with travelling light to every navy hero and
-     the home tour band. aria-hidden, behind the content, CSS-only motion
-     (transform/opacity) that stops under prefers-reduced-motion. */
   /* ---------- FAQ finder ----------
      [data-faq-tools] (hidden without JS) filters the questions as you type and
      opens or closes every answer. The count is announced politely. */
@@ -716,6 +682,7 @@
       if (count) count.textContent = q ? (shown + ' of ' + items.length + ' questions match') : '';
     }
     input.addEventListener('input', filter);
+    if (window.location.hash === '#faq-find') { try { input.focus(); } catch (e) {} }
     tools.querySelectorAll('[data-faq-all]').forEach(function (b) {
       b.addEventListener('click', function () {
         var open = b.getAttribute('data-faq-all') === 'open';
@@ -724,32 +691,172 @@
     });
   }
 
-  /* ---------- Manila clock ----------
-     [data-manila-clock] shows the current time in Asia/Manila, updated each minute.
-     Hidden without JS or Intl time-zone support. */
-  function initClock() {
-    var box = doc.querySelector('[data-manila-clock]');
-    if (!box || !window.Intl || !Intl.DateTimeFormat) return;
-    var t = box.querySelector('.ph-clock-time'), d = box.querySelector('.ph-clock-date');
-    var ft, fd;
-    try {
-      ft = new Intl.DateTimeFormat('en-PH', { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', hour12: false });
-      fd = new Intl.DateTimeFormat('en-PH', { timeZone: 'Asia/Manila', weekday: 'short', day: 'numeric', month: 'short' });
-    } catch (e) { return; }
-    function tick() {
-      var now = new Date();
-      if (t) t.textContent = ft.format(now);
-      if (d) d.textContent = fd.format(now) + ' · PHT, UTC+8';
+  /* ---------- App previews: slideshows from assets/screens/previews.json ----------
+     The manifest lists each app's slides (file, title, alt, size, capture date).
+     tools/capture-previews.mjs rewrites the images and the manifest after an app
+     release; no HTML edit is needed. Without JS (or if the manifest cannot be read)
+     the first slide written in the HTML stays as a plain picture.
+     Pattern: WAI-ARIA APG auto-rotating carousel. It advances every 5 s, pauses
+     on hover and while focus is inside, has a pause/play button, previous/next,
+     one button per slide and swipe; it never rotates with reduced motion. */
+  var SCRIPT_SRC = (doc.currentScript && doc.currentScript.src) || '';
+  var SLIDE_MS = 5000;
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function screenUrl(name) {
+    try { return new URL('screens/' + name, SCRIPT_SRC || window.location.href).href; } catch (e) { return 'assets/screens/' + name; }
+  }
+  function niceDate(iso) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || '');
+    return m ? (+m[3]) + ' ' + MONTHS[+m[2] - 1] + ' ' + m[1] : '';
+  }
+  function safeName(s) { return typeof s === 'string' && /^[a-z0-9-]+$/.test(s) ? s : null; }
+  var ICON = {
+    prev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 5-7 7 7 7"/></svg>',
+    next: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg>',
+    pause: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12-7.5z"/></svg>'
+  };
+
+  function buildSlide(s, i, n, caption, sizes) {
+    var slide = el('div', { 'class': 'car-slide', role: 'group', 'aria-roledescription': 'slide', 'aria-label': (i + 1) + ' of ' + n + ': ' + s.title });
+    var fig = el('figure', { 'class': 'mock shot-frame' });
+    var bar = el('div', { 'class': 'mock-bar', 'aria-hidden': 'true' });
+    bar.appendChild(el('i')); bar.appendChild(el('i')); bar.appendChild(el('i'));
+    bar.appendChild(el('b', null, s.title));
+    bar.appendChild(el('span', { 'class': 'pill info' }, 'Sample data'));
+    fig.appendChild(bar);
+    var pic = el('picture', { 'class': 'shot' });
+    var src = el('source', { type: 'image/webp', sizes: sizes });
+    var img = el('img', { loading: 'lazy', width: String(s.width || 1280), height: String(s.height || 800), sizes: sizes, decoding: 'async', alt: s.alt || '' });
+    // Lazy: only the first slide gets its address now; the rest load when needed.
+    src.setAttribute('data-srcset', screenUrl(s.file + '-640.webp') + ' 640w, ' + screenUrl(s.file + '-1280.webp') + ' 1280w');
+    img.setAttribute('data-srcset', screenUrl(s.file + '-640.jpg') + ' 640w, ' + screenUrl(s.file + '-1280.jpg') + ' 1280w');
+    img.setAttribute('data-src', screenUrl(s.file + '-640.jpg'));
+    pic.appendChild(src); pic.appendChild(img);
+    fig.appendChild(pic);
+    var when = niceDate(s.captured);
+    fig.appendChild(el('figcaption', { 'class': 'mock-caption' }, caption + (when ? '. Captured ' + when + '.' : '.')));
+    slide.appendChild(fig);
+    return slide;
+  }
+  function loadSlide(slide) {
+    if (!slide || slide.getAttribute('data-loaded')) return;
+    slide.setAttribute('data-loaded', '1');
+    slide.querySelectorAll('[data-srcset]').forEach(function (n) { n.setAttribute('srcset', n.getAttribute('data-srcset')); n.removeAttribute('data-srcset'); });
+    slide.querySelectorAll('img[data-src]').forEach(function (n) { n.setAttribute('src', n.getAttribute('data-src')); n.removeAttribute('data-src'); });
+  }
+
+  function initCarousel(root, app, manifest) {
+    var slides = (app.slides || []).filter(function (s) { return s && safeName(s.file) && typeof s.title === 'string'; });
+    if (!slides.length) return;
+    var viewport = root.querySelector('.car-viewport');
+    if (!viewport) return;
+    var sizes = root.getAttribute('data-sizes') || '(min-width: 1100px) 720px, 94vw';
+    var caption = typeof manifest.caption === 'string' ? manifest.caption : 'Screenshot of the app with sample data';
+    var id = viewport.id || ('car-' + Math.random().toString(36).slice(2, 8));
+    viewport.id = id;
+    while (viewport.firstChild) viewport.removeChild(viewport.firstChild);
+    var nodes = slides.map(function (s, i) { var n = buildSlide(s, i, slides.length, caption, sizes); viewport.appendChild(n); return n; });
+    loadSlide(nodes[0]);
+    root.classList.add('is-ready');
+    if (nodes.length < 2) { nodes[0].classList.add('is-active'); return; }
+
+    var controls = el('div', { 'class': 'car-controls' });
+    var play = el('button', { type: 'button', 'class': 'car-btn car-play' });
+    var prev = el('button', { type: 'button', 'class': 'car-btn car-prev', 'aria-controls': id, 'aria-label': 'Previous screen' });
+    var next = el('button', { type: 'button', 'class': 'car-btn car-next', 'aria-controls': id, 'aria-label': 'Next screen' });
+    prev.innerHTML = ICON.prev; next.innerHTML = ICON.next;
+    var dots = el('div', { 'class': 'car-dots', role: 'group', 'aria-label': 'Choose a screen' });
+    var dotBtns = slides.map(function (s, i) {
+      var b = el('button', { type: 'button', 'class': 'car-dot', 'aria-controls': id, 'aria-label': s.title });
+      b.appendChild(el('span', { 'aria-hidden': 'true' }));
+      b.addEventListener('click', function () { show(i, true); });
+      dots.appendChild(b);
+      return b;
+    });
+    controls.appendChild(play); controls.appendChild(prev); controls.appendChild(dots); controls.appendChild(next);
+    root.appendChild(controls);
+
+    var cur = 0, timer = null, userStopped = reduceMotion, hover = false, focusIn = false, seen = !hasIO;
+    function show(i, byUser) {
+      cur = (i + nodes.length) % nodes.length;
+      loadSlide(nodes[cur]);
+      nodes.forEach(function (n, j) {
+        var on = j === cur;
+        n.classList.toggle('is-active', on);
+        if (on) { n.removeAttribute('aria-hidden'); n.inert = false; } else { n.setAttribute('aria-hidden', 'true'); n.inert = true; }
+        if (on) dotBtns[j].setAttribute('aria-current', 'true'); else dotBtns[j].removeAttribute('aria-current');
+      });
+      loadSlide(nodes[(cur + 1) % nodes.length]); // the next one is ready before it is shown
+      if (byUser) restart();
     }
-    tick();
-    box.hidden = false;
-    setTimeout(function () { tick(); setInterval(tick, 60000); }, (60 - new Date().getSeconds()) * 1000 + 50);
+    function running() { return !userStopped && !hover && !focusIn && seen && !doc.hidden && root.offsetParent !== null; }
+    function tick() { if (running()) show(cur + 1, false); }
+    function restart() { clearInterval(timer); timer = null; if (!userStopped) timer = setInterval(tick, SLIDE_MS); }
+    function setPlay() {
+      play.innerHTML = userStopped ? ICON.play : ICON.pause;
+      play.setAttribute('aria-label', userStopped ? 'Start the slide show' : 'Stop the slide show');
+      viewport.setAttribute('aria-live', userStopped ? 'polite' : 'off');
+      root.classList.toggle('is-stopped', userStopped);
+    }
+    play.addEventListener('click', function () { userStopped = !userStopped; setPlay(); restart(); });
+    prev.addEventListener('click', function () { show(cur - 1, true); });
+    next.addEventListener('click', function () { show(cur + 1, true); });
+    root.addEventListener('mouseenter', function () { hover = true; });
+    root.addEventListener('mouseleave', function () { hover = false; });
+    root.addEventListener('focusin', function () { focusIn = true; });
+    root.addEventListener('focusout', function (e) { if (!e.relatedTarget || !root.contains(e.relatedTarget)) focusIn = false; });
+    // Swipe on touch screens; vertical scrolling stays with the page.
+    var sx = null, sy = null;
+    viewport.addEventListener('pointerdown', function (e) { if (e.pointerType === 'mouse') return; sx = e.clientX; sy = e.clientY; });
+    viewport.addEventListener('pointerup', function (e) {
+      if (sx === null) return;
+      var dx = e.clientX - sx, dy = e.clientY - sy; sx = sy = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) show(cur + (dx < 0 ? 1 : -1), true);
+    });
+    viewport.addEventListener('pointercancel', function () { sx = sy = null; });
+    if (hasIO) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { seen = e.isIntersecting; if (seen) loadSlide(nodes[(cur + 1) % nodes.length]); });
+      }, { rootMargin: '200px 0px' }).observe(root);
+    }
+    setPlay();
+    show(0, false);
+    restart();
+  }
+
+  function initPreviews() {
+    var boxes = doc.querySelectorAll('[data-carousel]');
+    var singles = doc.querySelectorAll('[data-preview]');
+    if ((!boxes.length && !singles.length) || !window.fetch) return;
+    fetch(screenUrl('previews.json'), { cache: 'no-cache', credentials: 'omit' })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (m) {
+        if (!m || typeof m !== 'object' || !m.apps || typeof m.apps !== 'object') return;
+        boxes.forEach(function (box) {
+          var app = m.apps[box.getAttribute('data-carousel')];
+          if (app && Array.isArray(app.slides)) initCarousel(box, app, m);
+        });
+        // A single picture tied to one slide keeps its alt text and date in step.
+        singles.forEach(function (fig) {
+          var ref = (fig.getAttribute('data-preview') || '').split('/');
+          var app = m.apps[ref[0]];
+          var s = app && Array.isArray(app.slides) ? app.slides.filter(function (x) { return x && x.file === ref[1]; })[0] : null;
+          if (!s) return;
+          var img = fig.querySelector('img');
+          if (img && typeof s.alt === 'string') img.setAttribute('alt', s.alt);
+          var cap = fig.querySelector('figcaption');
+          var when = niceDate(s.captured);
+          if (cap) cap.textContent = (typeof m.caption === 'string' ? m.caption : 'Screenshot of the app with sample data') + (when ? '. Captured ' + when + '.' : '.');
+        });
+      })
+      .catch(function () { /* keep the static first slide */ });
   }
 
   function init() {
-    initFaqTools();
-    initClock();
     initTrials();
+    initFaqTools();
+    initPreviews();
     initTabs();
     initMenus();
     initCounters();
