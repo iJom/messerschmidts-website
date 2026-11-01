@@ -1,16 +1,15 @@
-/* Messerschmidts v7 "window" - the animated stage (vanilla JS, no libraries).
+/* Messerschmidts v8 "orbit" - the animated stages (vanilla JS, no libraries).
 
-   [data-stage="globe"]  home hero: a particle-network globe whose nodes are
-                         plants and sites. Particle streams leave its limb and
-                         dissolve into the MESSERSCHMIDTS wordmark; the three
-                         apps orbit it (cyan EAM, green Safety, amber Construction,
-                         matching the legend in the HTML).
-   .page-hero, .notfound a quiet constellation field behind the window card
+   [data-stage="earth"]  home: a night globe of the Philippines. City lights
+                         twinkle; amber plant and site points and the links
+                         between them light up as the statement beside the
+                         globe is read (word by word, plain scroll).
+   .page-hero, .notfound a quiet constellation field behind the hero copy
                          (canvas added here, absolutely positioned: no layout shift).
 
-   Budget: <= 60 fps (30 on phones and small CPUs), fewer particles on phones,
+   Budget: <= 60 fps (30 on phones and small CPUs), fewer dots on phones,
    device pixel ratio capped, paused when off-screen or when the tab is hidden.
-   prefers-reduced-motion: one static frame, no loop. */
+   prefers-reduced-motion: one static, fully lit frame, no loop, statement lit. */
 (function () {
   'use strict';
   var doc = document;
@@ -102,142 +101,220 @@
     this.start();
   };
 
-  /* ---------- Globe: plants and sites streaming into one platform ---------- */
+  /* ---------- Earth: the Philippines at night (v8) ----------
+     An orthographic night globe centred on the archipelago. Land is a dot
+     matrix from coarse outlines we drew ourselves (lon, lat pairs); the
+     Philippines is drawn finer and warmer than its neighbours. City lights
+     twinkle; amber points mark plants and sites and light up, with the
+     links between them, as the statement beside the globe is read
+     (scene.p, 0..1, set by initStatement). The land layer is painted once
+     per size into an offscreen canvas, so a frame is one drawImage plus a
+     few dozen lights. */
   var COL = {
-    node: [214, 206, 255],   /* lilac */
-    line: [150, 136, 240],   /* violet */
-    site: [255, 184, 28],    /* amber: plants and sites */
-    eam: [95, 216, 240], safety: [75, 227, 168], build: [255, 176, 0]
+    node: [196, 196, 204],   /* neutral: the inner-page constellation */
+    line: [150, 150, 162],
+    site: [255, 176, 0]      /* amber: plants and sites */
   };
-  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a.toFixed(3) + ')'; }
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + Math.max(0, Math.min(1, a)).toFixed(3) + ')'; }
 
-  var Globe = {
-    init: function (s) {
-      var R = rng(7);
-      var n = s.low ? 64 : 120;
-      var pts = [], golden = Math.PI * (3 - Math.sqrt(5));
-      for (var i = 0; i < n; i++) {
-        var y = 1 - (i / (n - 1)) * 2, rad = Math.sqrt(1 - y * y), th = golden * i;
-        pts.push({ x: Math.cos(th) * rad, y: y, z: Math.sin(th) * rad, site: R() < .14, ph: R() * TAU });
-      }
-      var links = [], lim = s.low ? .52 : .4;
-      for (var a = 0; a < n; a++) for (var b = a + 1; b < n; b++) {
-        var dx = pts[a].x - pts[b].x, dy = pts[a].y - pts[b].y, dz = pts[a].z - pts[b].z;
-        if (dx * dx + dy * dy + dz * dz < lim * lim) links.push(a, b);
-      }
-      this.pts = pts; this.links = links;
-      /* Stream particles: each follows a curve from the globe's limb to the wordmark. */
-      var m = s.low ? 70 : 170, ps = [];
-      for (var k = 0; k < m; k++) ps.push({ u: R(), sp: .05 + R() * .08, lane: R(), wob: R() * TAU, size: .6 + R() * 1.6 });
-      this.ps = ps;
-      var stars = [], ns = s.low ? 10 : 22;
-      for (var q = 0; q < ns; q++) stars.push({ x: R(), y: R(), r: .6 + R() * 1.6, ph: R() * TAU });
-      this.stars = stars;
-      this.geom(s);
-    },
-    geom: function (s) {
-      var c = s.c, word = c.parentNode.querySelector('.stage-word');
-      var cr = c.getBoundingClientRect();
-      var wide = window.matchMedia ? window.matchMedia('(min-width: 720px)').matches : s.w >= 720; /* same breakpoint as .stage-word in site.css */
-      var R = Math.min(s.h * .34, wide ? s.w * .13 : s.w * .3);
-      var gx = wide ? Math.max(R * 1.45, s.w * .15) : s.w * .5, gy = wide ? s.h * .5 : s.h * .4;
-      var tx0 = s.w * .62, ty0 = s.h * .5, tx1 = s.w * .95, th = 40;
-      if (word) {
-        var wr = word.getBoundingClientRect();
-        if (wr.width) { tx0 = wr.left - cr.left; tx1 = wr.right - cr.left; ty0 = wr.top - cr.top + wr.height / 2; th = wr.height; }
-      }
-      if (!wide) { R = Math.min(R, (ty0 - th) * .42); gy = Math.max(R + 18, (ty0 - th / 2) * .48); }
-      this.g = { x: gx, y: gy, R: R, wide: wide, tx0: tx0, tx1: tx1, ty: ty0, th: th };
-    },
-    draw: function (s, t) {
-      var ctx = s.ctx, g = this.g, pts = this.pts, P = [];
-      var rot = t * .16 + .6, tilt = -.38;
-      var cr = Math.cos(rot), sr = Math.sin(rot), ct = Math.cos(tilt), st = Math.sin(tilt);
+  var PH = [ /* Philippine islands, coarse */
+    [120.6,18.5,121.2,18.6,122.2,18.5,122.3,17.2,122.5,16.3,121.6,15.8,121.6,14.6,122,14,122.6,14.2,123.3,13.8,123.9,13.8,124.2,13,124,12.6,123.3,13,122.6,13.4,122,13.6,121.5,13.8,120.9,13.9,120.6,14.5,120.9,14.7,120.5,14.9,120,15.5,119.8,16.3,120.3,16.6,120.4,17.5],
+    [120.3,13.5,121.2,13.6,121.5,13.1,121.2,12.3,120.9,12.3,120.4,12.9],
+    [117.2,8.4,117.6,8.6,118.6,9.6,119.4,10.6,119.7,11.3,119.3,11.4,118.7,10.6,117.9,9.8,117.2,8.8],
+    [121.9,11.9,122.6,11.5,123.1,11.2,122.5,10.6,122,10.5,121.9,11.2],
+    [122.4,10.9,123.2,10.9,123.6,10.4,123.2,9.3,122.9,9,122.5,9.6,122.9,10.2],
+    [123.9,11.2,124.1,11,123.9,10.3,123.4,9.5,123.3,9.8,123.7,10.5],
+    [123.8,10.1,124.5,10.1,124.6,9.7,124.1,9.6,123.8,9.7],
+    [124.3,11.6,125,11.3,125.1,10.3,124.8,10,124.6,10.6,124.3,11.1],
+    [124.3,12.5,125.3,12.6,125.7,11.8,125.5,11.1,125,11.1,124.6,11.6,124.4,12.1],
+    [123.2,12.5,123.8,12.3,123.9,11.9,123.4,12],
+    [121.9,7,122.1,7.9,122.9,8.2,123.6,8.7,124.3,8.6,124.8,9,125.4,9.8,125.6,9.5,126,9.2,126.4,8.3,126.6,7.3,126.2,6.3,125.6,5.8,125.3,6,125.4,6.9,124.9,6.9,124.2,6.3,124,7,123.7,7.7,123,7.6,122.6,7.2,122.2,6.9],
+    [120.8,6.1,121.3,6.1,121.2,5.8,120.8,5.9]
+  ];
+  var WORLD = [ /* neighbours, coarser and dimmer */
+    [103.5,1.4,104.2,1.6,103.4,4.5,102.3,6.2,101,6.9,100.3,8.4,99.2,10,99.5,11.5,100,12.8,100.9,13.5,102,12.3,102.8,12,104.5,10.4,105,8.6,106.6,9.6,108.9,11.3,109.3,13.5,108.8,15.4,107.2,16.9,105.7,18.9,106.6,20.4,108,21.5,110,21.4,110.4,20.3,111.5,21.6,113.5,22.2,114.3,22.3,116.5,23,118.1,24.5,119.6,25.9,120.5,27.5,121.9,29.9,121.3,31.6,120.9,32.9,119.3,34.5,120.3,36.2,122.5,37.4,121.1,37.7,119,37.2,117.8,38.5,118.1,39.2,121.2,40.8,122,40.3,121.3,39,123.6,39.9,125.1,39.6,125.4,37.7,126.6,37.6,126.4,34.5,127.6,34.7,129.3,35.3,129.4,36.8,128.4,38.6,127.5,39.8,129.7,40.9,130.7,42.5,132.9,42.8,135.5,43.9,138.2,46.6,140.4,48.9,141.4,52.2,140.7,53.6,137.2,54,135.2,54.7,138,56.5,143,59.3,148.5,59.3,152.3,59,155,59.6,156.8,61.6,160.1,61.8,163.3,62.5,170,60,176,62,180,65,180,72,140,73,110,77,90,76,70,73,60,70,60,25,61.5,25.1,66.5,25.4,68.8,23.9,72.8,21,72.9,19,73.5,16,74.4,14.6,75.7,11.3,76.4,9.5,77.5,8,78.3,8.9,79.3,10.3,79.9,12.1,80.3,15.9,82.2,16.6,84.9,19.3,86.5,20.2,87,21.5,88.9,21.7,90.6,22.4,91.4,22.8,92.2,21.2,94.3,18.2,94.5,16,95.4,15.7,97.2,16.9,97.6,16.1,98.5,13.1,98.6,10.8,98.3,8.4,98.9,8,100.3,6.4,100.3,4.3,101.3,2.8],
+    [109,1.5,110.5,2,113,3.2,114.5,4.6,115.4,5.4,116.7,6.9,117.7,6.1,119.2,5.2,118.3,4.3,117.6,3.5,118,1,117.5,0,117,-1,116.3,-3.5,114.5,-3.5,111,-3,110,-1.5,109,0],
+    [119.4,-5.5,119.6,-3.4,119,-2.6,119.8,0,120.3,.9,121.5,1,123.2,.9,124.7,1.5,125.2,1.6,124.4,.4,123,.5,121.5,.5,120.8,-1,121.5,-1.9,122.8,-4.6,121.9,-5.2,120.4,-5.6],
+    [120.1,23.1,121,25.2,121.9,25,121.5,23.5,120.8,21.9],
+    [108.6,19.2,109.5,20.1,110.9,20,111,19.6,110.2,18.3,109.3,18.3],
+    [95.3,5.6,97.5,5.2,100.3,2.5,103.5,-.5,106,-3,105.8,-5.8,104.5,-5.9,102,-4,100.3,-1,98.7,1.7,96.5,3.7],
+    [105.2,-6.8,106,-5.9,108.3,-6.3,111,-6.4,112.6,-6.9,114.4,-7.8,114.6,-8.7,112,-8.3,108,-7.8,106.4,-7.4],
+    [131,-1.4,134,-.9,135,-3.3,138,-1.6,141,-2.6,145,-4.3,146,-6,147.5,-8,150,-10.4,147,-10,146,-8.5,143.5,-9,142,-9.2,141,-9.1,139,-8.1,138,-8.4,137.5,-6,134.5,-4,132,-2.8],
+    [113.5,-22,114,-26,115,-34,118,-35,123,-34,129,-31.6,131,-31.5,135,-34.8,138,-35,140,-38,146,-39,150,-37.5,153,-32,153.5,-28,153,-25,150,-22,146,-19,145.4,-15,143.5,-14,142.5,-10.7,141.5,-13,141.6,-17,140,-17.5,137,-16,136,-12,132.5,-11.5,130,-13,129.5,-15,127,-14,125,-15.5,122,-17.5,121,-19.5,117,-20.7],
+    [130.2,32.2,130.8,31.4,131.4,33.5,130.9,33.9,129.8,33.3],
+    [131,34.3,133,35.5,136,35.8,137.3,36.9,139.6,38.2,140,40,140,41.4,141.5,41.4,142,39.4,141,37.5,140.6,36,140,35,138.8,34.6,137,34.6,135.2,33.8,133.5,34.3,132,33.9],
+    [140,41.6,140.2,43.3,141.4,45.4,143.3,44.3,145.3,43.3,143.3,42,141.2,41.8],
+    [124.8,1.4,125.6,1.9,128,1.5,128.6,-.3,127.9,-.6,127.3,.6],
+    [79.9,9.8,81.8,7.5,81.2,6.2,80,6.1,79.8,8]
+  ];
+  /* Cities [lat, lon, weight]: the Philippines warm and bright, the region dim. */
+  var CITY = [[14.6,121.0,1],[14.68,121.05,.8],[14.52,121.0,.8],[14.59,121.18,.55],[14.84,120.81,.5],[14.21,121.17,.5],[15.15,120.59,.5],[13.76,121.06,.45],[13.94,121.62,.4],[15.49,120.97,.4],
+    [16.41,120.6,.45],[16.04,120.33,.4],[16.62,120.32,.3],[18.2,120.59,.3],[17.61,121.73,.35],[13.62,123.19,.35],[13.14,123.74,.4],[13.41,121.18,.3],[11.58,122.75,.3],[10.72,122.56,.5],
+    [10.67,122.95,.5],[10.32,123.9,.85],[10.29,123.96,.6],[9.31,123.3,.35],[9.65,123.85,.3],[11.24,125.0,.4],[11.0,124.6,.3],[9.74,118.74,.35],[8.48,124.65,.55],[8.23,124.24,.35],
+    [8.95,125.54,.35],[7.07,125.6,.8],[7.12,125.52,.5],[6.11,125.17,.45],[7.22,124.25,.35],[6.92,122.08,.5],[12.37,123.62,.25],[11.77,124.88,.25]];
+  var CITY2 = [[25.03,121.56],[22.63,120.3],[22.32,114.17],[23.13,113.26],[22.54,114.06],[24.48,118.09],[31.23,121.47],[10.82,106.63],[21.03,105.85],[13.75,100.5],[3.14,101.69],[1.35,103.82],
+    [-6.2,106.85],[5.98,116.07],[4.9,114.94],[1.55,110.34],[-5.14,119.43],[1.47,124.84],[35.68,139.69],[34.69,135.5],[37.57,126.98],[16.07,108.22]];
+  /* Plants and sites (illustrative points of light, north to south). */
+  var SITES = [[18.2,120.65],[16.45,120.95],[15.6,120.7],[14.0,121.2],[12.9,121.1],[13.25,123.6],[11.0,122.5],[10.5,123.1],[10.4,123.75],[11.1,124.6],[9.8,118.8],[8.1,124.9],[7.4,125.4],[6.3,124.9]];
 
-      /* soft halo behind the globe */
-      var hr = Math.min(g.R * 1.9, g.x, g.y, s.h - g.y); /* stays inside the canvas: no hard edge */
-      var halo = ctx.createRadialGradient(g.x, g.y, g.R * .2, g.x, g.y, hr);
-      halo.addColorStop(0, 'rgba(120,100,240,.30)'); halo.addColorStop(.55, 'rgba(90,70,200,.08)'); halo.addColorStop(1, 'rgba(90,70,200,0)');
-      ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(g.x, g.y, hr, 0, TAU); ctx.fill();
-
-      /* sparkles */
-      for (var q = 0; q < this.stars.length; q++) {
-        var sx = this.stars[q], tw = .35 + .65 * Math.abs(Math.sin(t * .9 + sx.ph));
-        var px = sx.x * s.w, py = sx.y * s.h, rr = sx.r * (1 + tw);
-        if (g.wide && px > g.tx0 - 20 && px < g.tx1 + 20 && Math.abs(py - g.ty) < g.th) continue; /* keep the wordmark clear */
-        ctx.strokeStyle = rgba([235, 230, 255], .5 * tw); ctx.lineWidth = .8;
-        ctx.beginPath(); ctx.moveTo(px - rr * 2.2, py); ctx.lineTo(px + rr * 2.2, py); ctx.moveTo(px, py - rr * 2.2); ctx.lineTo(px, py + rr * 2.2); ctx.stroke();
-      }
-
-      /* project the sphere */
-      for (var i = 0; i < pts.length; i++) {
-        var p = pts[i], x = p.x * cr + p.z * sr, z = -p.x * sr + p.z * cr, y = p.y;
-        var y2 = y * ct - z * st, z2 = y * st + z * ct;
-        P.push({ x: g.x + x * g.R, y: g.y + y2 * g.R, z: z2 });
-      }
-      /* links, brighter in front */
-      ctx.lineWidth = .8;
-      var L = this.links;
-      for (var k = 0; k < L.length; k += 2) {
-        var a = P[L[k]], b = P[L[k + 1]], d = (a.z + b.z) * .5;
-        ctx.strokeStyle = rgba(COL.line, .08 + .34 * (d + 1) * .5);
-        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-      }
-      /* nodes: sites in amber with a pulse ring */
-      for (var j = 0; j < P.length; j++) {
-        var n = P[j], depth = (n.z + 1) * .5, pt = pts[j];
-        if (pt.site) {
-          var pulse = (Math.sin(t * 2 + pt.ph) + 1) * .5;
-          ctx.fillStyle = rgba(COL.site, .45 + .55 * depth);
-          ctx.beginPath(); ctx.arc(n.x, n.y, 1.6 + 1.8 * depth, 0, TAU); ctx.fill();
-          if (depth > .5) { ctx.strokeStyle = rgba(COL.site, .5 * (1 - pulse) * depth); ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(n.x, n.y, 4 + 8 * pulse, 0, TAU); ctx.stroke(); }
-        } else {
-          ctx.fillStyle = rgba(COL.node, .25 + .7 * depth);
-          ctx.beginPath(); ctx.arc(n.x, n.y, .9 + 1.4 * depth, 0, TAU); ctx.fill();
+  function inPoly(x, y, P) {
+    var c = false;
+    for (var i = 0, j = P.length - 2; i < P.length; j = i, i += 2) {
+      var xi = P[i], yi = P[i + 1], xj = P[j], yj = P[j + 1];
+      if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) c = !c;
+    }
+    return c;
+  }
+  var landCache = {};
+  function land(low) {
+    var key = low ? 'l' : 'h';
+    if (landCache[key]) return landCache[key];
+    var out = [];
+    function fill(list, step, ph) {
+      for (var k = 0; k < list.length; k++) {
+        var P = list[k], x0 = 999, x1 = -999, y0 = 99, y1 = -99;
+        for (var i = 0; i < P.length; i += 2) { x0 = Math.min(x0, P[i]); x1 = Math.max(x1, P[i]); y0 = Math.min(y0, P[i + 1]); y1 = Math.max(y1, P[i + 1]); }
+        for (var lat = y0 + step / 2; lat < y1; lat += step) {
+          var ls = step / Math.max(.25, Math.cos(lat * Math.PI / 180));
+          for (var lon = x0 + ls / 2; lon < x1; lon += ls) if (inPoly(lon, lat, P)) out.push(lat, lon, ph);
         }
       }
+    }
+    fill(PH, low ? .3 : .2, 1);
+    fill(WORLD, low ? 1.25 : .85, 0);
+    return (landCache[key] = out);
+  }
 
-      /* streams: from the right limb, sweeping into the wordmark, dissolving as they arrive */
-      var sx0 = g.x + g.R * .85, sy0 = g.y - g.R * .2;
-      function at(u, q2, lane, out) {
-        var ex = g.tx0 - 10, ey = g.ty + lane * g.th * 1.2, c1x, c1y, c2x, c2y;
-        if (g.wide) { c1x = sx0 + (ex - sx0) * .3; c1y = sy0 - g.R * .7 + lane * g.R * 1.1; c2x = sx0 + (ex - sx0) * .68; c2y = ey + lane * g.R * .9 + g.R * .35; }
-        else { c1x = sx0 + g.R * .45; c1y = sy0 + g.R * 1.1; c2x = g.tx0 + (g.tx1 - g.tx0) * .25; c2y = g.ty - g.th * 2.2; ex = g.tx0 + (g.tx1 - g.tx0) * (.08 + .84 * q2.lane); ey = g.ty - g.th * .6; }
-        var iu = 1 - u;
-        out[0] = iu * iu * iu * sx0 + 3 * iu * iu * u * c1x + 3 * iu * u * u * c2x + u * u * u * ex + Math.sin(t * 1.3 + q2.wob + u * 6) * 5 * u;
-        out[1] = iu * iu * iu * sy0 + 3 * iu * iu * u * c1y + 3 * iu * u * u * c2y + u * u * u * ey + Math.cos(t * 1.1 + q2.wob + u * 5) * 6 * u;
+  var D2R = Math.PI / 180;
+  var Earth = {
+    init: function (s) {
+      this.p = this.p == null ? 1 : this.p;
+      this.dots = land(s.low);
+      var wide = s.w >= 880;
+      var R, cx, cy;
+      if (wide) { R = Math.min(s.h * 1.2, s.w * .6); cx = s.w * .72; cy = s.h * .6; }
+      else { R = s.w * .72; cx = s.w * .5; cy = s.h * .52; }
+      this.g = { R: R, cx: cx, cy: cy, wide: wide, lon0: 121.6, lat0: 11.8, fadeX: wide ? s.w * .5 : 0 };
+      var sl = Math.sin(this.g.lat0 * D2R), cl = Math.cos(this.g.lat0 * D2R);
+      this.g.sl = sl; this.g.cl = cl;
+      this.paintLand(s);
+      var self = this;
+      this.cities = CITY.map(function (c, i) { var q = self.proj(c[0], c[1]); q.w = c[2]; q.ph = i * 1.7; return q; });
+      this.cities2 = CITY2.map(function (c) { return self.proj(c[0], c[1]); });
+      this.sites = SITES.map(function (c, i) { var q = self.proj(c[0], c[1]); q.ph = i * .9; return q; });
+    },
+    proj: function (lat, lon) {
+      var g = this.g, la = lat * D2R, dl = (lon - g.lon0) * D2R, cla = Math.cos(la), sla = Math.sin(la), cd = Math.cos(dl);
+      var z = g.sl * sla + g.cl * cla * cd;
+      return { x: g.cx + g.R * cla * Math.sin(dl), y: g.cy - g.R * (g.cl * sla - g.sl * cla * cd), z: z };
+    },
+    fade: function (x) { /* keep the copy column quiet: dim the land behind the text */
+      var f = this.g.fadeX; if (!f) return 1;
+      return Math.max(.14, Math.min(1, (x - f * .55) / (f * .5)));
+    },
+    paintLand: function (s) {
+      var off = this.off || (this.off = doc.createElement('canvas'));
+      off.width = s.c.width; off.height = s.c.height;
+      var ctx = off.getContext('2d'), g = this.g;
+      ctx.setTransform(s.dpr, 0, 0, s.dpr, 0, 0);
+      ctx.clearRect(0, 0, s.w, s.h);
+      /* night side of the sphere and a thin atmosphere at the limb */
+      ctx.fillStyle = '#04070C'; ctx.beginPath(); ctx.arc(g.cx, g.cy, g.R, 0, TAU); ctx.fill();
+      ctx.strokeStyle = 'rgba(120,160,215,.10)'; ctx.lineWidth = 12; ctx.beginPath(); ctx.arc(g.cx, g.cy, g.R + 5, 0, TAU); ctx.stroke();
+      ctx.strokeStyle = 'rgba(150,185,230,.42)'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(g.cx, g.cy, g.R, 0, TAU); ctx.stroke();
+      /* graticule every 15 degrees, very faint */
+      ctx.fillStyle = 'rgba(160,175,200,.12)';
+      for (var la = -60; la <= 75; la += 15) for (var lo = 30; lo <= 210; lo += 1.5) { var q = this.proj(la, lo); if (q.z > .05) ctx.fillRect(q.x, q.y, .8, .8); }
+      for (var lo2 = 30; lo2 <= 210; lo2 += 15) for (var la2 = -75; la2 <= 75; la2 += 1.5) { var q2 = this.proj(la2, lo2); if (q2.z > .05) ctx.fillRect(q2.x, q2.y, .8, .8); }
+      /* land */
+      var d = this.dots, sz = s.low ? 1.6 : 1.4;
+      for (var i = 0; i < d.length; i += 3) {
+        var p = this.proj(d[i], d[i + 1]);
+        if (p.z <= 0) continue;
+        var a = (.25 + .75 * p.z) * this.fade(p.x);
+        ctx.fillStyle = d[i + 2] ? rgba([226, 208, 170], .8 * a) : rgba([128, 140, 162], .58 * a);
+        var r = (d[i + 2] ? sz * .95 : sz) * (.6 + .4 * p.z);
+        ctx.fillRect(p.x - r / 2, p.y - r / 2, r, r);
       }
-      var A = [0, 0], B = [0, 0];
-      ctx.lineCap = 'round';
-      for (var m = 0; m < this.ps.length; m++) {
-        var q2 = this.ps[m];
-        var u = (q2.u + t * q2.sp) % 1, lane = q2.lane - .5;
-        /* fade in off the limb, dissolve before the letters */
-        var al = Math.min(1, u * 6) * (1 - Math.pow(u, 4)) * .8;
-        if (al <= .02) continue;
-        at(u, q2, lane, A); at(Math.max(0, u - .035), q2, lane, B);
-        var c = q2.lane < .16 ? COL.site : (u > .55 ? [236, 232, 255] : COL.node);
-        ctx.strokeStyle = rgba(c, al * .55); ctx.lineWidth = q2.size * (1.1 - u * .6);
-        ctx.beginPath(); ctx.moveTo(B[0], B[1]); ctx.lineTo(A[0], A[1]); ctx.stroke();
-        ctx.fillStyle = rgba(c, al);
-        ctx.beginPath(); ctx.arc(A[0], A[1], q2.size * (1.05 - u * .5), 0, TAU); ctx.fill();
+    },
+    draw: function (s, t) {
+      var ctx = s.ctx, g = this.g, p = this.p;
+      ctx.drawImage(this.off, 0, 0, s.w, s.h);
+      /* the region's cities, dim and steady */
+      for (var j = 0; j < this.cities2.length; j++) {
+        var c2 = this.cities2[j]; if (c2.z <= 0) continue;
+        ctx.fillStyle = rgba([235, 225, 205], .45 * c2.z * this.fade(c2.x)); ctx.beginPath(); ctx.arc(c2.x, c2.y, 1.4, 0, TAU); ctx.fill();
       }
-
-      /* the three apps on a tilted orbit */
-      var apps = [COL.eam, COL.safety, COL.build], oR = g.R * 1.32, oT = .34;
-      ctx.strokeStyle = 'rgba(200,190,255,.22)'; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.ellipse(g.x, g.y, oR, oR * oT, -.22, 0, TAU); ctx.stroke();
-      for (var o = 0; o < 3; o++) {
-        var ang = t * .35 + o * TAU / 3, ox = Math.cos(ang) * oR, oy = Math.sin(ang) * oR * oT;
-        var rx = g.x + ox * Math.cos(-.22) - oy * Math.sin(-.22), ry = g.y + ox * Math.sin(-.22) + oy * Math.cos(-.22);
-        var front = Math.sin(ang) > 0 ? 1 : .55;
-        var gl = ctx.createRadialGradient(rx, ry, 0, rx, ry, 16);
-        gl.addColorStop(0, rgba(apps[o], .55 * front)); gl.addColorStop(1, rgba(apps[o], 0));
-        ctx.fillStyle = gl; ctx.beginPath(); ctx.arc(rx, ry, 16, 0, TAU); ctx.fill();
-        ctx.fillStyle = rgba(apps[o], front); ctx.beginPath(); ctx.arc(rx, ry, 5.5, 0, TAU); ctx.fill();
+      /* Philippine city lights, brightening with the statement */
+      var lit = .45 + .55 * p;
+      for (var i = 0; i < this.cities.length; i++) {
+        var c = this.cities[i], tw = .8 + .2 * Math.sin(t * 1.6 + c.ph);
+        ctx.fillStyle = rgba([255, 205, 130], .16 * c.w * lit * tw); ctx.beginPath(); ctx.arc(c.x, c.y, 3 + 6 * c.w, 0, TAU); ctx.fill();
+        ctx.fillStyle = rgba([255, 236, 200], (.5 + .5 * c.w) * lit * tw); ctx.beginPath(); ctx.arc(c.x, c.y, .9 + 1.1 * c.w, 0, TAU); ctx.fill();
+      }
+      /* links between plants and sites, drawn in as the statement is read */
+      var S = this.sites, n = S.length;
+      ctx.lineWidth = 1;
+      for (var k = 0; k < n - 1; k++) {
+        var on = Math.max(0, Math.min(1, (p * 1.15 - k / n) * n / 2));
+        if (on <= 0) continue;
+        var a = S[k], b = S[k + 1], mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+        var ox = mx - g.cx, oy = my - g.cy, ol = Math.sqrt(ox * ox + oy * oy) || 1, lift = Math.hypot(b.x - a.x, b.y - a.y) * .35;
+        var qx = mx + ox / ol * lift, qy = my + oy / ol * lift;
+        ctx.strokeStyle = rgba(COL.site, .5 * on);
+        ctx.beginPath(); ctx.moveTo(a.x, a.y);
+        /* partial curve: de Casteljau up to "on" */
+        var u = on, x1 = a.x + (qx - a.x) * u, y1 = a.y + (qy - a.y) * u, x2 = qx + (b.x - qx) * u, y2 = qy + (b.y - qy) * u;
+        ctx.quadraticCurveTo(x1, y1, x1 + (x2 - x1) * u, y1 + (y2 - y1) * u); ctx.stroke();
+      }
+      /* the points themselves, each with a slow pulse ring */
+      for (var m = 0; m < n; m++) {
+        var sp = S[m], v = Math.max(0, Math.min(1, (p * 1.15 - m / n) * n / 1.5)), pulse = (t * .45 + sp.ph) % 1;
+        var base = .35 + .65 * v;
+        ctx.fillStyle = rgba(COL.site, .22 * base); ctx.beginPath(); ctx.arc(sp.x, sp.y, 7, 0, TAU); ctx.fill();
+        ctx.fillStyle = rgba(COL.site, base); ctx.beginPath(); ctx.arc(sp.x, sp.y, 2.6, 0, TAU); ctx.fill();
+        if (v > .5) { ctx.strokeStyle = rgba(COL.site, .6 * (1 - pulse) * v); ctx.beginPath(); ctx.arc(sp.x, sp.y, 4 + 16 * pulse, 0, TAU); ctx.stroke(); }
       }
     }
   };
+
+  /* The statement beside the globe lights word by word as the reader
+     scrolls past it. Plain scroll: nothing is pinned by script (the sticky
+     hold is CSS and only on tall desktop screens). Without JS, without
+     IntersectionObserver or with reduced motion it is fully lit. */
+  function initStatement(earth) {
+    var st = doc.querySelector('[data-statement]');
+    if (!st || mqReduce.matches || !hasIO) return;
+    var parts = st.textContent.split(/(\s+)/), frag = doc.createDocumentFragment(), words = [];
+    parts.forEach(function (w) {
+      if (!w) return;
+      if (/^\s+$/.test(w)) { frag.appendChild(doc.createTextNode(w)); return; }
+      var sp = doc.createElement('span'); sp.className = 'w'; sp.textContent = w; frag.appendChild(sp); words.push(sp);
+    });
+    st.textContent = ''; st.appendChild(frag);
+    var track = st.closest('.globe-track'), sticky = track && track.firstElementChild, lastN = -1, ticking = false;
+    function measure() {
+      var vh = window.innerHeight || doc.documentElement.clientHeight, p;
+      if (sticky && getComputedStyle(sticky).position === 'sticky') {
+        /* from the moment the section is half in view until four fifths of the hold */
+        var tr = track.getBoundingClientRect(), span = tr.height - sticky.offsetHeight;
+        p = (vh * .5 - tr.top) / Math.max(1, vh * .5 + span * .8);
+      } else {
+        var r = st.getBoundingClientRect();
+        p = (vh * .85 - r.top) / Math.max(1, vh * .5 + r.height * .5);
+      }
+      p = Math.max(0, Math.min(1, p));
+      var n = Math.round(p * words.length);
+      if (n !== lastN) { for (var i = 0; i < words.length; i++) words[i].classList.toggle('on', i < n); lastN = n; }
+      if (earth) earth.p = p;
+      ticking = false;
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(measure); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    window.addEventListener('beforeprint', function () { words.forEach(function (w) { w.classList.add('on'); }); });
+    measure();
+  }
 
   /* ---------- Field: a quiet constellation for the inner pages ---------- */
   var Field = {
@@ -284,9 +361,11 @@
   function boot() {
     initSearchLink();
     if (!window.requestAnimationFrame) return;
-    doc.querySelectorAll('canvas[data-stage="globe"]').forEach(function (c) {
-      if (c.getContext) new Stage(c, Object.create(Globe));
+    var earth = null;
+    doc.querySelectorAll('canvas[data-stage="earth"]').forEach(function (c) {
+      if (c.getContext) { earth = Object.create(Earth); new Stage(c, earth); }
     });
+    initStatement(earth);
     doc.querySelectorAll('.page-hero, .notfound').forEach(function (sec) {
       var c = doc.createElement('canvas');
       c.className = 'stage-field'; c.setAttribute('aria-hidden', 'true');
