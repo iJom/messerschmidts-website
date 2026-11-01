@@ -1288,3 +1288,6 @@ a.btn::before { content: ""; order: 2; flex: none; width: .95em; height: .95em; 
 .fm-also .fm-also-card:hover .fm-also-go { transform: translate(4px, -50%); }
 @media (prefers-reduced-motion: reduce) { .fm-also .fm-also-card, .fm-also-go { transition: none; } .fm-also .fm-also-card:hover { transform: none; } }
 @media (forced-colors: active) { .fm-also .fm-also-card { border: 2px solid CanvasText; } }
+/* the 'Also from' cards sit inside the offer box, under a divider */
+.fm-card .fm-also.in-card { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid var(--border-strong); max-width: none; }
+.fm-card .fm-also .fm-also-card { background: rgba(255,255,255,.04); }
