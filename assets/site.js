@@ -298,7 +298,35 @@
     }
     var total = lines.reduce(function (a, l) { return a + l[1]; }, 0);
     var out = doc.getElementById(totalId);
-    if (out) out.textContent = peso(total);
+    if (out) {
+      var txt = peso(total);
+      if (out.textContent !== txt) {
+        out.textContent = txt;
+        // A short bump shows the figure changed (transform only; nothing under reduced motion).
+        if (!reduceMotion) { out.classList.remove('bump'); void out.offsetWidth; out.classList.add('bump'); }
+      }
+    }
+  }
+  /* Every estimator number field gets a - / + stepper (48px targets); the
+     Construction one already has its own in the HTML. */
+  function addSteppers(calc) {
+    calc.querySelectorAll('input[type="number"]').forEach(function (input) {
+      if (input.closest('.stepper')) return;
+      var label = doc.querySelector('label[for="' + input.id + '"]');
+      var name = label ? label.textContent.trim() : 'value';
+      var box = el('div', { 'class': 'stepper' });
+      var minus = el('button', { type: 'button', 'aria-label': 'One fewer: ' + name, 'aria-controls': input.id }, '−');
+      var plus = el('button', { type: 'button', 'aria-label': 'One more: ' + name, 'aria-controls': input.id }, '+');
+      input.parentNode.insertBefore(box, input);
+      box.appendChild(minus); box.appendChild(input); box.appendChild(plus);
+      function step(d) {
+        var min = Number(input.min) || 0, max = Number(input.max) || 100000;
+        input.value = String(Math.max(min, Math.min((parseInt(input.value, 10) || 0) + d, max)));
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      minus.addEventListener('click', function () { step(-1); });
+      plus.addEventListener('click', function () { step(1); });
+    });
   }
   // EAM: one price per organisation with users included, plus a price per extra user.
   function updateCalcEam() {
@@ -362,6 +390,7 @@
   function initCalc() {
     initCalcBuild();
     var calc = doc.getElementById('calc');
+    ['calc', 'calc-eam'].forEach(function (id) { var c = doc.getElementById(id); if (c) addSteppers(c); });
     if (calc) {
       calc.hidden = false;
       calc.addEventListener('input', updateCalc);
@@ -543,7 +572,7 @@
   function initReveal() {
     // Deep links (#section) jump straight to content: never hide it there.
     if (reduceMotion || !hasIO || window.location.hash) return;
-    var sel = '.section .section-head, .section .grid > *, .offers > *, .plans > *, .flow, .split > *, .platform > *, .tour-tabs, .cta-band, .table-wrap, .faq-group, .section .panel, .std-matrix, .included-band';
+    var sel = '.section .section-head, .section .grid > *, .offers > *, .plans > *, .flow, .split > *, .platform > *, .tour-tabs, .cta-band, .table-wrap, .faq-group, .section .panel, .std-matrix, .included-band, .switch-list > *, .switch-stage, .ind-head > *, .price-strip, .cta-strip, .footer-grid > *, .bir-seal';
     var vh = window.innerHeight || doc.documentElement.clientHeight;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -660,12 +689,38 @@
      Adds a layer of thin grid lines with travelling light to every navy hero and
      the home tour band. aria-hidden, behind the content, CSS-only motion
      (transform/opacity) that stops under prefers-reduced-motion. */
-  function initEnergy() {
-    doc.querySelectorAll('.hero, .page-hero, .chrome-band').forEach(function (host) {
-      if (host.querySelector(':scope > .energy')) return;
-      var layer = el('div', { 'class': 'energy', 'aria-hidden': 'true' });
-      for (var i = 0; i < 6; i++) layer.appendChild(el('i'));
-      host.insertBefore(layer, host.firstChild);
+  /* ---------- FAQ finder ----------
+     [data-faq-tools] (hidden without JS) filters the questions as you type and
+     opens or closes every answer. The count is announced politely. */
+  function initFaqTools() {
+    var tools = doc.querySelector('[data-faq-tools]');
+    if (!tools) return;
+    var input = tools.querySelector('input');
+    var count = tools.querySelector('.faq-count');
+    var empty = doc.querySelector('.faq-empty');
+    var items = Array.prototype.slice.call(doc.querySelectorAll('.faq details'));
+    var groups = Array.prototype.slice.call(doc.querySelectorAll('.faq-group'));
+    tools.hidden = false;
+    function filter() {
+      var q = (input.value || '').trim().toLowerCase();
+      var shown = 0;
+      items.forEach(function (d) {
+        var hit = !q || d.textContent.toLowerCase().indexOf(q) !== -1;
+        d.hidden = !hit;
+        if (hit) shown++;
+        if (q && hit && !d.open) { d.open = true; d.setAttribute('data-auto-open', ''); }
+        if (!q && d.hasAttribute('data-auto-open')) { d.open = false; d.removeAttribute('data-auto-open'); }
+      });
+      groups.forEach(function (g) { g.hidden = !g.querySelector('details:not([hidden])'); });
+      if (empty) empty.hidden = shown > 0;
+      if (count) count.textContent = q ? (shown + ' of ' + items.length + ' questions match') : '';
+    }
+    input.addEventListener('input', filter);
+    tools.querySelectorAll('[data-faq-all]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var open = b.getAttribute('data-faq-all') === 'open';
+        items.forEach(function (d) { if (!d.hidden) d.open = open; d.removeAttribute('data-auto-open'); });
+      });
     });
   }
 
@@ -692,7 +747,7 @@
   }
 
   function init() {
-    initEnergy();
+    initFaqTools();
     initClock();
     initTrials();
     initTabs();

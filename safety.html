@@ -20,9 +20,8 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Messerschmidts: software for Philippine industries, EAM for power plants and HSSE">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#0B1E38" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0E2340" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#040A14">
 <!-- API base for live prices; empty = same origin as this page. -->
 <meta name="msm-api" content="https://app.messerschmidts.online">
 <!-- Application base for Sign in / sign-up links; empty = same origin. -->
@@ -103,7 +102,7 @@
 
 <section class="section" aria-labelledby="smod-title">
   <div class="container">
-    <div class="section-head"><span class="eyebrow safety">Modules</span><h2 id="smod-title">Everything the safety office runs</h2></div>
+    <div class="section-head"><h2 id="smod-title">Everything the safety office runs</h2></div>
     <div class="grid grid-3">
       <article class="card feature-card safety"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M8.5 12l2 2 4-4M8.5 17h7"/></svg></div><h3>Permits to work</h3><p>Hot work, confined space, work at height, electrical isolation and more, with approvals, extensions and close-out.</p></article>
 <article class="card feature-card safety"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Man-hours</h3><p>Daily headcount and hours by company and site, with safe man-hours counted automatically.</p></article>
@@ -129,10 +128,8 @@
 <div class="mock shot-frame">
   <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Live permit-to-work board</b><span class="pill ok live">Synced</span></div>
   <picture class="shot">
-    <source type="image/webp" media="(prefers-color-scheme: dark)" srcset="assets/screens/safety-permit-board-dark-640.webp 640w, assets/screens/safety-permit-board-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <source type="image/jpeg" media="(prefers-color-scheme: dark)" srcset="assets/screens/safety-permit-board-dark-640.jpg 640w, assets/screens/safety-permit-board-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <source type="image/webp" srcset="assets/screens/safety-permit-board-light-640.webp 640w, assets/screens/safety-permit-board-light-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <img src="assets/screens/safety-permit-board-light-640.jpg" srcset="assets/screens/safety-permit-board-light-640.jpg 640w, assets/screens/safety-permit-board-light-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="416" loading="lazy" decoding="async" alt="Screenshot with sample data: the Safety live permit-to-work board for a sample site, with the site plot plan on the left and the permits by status: one draft, two pending approval, one approved hot work permit, one active and one extended permit that expire soon, and one work at height permit suspended automatically because the wind is above its limit.">
+    <source type="image/webp" srcset="assets/screens/safety-permit-board-dark-640.webp 640w, assets/screens/safety-permit-board-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
+    <img src="assets/screens/safety-permit-board-dark-640.jpg" srcset="assets/screens/safety-permit-board-dark-640.jpg 640w, assets/screens/safety-permit-board-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="416" loading="lazy" decoding="async" alt="Screenshot with sample data: the Safety live permit-to-work board for a sample site, with the site plot plan on the left and the permits by status: one draft, two pending approval, one approved hot work permit, one active and one extended permit that expire soon, and one work at height permit suspended automatically because the wind is above its limit.">
   </picture>
   <p class="mock-caption" aria-hidden="true">Screenshot of the app with sample data.</p>
 </div>
@@ -151,7 +148,7 @@
 
 <section class="section" aria-labelledby="dom-title">
   <div class="container">
-    <div class="section-head"><span class="eyebrow safety">HSSE</span><h2 id="dom-title">Health, Safety, Security and Environment in one view</h2><p class="lead">Records are grouped by domain, so each specialist has a home and management sees the whole picture.</p><p>It helps you keep the records that DOLE occupational safety and health rules ask for under RA 11058 and DO 198-18: permits to work, toolbox talks, incident reports and man-hours.</p></div>
+    <div class="section-head"><h2 id="dom-title">Health, Safety, Security and Environment in one view</h2><p class="lead">Records are grouped by domain, so each specialist has a home and management sees the whole picture.</p><p>It helps you keep the records that DOLE occupational safety and health rules ask for under RA 11058 and DO 198-18: permits to work, toolbox talks, incident reports and man-hours.</p></div>
     <div class="grid grid-4">
       <article class="card domain health"><div class="icon safety"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20s-8-4.6-8-10.2A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.8C20 15.4 12 20 12 20Z"/><path d="M8 12h2l1-2 2 4 1-2h2"/></svg></div><h3>Health</h3><p class="muted">Medical clearances, fitness to work, first aid cases and health campaigns.</p></article>
       <article class="card domain safety-d"><div class="icon safety"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 17h18M5 17v-3a7 7 0 0 1 14 0v3"/><path d="M10 7v5M14 7v5M9 7h6"/></svg></div><h3>Safety</h3><p class="muted">Permits, inspections, incidents, toolbox talks and man-hours.</p></article>

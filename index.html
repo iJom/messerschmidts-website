@@ -20,9 +20,8 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Messerschmidts: software for Philippine industries, EAM for power plants and HSSE">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#0B1E38" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0E2340" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#040A14">
 <!-- API base for live prices; empty = same origin as this page. -->
 <meta name="msm-api" content="https://app.messerschmidts.online">
 <!-- Application base for Sign in / sign-up links; empty = same origin. -->
@@ -96,9 +95,11 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
 <g mask="url(#pv-mask)"><rect class="sky-shine" x="0" y="0" width="420" height="70" fill="url(#pv-glint)"/></g>
 </svg>
   <div class="container hero-grid">
-    <div class="fm-hero">
+    <div class="hero-head">
       <span class="eyebrow safety">Messerschmidts Safety Premium</span>
       <h1 id="hero-title" class="fm-title">Get <span data-trial="safety" data-trial-fmt="Days">14 Days</span> of Premium Free upon Sign-Up</h1>
+    </div>
+    <div class="fm-hero">
       <p class="lead">Permits to work, incidents, man-hours, ID cards and gate passes for everyone on your site. Use the full Premium plan with your own team before you pay anything.</p>
       <div class="fm-card" data-inview>
         <p class="fm-price"><span class="fm-amount">&#8369;0</span><span class="fm-for">for your first <span data-trial="safety">14 days</span> of Premium</span></p>
@@ -141,6 +142,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
 <g class="pk pk-up" style="--dx:0px;--y1:-50px;--y2:-78px;--d:3.10s"><circle class="f-green pk-glow" cx="280" cy="150" r="9"/><circle class="f-green" cx="280" cy="150" r="4"/></g>
 <g class="pk pk-up" style="--dx:185px;--y1:-50px;--y2:-78px;--d:3.80s"><circle class="f-amber pk-glow" cx="280" cy="150" r="9"/><circle class="f-amber" cx="280" cy="150" r="4"/></g>
 </svg>
+      <ul class="hero-live" aria-label="Apps on the platform"><li class="hl-eam">EAM: live</li><li>Safety: live</li><li class="hl-build">Construction: live</li></ul>
     </figure>
   </div>
   <div class="container">
@@ -156,12 +158,17 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
 <section class="section" id="offerings" aria-labelledby="offer-title">
   <div class="container">
     <div class="section-head center">
-      <span class="eyebrow">What we do</span>
       <h2 id="offer-title">Three ways we help Philippine industries</h2>
       <p class="lead">Start with the one you need today. All three run on the same server, sign-in and data.</p>
     </div>
-    <div class="offers">
-      <article class="card offer">
+    <div class="switcher" data-tabs>
+    <div class="switch-list" role="tablist" aria-label="Choose a product" aria-orientation="vertical">
+      <button class="sw sw-eam" type="button" role="tab" id="sw-eam" aria-controls="sp-eam" aria-selected="true"><span class="sw-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span><span class="sw-name">EAM</span><span class="sw-sub">Maintenance for power plants and substations</span></button>
+      <button class="sw sw-safety" type="button" role="tab" id="sw-safety" aria-controls="sp-safety" aria-selected="false" tabindex="-1"><span class="sw-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span class="sw-name">Safety</span><span class="sw-sub">HSSE: permits, people and gates</span></button>
+      <button class="sw sw-build" type="button" role="tab" id="sw-build" aria-controls="sp-build" aria-selected="false" tabindex="-1"><span class="sw-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></span><span class="sw-name">Construction</span><span class="sw-sub">Schedule, inspections, deliveries and payments</span></button>
+    </div>
+    <div class="switch-stage">
+      <article class="card offer" id="sp-eam" role="tabpanel" aria-labelledby="sw-eam" tabindex="0">
         <div class="offer-top"><span class="offer-num">Messerschmidts EAM</span><span class="status status-live">Live</span></div>
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div>
         <h3>EAM for Power Plants</h3>
@@ -175,7 +182,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         </ul>
         <div class="btn-row"><a class="btn btn-secondary" href="eam.html">Explore EAM</a></div>
       </article>
-      <article class="card offer safety">
+      <article class="card offer safety" id="sp-safety" role="tabpanel" aria-labelledby="sw-safety" tabindex="0">
         <div class="offer-top"><span class="offer-num">Messerschmidts Safety</span><span class="status status-live">Live</span></div>
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div>
         <h3>HSSE</h3>
@@ -189,7 +196,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         </ul>
         <div class="btn-row"><a class="btn btn-secondary" href="safety.html">Explore Safety</a></div>
       </article>
-      <article class="card offer build">
+      <article class="card offer build" id="sp-build" role="tabpanel" aria-labelledby="sw-build" tabindex="0">
         <div class="offer-top"><span class="offer-num">Messerschmidts Construction</span><span class="status status-live">Live</span></div>
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21V4h2v17M4 21h8M8 5h13M8 5l5 5M18 5v6"/><rect x="16" y="11" width="4" height="3"/></svg></div>
         <h3>Construction</h3>
@@ -204,12 +211,13 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <div class="btn-row"><a class="btn btn-secondary" href="construction.html">Explore Construction</a><a class="btn btn-secondary" href="contact.html?topic=construction" aria-label="Ask for a demo of Messerschmidts Construction">Ask for a demo</a></div>
       </article>
     </div>
+    </div>
   </div>
 </section>
 
 <section class="section chrome chrome-band" id="screens" aria-labelledby="tour-title">
   <div class="container">
-    <div class="section-head"><span class="eyebrow">Inside the apps</span><h2 id="tour-title">See what your teams will work with</h2><p class="lead">One real screen from each app, captured with sample data.</p></div>
+    <div class="section-head"><h2 id="tour-title">See what your teams will work with</h2><p class="lead">One real screen from each app, captured with sample data.</p></div>
     <div data-tabs>
       <div class="tour-tabs" role="tablist" aria-label="Sample app screens" aria-orientation="horizontal">
         <button class="tour-tab" type="button" role="tab" id="tab-eam" aria-controls="panel-eam" aria-selected="true">EAM: day-ahead nomination</button>
@@ -225,10 +233,8 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <div class="mock shot-frame">
   <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Weather forecast and day-ahead output</b><span class="pill info">Sample plant</span></div>
   <picture class="shot">
-    <source type="image/webp" media="(prefers-color-scheme: dark)" srcset="assets/screens/eam-nomination-dark-640.webp 640w, assets/screens/eam-nomination-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <source type="image/jpeg" media="(prefers-color-scheme: dark)" srcset="assets/screens/eam-nomination-dark-640.jpg 640w, assets/screens/eam-nomination-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <source type="image/webp" srcset="assets/screens/eam-nomination-light-640.webp 640w, assets/screens/eam-nomination-light-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <img src="assets/screens/eam-nomination-light-640.jpg" srcset="assets/screens/eam-nomination-light-640.jpg 640w, assets/screens/eam-nomination-light-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="387" loading="lazy" decoding="async" alt="Screenshot with sample data: the EAM Weather forecast page for a sample 8 MW solar plant on 27 Oct 2026. The hourly P10, P50 and P90 output peaks at about 5.2 MW around noon and drops when rain arrives from 14:00; the day totals 35.0 MWh at P50. Below the chart are the hourly sky, temperature, cloud, rain, irradiance and estimated MW that the day-ahead nomination starts from.">
+    <source type="image/webp" srcset="assets/screens/eam-nomination-dark-640.webp 640w, assets/screens/eam-nomination-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
+    <img src="assets/screens/eam-nomination-dark-640.jpg" srcset="assets/screens/eam-nomination-dark-640.jpg 640w, assets/screens/eam-nomination-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="387" loading="lazy" decoding="async" alt="Screenshot with sample data: the EAM Weather forecast page for a sample 8 MW solar plant on 27 Oct 2026. The hourly P10, P50 and P90 output peaks at about 5.2 MW around noon and drops when rain arrives from 14:00; the day totals 35.0 MWh at P50. Below the chart are the hourly sky, temperature, cloud, rain, irradiance and estimated MW that the day-ahead nomination starts from.">
   </picture>
   <p class="mock-caption" aria-hidden="true">Screenshot of the app with sample data. Always check NGCP and IEMOP instructions before you nominate.</p>
 </div>
@@ -242,10 +248,8 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <div class="mock shot-frame">
   <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Live permit-to-work board</b><span class="pill ok live">Synced</span></div>
   <picture class="shot">
-    <source type="image/webp" media="(prefers-color-scheme: dark)" srcset="assets/screens/safety-permit-board-dark-640.webp 640w, assets/screens/safety-permit-board-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <source type="image/jpeg" media="(prefers-color-scheme: dark)" srcset="assets/screens/safety-permit-board-dark-640.jpg 640w, assets/screens/safety-permit-board-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <source type="image/webp" srcset="assets/screens/safety-permit-board-light-640.webp 640w, assets/screens/safety-permit-board-light-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <img src="assets/screens/safety-permit-board-light-640.jpg" srcset="assets/screens/safety-permit-board-light-640.jpg 640w, assets/screens/safety-permit-board-light-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="416" loading="lazy" decoding="async" alt="Screenshot with sample data: the Safety live permit-to-work board for a sample site, with the site plot plan on the left and the permits by status: one draft, two pending approval, one approved hot work permit, one active and one extended permit that expire soon, and one work at height permit suspended automatically because the wind is above its limit.">
+    <source type="image/webp" srcset="assets/screens/safety-permit-board-dark-640.webp 640w, assets/screens/safety-permit-board-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
+    <img src="assets/screens/safety-permit-board-dark-640.jpg" srcset="assets/screens/safety-permit-board-dark-640.jpg 640w, assets/screens/safety-permit-board-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="416" loading="lazy" decoding="async" alt="Screenshot with sample data: the Safety live permit-to-work board for a sample site, with the site plot plan on the left and the permits by status: one draft, two pending approval, one approved hot work permit, one active and one extended permit that expire soon, and one work at height permit suspended automatically because the wind is above its limit.">
   </picture>
   <p class="mock-caption" aria-hidden="true">Screenshot of the app with sample data.</p>
 </div>
@@ -259,10 +263,8 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <div class="mock shot-frame">
   <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>S-curve, sample project</b><span class="pill ok live">Synced</span></div>
   <picture class="shot">
-    <source type="image/webp" media="(prefers-color-scheme: dark)" srcset="assets/screens/construction-scurve-dark-640.webp 640w, assets/screens/construction-scurve-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <source type="image/jpeg" media="(prefers-color-scheme: dark)" srcset="assets/screens/construction-scurve-dark-640.jpg 640w, assets/screens/construction-scurve-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <source type="image/webp" srcset="assets/screens/construction-scurve-light-640.webp 640w, assets/screens/construction-scurve-light-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <img src="assets/screens/construction-scurve-light-640.jpg" srcset="assets/screens/construction-scurve-light-640.jpg 640w, assets/screens/construction-scurve-light-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="413" loading="lazy" decoding="async" alt="Screenshot with sample data: the S-curve of a sample project, planned vs actual vs revised progress by month from June 2026 to February 2027, with the data date in October. Actual progress runs below plan; warnings show SPI 0.87 and a finish on 2 Mar 2027 at the current pace against the planned 3 Feb 2027. The earned value table in pesos sits below the chart.">
+    <source type="image/webp" srcset="assets/screens/construction-scurve-dark-640.webp 640w, assets/screens/construction-scurve-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
+    <img src="assets/screens/construction-scurve-dark-640.jpg" srcset="assets/screens/construction-scurve-dark-640.jpg 640w, assets/screens/construction-scurve-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="413" loading="lazy" decoding="async" alt="Screenshot with sample data: the S-curve of a sample project, planned vs actual vs revised progress by month from June 2026 to February 2027, with the data date in October. Actual progress runs below plan; warnings show SPI 0.87 and a finish on 2 Mar 2027 at the current pace against the planned 3 Feb 2027. The earned value table in pesos sits below the chart.">
   </picture>
   <p class="mock-caption" aria-hidden="true">Screenshot of the app with sample data.</p>
 </div>
@@ -274,7 +276,6 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
 <section class="section section-alt" aria-labelledby="platform-title">
   <div class="container platform">
     <div>
-      <span class="eyebrow">One platform</span>
       <h2 id="platform-title">Every site on one screen</h2>
       <p class="lead">Work orders, preventive maintenance, spare parts and permits side by side, the way your site teams see them.</p>
       <ul class="check-list">
@@ -292,10 +293,8 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
       <div class="mock shot-frame">
   <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><b>Operations dashboard</b><span class="pill ok live">Synced</span></div>
   <picture class="shot">
-    <source type="image/webp" media="(prefers-color-scheme: dark)" srcset="assets/screens/eam-dashboard-dark-640.webp 640w, assets/screens/eam-dashboard-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <source type="image/jpeg" media="(prefers-color-scheme: dark)" srcset="assets/screens/eam-dashboard-dark-640.jpg 640w, assets/screens/eam-dashboard-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <source type="image/webp" srcset="assets/screens/eam-dashboard-light-640.webp 640w, assets/screens/eam-dashboard-light-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
-    <img src="assets/screens/eam-dashboard-light-640.jpg" srcset="assets/screens/eam-dashboard-light-640.jpg 640w, assets/screens/eam-dashboard-light-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="428" loading="lazy" decoding="async" alt="Screenshot with sample data: the EAM operations dashboard of a demo company's sample solar plant, with 4.10 MW live AC output, 5 open work orders, 4 active alarms, a 30-day MTTR of 182.2 hours, 5 low-stock items, 3 preventive maintenance jobs awaiting approval, plant OEE of 96.3%, open work by priority and asset health by tier.">
+    <source type="image/webp" srcset="assets/screens/eam-dashboard-dark-640.webp 640w, assets/screens/eam-dashboard-dark-1280.webp 1280w" sizes="(min-width: 1100px) 760px, 96vw">
+    <img src="assets/screens/eam-dashboard-dark-640.jpg" srcset="assets/screens/eam-dashboard-dark-640.jpg 640w, assets/screens/eam-dashboard-dark-1280.jpg 1280w" sizes="(min-width: 1100px) 760px, 96vw" width="640" height="428" loading="lazy" decoding="async" alt="Screenshot with sample data: the EAM operations dashboard of a demo company's sample solar plant, with 4.10 MW live AC output, 5 open work orders, 4 active alarms, a 30-day MTTR of 182.2 hours, 5 low-stock items, 3 preventive maintenance jobs awaiting approval, plant OEE of 96.3%, open work by priority and asset health by tier.">
   </picture>
   <p class="mock-caption" aria-hidden="true">Screenshot of the app with sample data.</p>
 </div>
@@ -306,7 +305,6 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
 <section class="section" aria-labelledby="why-title">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Why Messerschmidts</span>
       <h2 id="why-title">Made for Philippine sites, not just offices</h2>
       <p class="lead">Solar farms far from town, hydro plants up in the mountains, island diesel plants, project sites with no fibre yet. The software has to keep up with where the work actually happens.</p>
     </div>
@@ -325,7 +323,6 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
 <section class="section section-alt" aria-labelledby="price-title">
   <div class="container">
     <div class="section-head center">
-      <span class="eyebrow">Subscription</span>
       <h2 id="price-title">Simple prices in Philippine peso</h2>
       <p class="lead">Pay by GCash, Maya, card, QR Ph, online banking or USDT on TRON. Verified automatically, active instantly.</p>
     </div>
