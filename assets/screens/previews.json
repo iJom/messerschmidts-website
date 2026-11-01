@@ -1,8 +1,7 @@
 {
   "version": 1,
   "captured": "2026-11-01",
-  "source": "Messerschmidts 4.19.2 demo organisation with sample data",
-  "caption": "Screenshot of the app with sample data",
+  "source": "Messerschmidts 4.19.3 demo organisation with sample data; organisation, user and e-mail blurred",
   "apps": {
     "eam": {
       "label": "EAM",
@@ -11,7 +10,7 @@
         {
           "file": "eam-dashboard",
           "title": "Operations dashboard",
-          "alt": "Screenshot with sample data: the EAM operations dashboard of Demo Company's sample solar plant, with live AC output and irradiance, open and overdue work orders, active alarms, MTTR and preventive jobs to dispatch, OEE and availability gauges, open work by priority and asset health by tier.",
+          "alt": "Screenshot with sample data: the EAM operations dashboard of a demo company's sample solar plant, with live AC output and irradiance, open and overdue work orders, active alarms, MTTR and preventive jobs to dispatch, OEE and availability gauges, open work by priority and asset health by tier.",
           "width": 1280,
           "height": 800,
           "captured": "2026-11-01"
