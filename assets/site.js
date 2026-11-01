@@ -701,13 +701,8 @@
      one button per slide and swipe; it never rotates with reduced motion. */
   var SCRIPT_SRC = (doc.currentScript && doc.currentScript.src) || '';
   var SLIDE_MS = 5000;
-  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   function screenUrl(name) {
     try { return new URL('screens/' + name, SCRIPT_SRC || window.location.href).href; } catch (e) { return 'assets/screens/' + name; }
-  }
-  function niceDate(iso) {
-    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || '');
-    return m ? (+m[3]) + ' ' + MONTHS[+m[2] - 1] + ' ' + m[1] : '';
   }
   function safeName(s) { return typeof s === 'string' && /^[a-z0-9-]+$/.test(s) ? s : null; }
   var ICON = {
@@ -717,13 +712,13 @@
     play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12-7.5z"/></svg>'
   };
 
-  function buildSlide(s, i, n, caption, sizes) {
+  function buildSlide(s, i, n, sizes) {
     var slide = el('div', { 'class': 'car-slide', role: 'group', 'aria-roledescription': 'slide', 'aria-label': (i + 1) + ' of ' + n + ': ' + s.title });
     var fig = el('figure', { 'class': 'mock shot-frame' });
     var bar = el('div', { 'class': 'mock-bar', 'aria-hidden': 'true' });
     bar.appendChild(el('i')); bar.appendChild(el('i')); bar.appendChild(el('i'));
     bar.appendChild(el('b', null, s.title));
-    bar.appendChild(el('span', { 'class': 'pill info' }, 'Sample data'));
+    bar.appendChild(el('span', { 'class': 'pill ok live' }, 'Online'));
     fig.appendChild(bar);
     var pic = el('picture', { 'class': 'shot' });
     var src = el('source', { type: 'image/webp', sizes: sizes });
@@ -734,8 +729,6 @@
     img.setAttribute('data-src', screenUrl(s.file + '-640.jpg'));
     pic.appendChild(src); pic.appendChild(img);
     fig.appendChild(pic);
-    var when = niceDate(s.captured);
-    fig.appendChild(el('figcaption', { 'class': 'mock-caption' }, caption + (when ? '. Captured ' + when + '.' : '.')));
     slide.appendChild(fig);
     return slide;
   }
@@ -752,11 +745,10 @@
     var viewport = root.querySelector('.car-viewport');
     if (!viewport) return;
     var sizes = root.getAttribute('data-sizes') || '(min-width: 1100px) 720px, 94vw';
-    var caption = typeof manifest.caption === 'string' ? manifest.caption : 'Screenshot of the app with sample data';
     var id = viewport.id || ('car-' + Math.random().toString(36).slice(2, 8));
     viewport.id = id;
     while (viewport.firstChild) viewport.removeChild(viewport.firstChild);
-    var nodes = slides.map(function (s, i) { var n = buildSlide(s, i, slides.length, caption, sizes); viewport.appendChild(n); return n; });
+    var nodes = slides.map(function (s, i) { var n = buildSlide(s, i, slides.length, sizes); viewport.appendChild(n); return n; });
     loadSlide(nodes[0]);
     root.classList.add('is-ready');
     if (nodes.length < 2) { nodes[0].classList.add('is-active'); return; }
@@ -837,7 +829,7 @@
           var app = m.apps[box.getAttribute('data-carousel')];
           if (app && Array.isArray(app.slides)) initCarousel(box, app, m);
         });
-        // A single picture tied to one slide keeps its alt text and date in step.
+        // A single picture tied to one slide keeps its alt text in step.
         singles.forEach(function (fig) {
           var ref = (fig.getAttribute('data-preview') || '').split('/');
           var app = m.apps[ref[0]];
@@ -845,9 +837,6 @@
           if (!s) return;
           var img = fig.querySelector('img');
           if (img && typeof s.alt === 'string') img.setAttribute('alt', s.alt);
-          var cap = fig.querySelector('figcaption');
-          var when = niceDate(s.captured);
-          if (cap) cap.textContent = (typeof m.caption === 'string' ? m.caption : 'Screenshot of the app with sample data') + (when ? '. Captured ' + when + '.' : '.');
         });
       })
       .catch(function () { /* keep the static first slide */ });

@@ -11,7 +11,10 @@
 //     on all three apps for it, the same as the console's NEW DEMO.
 //  3. Activates one client device and signs in with the demo's own sample account
 //     (admin@<code>.example), on localhost only.
-//  4. Opens 9 screens (3 per app) in headless Chrome at 1280x800 @2x, encodes each in the
+//  4. Opens 9 screens (3 per app) in headless Chrome at 1280x800 @2x. Before each shot it
+//     blurs every place the demo organisation's name, the signed-in user's name and any
+//     e-mail address appear (sidebar/top bar, site box and pickers, letterheads, titles),
+//     by marking those elements and injecting `filter: blur(6px)`. It then encodes each in the
 //     same browser (no image library needed) as webp + jpg at 1280w and 640w, and writes
 //     them to assets/screens/ with stable names.
 //  5. Writes assets/screens/previews.json (the manifest the pages read) with the capture
@@ -57,7 +60,7 @@ const APPS = {
 const PICK_SITE = (re) => `(() => { const sel = [...document.querySelectorAll('select')].find((s) => [...s.options].some((o) => ${re}.test(o.textContent))); if (!sel) return 'no picker'; const o = [...sel.options].find((x) => ${re}.test(x.textContent)); sel.value = o.value; sel.dispatchEvent(new Event('change', { bubbles: true })); return o.textContent })()`;
 const PLAN = [
   { app: "eam", file: "eam-dashboard", url: "/#/dashboard", wait: 7000, title: "Operations dashboard",
-    alt: "Screenshot with sample data: the EAM operations dashboard of Demo Company's sample solar plant, with live AC output and irradiance, open and overdue work orders, active alarms, MTTR and preventive jobs to dispatch, OEE and availability gauges, open work by priority and asset health by tier." },
+    alt: "Screenshot with sample data: the EAM operations dashboard of a demo company's sample solar plant, with live AC output and irradiance, open and overdue work orders, active alarms, MTTR and preventive jobs to dispatch, OEE and availability gauges, open work by priority and asset health by tier." },
   { app: "eam", file: "eam-workorders", url: "/#/corrective", wait: 4000, title: "Corrective work orders",
     alt: "Screenshot with sample data: the EAM corrective maintenance list with tabs for open, high-priority and completed work orders, and sample jobs such as an inverter cooling fan failure raised by an IoT alarm and a string inverter fault reported by QR scan, each with its source, priority, status and due date." },
   { app: "eam", file: "eam-assets", url: "/#/assets", wait: 4000, title: "Asset register",
@@ -124,6 +127,7 @@ const users = {}; for (const m of txt.matchAll(/^\s+(\w+)\s+(\S+@\S+\.example)\s
 if (!code || !users[WHO]) throw new Error("demo activation code or sample account not found");
 const [sa, dev] = await api("POST", "/api/activation/client", { token: code, device_name: "website-previews" });
 if (sa >= 300) throw new Error("activation failed " + sa);
+const me = { name: "", email: WHO };
 const DEVICE = { device_id: dev.device_id, device_secret: dev.device_secret, tenant_id: dev.tenant_id, tenant_code: CODE, company_name: dev.company_name || "Demo Company", kind: "client" };
 
 // ---------- 3. Headless Chrome over CDP ----------
@@ -149,12 +153,41 @@ await cdp("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-mo
 await cdp("Page.navigate", { url: BASE + "/" }); await sleep(1500);
 const st = await js(`(async () => { localStorage.clear(); sessionStorage.clear(); const dev = ${JSON.stringify(DEVICE)}; localStorage.setItem('eam.device', JSON.stringify(dev));
   const r = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: ${JSON.stringify(WHO)}, password: ${JSON.stringify(users[WHO])}, device_id: dev.device_id, device_secret: dev.device_secret }) });
-  localStorage.setItem('eam.session', JSON.stringify(await r.json())); return r.status })()`);
-if (st !== 200) throw new Error("sign-in failed " + st);
+  const j = await r.json(); localStorage.setItem('eam.session', JSON.stringify(j)); const u = j.user || j; return JSON.stringify({ s: r.status, n: u.full_name || u.name || u.display_name || '' }) })()`);
+const stj = JSON.parse(st || "{}");
+if (stj.s !== 200) throw new Error("sign-in failed " + stj.s);
+me.name = stj.n;
 log("signed in as", WHO);
 
 const CLOSE = (keep) => `(() => { let n = 0; ${keep ? "" : "[...document.querySelectorAll('button')].filter((b) => /^(CLOSE|DISMISS|GOT IT|LATER|NOT NOW)$/i.test(b.textContent.trim()) && b.offsetParent).forEach((b) => { b.click(); n++ });"}
   [...document.querySelectorAll('div,p,section,aside')].filter((e) => /^Demo organisation with sample data/.test((e.innerText || '').trim()) && (e.innerText || '').length < 200).forEach((e) => { e.style.display = 'none'; n++ }); return n })()`;
+// ---------- Privacy blur: the demo organisation's name, the user's name, any e-mail ----------
+// Targets elements, never coordinates: known name-bearing selectors, plus a walk over every text
+// node (also open shadow roots and same-origin frames) that contains a name or an e-mail address.
+// A short text's parent element is blurred; a long mixed one gets its matching text wrapped in a
+// span, which UNBLUR removes again so the app's own DOM is left as it was.
+const NAMES = [DEVICE.company_name, me.name].filter((n) => n && n.length >= 3);
+const BLUR_SELECTORS = [".user-menu", ".ap-company", "[class*=letterhead]", "[class*=org-name]", "[class*=tenant-name]", "[class*=company-name]"];
+const BLUR = () => `(() => { const names = ${JSON.stringify(NAMES)}.map((n) => n.toLowerCase()); const mail = /[a-z0-9._%+-]+@[a-z0-9-]+([.][a-z0-9-]+)+/i;
+  const hit = (t) => { t = String(t || '').toLowerCase(); return !!t.trim() && (names.some((n) => t.includes(n)) || mail.test(t)); };
+  const mark = (e) => { if (e && e.nodeType === 1 && !e.hasAttribute('data-msm-blur')) { e.setAttribute('data-msm-blur', ''); n++; } }; let n = 0;
+  const css = '[data-msm-blur]{filter:blur(6px)!important}';
+  const scan = (root) => { const doc = root.ownerDocument || root; const host = root.head || root;
+    if (!root.querySelector('style[data-msm-blur-css]')) { const st = doc.createElement('style'); st.setAttribute('data-msm-blur-css', ''); st.textContent = css; (root.head || root).appendChild(st); }
+    ${JSON.stringify(BLUR_SELECTORS)}.forEach((s) => root.querySelectorAll(s).forEach(mark));
+    const w = doc.createTreeWalker(root.body || root, NodeFilter.SHOW_TEXT); const found = []; let t; while ((t = w.nextNode())) if (hit(t.nodeValue)) found.push(t);
+    for (const t of found) { const p = t.parentElement; if (!p || /^(SCRIPT|STYLE|TITLE)$/.test(p.tagName)) continue;
+      if ((p.textContent || '').length <= 160 || p.namespaceURI !== 'http://www.w3.org/1999/xhtml') mark(p);
+      else { const sp = doc.createElement('span'); sp.setAttribute('data-msm-wrap', ''); t.parentNode.insertBefore(sp, t); sp.appendChild(t); mark(sp); } }
+    root.querySelectorAll('input,textarea').forEach((e) => { if (hit(e.value) || hit(e.placeholder)) mark(e); });
+    root.querySelectorAll('select').forEach((e) => { const o = e.options[e.selectedIndex]; if (o && hit(o.textContent)) mark(e); });
+    root.querySelectorAll('img[alt],svg title').forEach((e) => { if (hit(e.getAttribute('alt') || e.textContent)) mark(e.tagName === 'title' ? e.parentElement : e); });
+    root.querySelectorAll('*').forEach((e) => { if (e.shadowRoot) scan(e.shadowRoot); });
+    root.querySelectorAll('iframe').forEach((f) => { try { f.contentDocument && scan(f.contentDocument); } catch {} }); };
+  scan(document); return n })()`;
+const UNBLUR = `(() => { const un = (root) => { root.querySelectorAll('[data-msm-wrap]').forEach((s) => { while (s.firstChild) s.parentNode.insertBefore(s.firstChild, s); s.remove(); });
+  root.querySelectorAll('[data-msm-blur]').forEach((e) => e.removeAttribute('data-msm-blur')); root.querySelectorAll('*').forEach((e) => e.shadowRoot && un(e.shadowRoot));
+  root.querySelectorAll('iframe').forEach((f) => { try { f.contentDocument && un(f.contentDocument); } catch {} }); }; un(document); return 1 })()`;
 const SCROLL = (re, off) => `(() => { const re = new RegExp(${JSON.stringify(re)}); const el = [...document.querySelectorAll('h1,h2,h3,h4,b,strong,span,div,p,th,td,small')].find((e) => e.offsetParent && re.test((e.textContent || '').trim()) && e.textContent.length < 120);
   if (!el) return 'none'; let s = el.parentElement; while (s && !(s.scrollHeight > s.clientHeight + 4 && /(auto|scroll)/.test(getComputedStyle(s).overflowY))) s = s.parentElement;
   const d = el.getBoundingClientRect().top - ${off}; if (s) s.scrollTop += d; else window.scrollBy(0, d); return Math.round(d) })()`;
@@ -179,7 +212,9 @@ for (const pg of PLAN) {
   await js(CLOSE(pg.keepModal)); await sleep(800);
   if (pg.to) await js(SCROLL(pg.to, pg.off ?? 140));
   await sleep(1500);
+  log(pg.file, "blurred:", await js(BLUR())); await sleep(400);
   const png = (await cdp("Page.captureScreenshot", { format: "png" })).result.data;
+  await js(UNBLUR);
   shots.push({ pg, png });
   log("captured", pg.file);
 }
@@ -189,7 +224,7 @@ await cdp("Page.navigate", { url: "about:blank" }); await sleep(500);
 fs.mkdirSync(OUT, { recursive: true });
 const today = new Date();
 const iso = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-const manifest = { version: 1, captured: iso, source: `Messerschmidts ${args.label ? args.label + " " : ""}demo organisation with sample data`, caption: "Screenshot of the app with sample data", apps: {} };
+const manifest = { version: 1, captured: iso, source: `Messerschmidts ${args.label ? args.label + " " : ""}demo organisation with sample data; organisation, user and e-mail blurred`, apps: {} };
 for (const k of Object.keys(APPS)) manifest.apps[k] = { label: APPS[k].label, short: APPS[k].short, slides: [] };
 for (const { pg, png } of shots) {
   const enc = await js(ENCODE(png));
