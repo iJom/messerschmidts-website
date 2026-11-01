@@ -1291,3 +1291,4 @@ a.btn::before { content: ""; order: 2; flex: none; width: .95em; height: .95em; 
 /* the 'Also from' cards sit inside the offer box, under a divider */
 .fm-card .fm-also.in-card { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid var(--border-strong); max-width: none; }
 .fm-card .fm-also .fm-also-card { background: rgba(255,255,255,.04); }
+.fees-note { margin: 14px 0 0; padding: 12px 16px; border-left: 4px solid var(--amber); border-radius: 8px; background: var(--surface); color: var(--text); max-width: 760px; }
