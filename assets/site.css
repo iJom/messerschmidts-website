@@ -1173,7 +1173,7 @@ a.btn::before { content: ""; order: 2; flex: none; width: .95em; height: .95em; 
 .brand { min-height: 44px; }
 .menu-foot a { min-height: 44px; }
 .cta-band .btn-row { gap: 16px; }
-.fm-also a { display: inline-block; padding: 10px 0; }
+.fm-also { line-height: 1.75; } .fm-also a { display: inline; padding: 0; }   /* inline links in running text: WCAG 2.5.8 exempt, so no tall boxes breaking the sentence */
 
 /* Short app descriptions: product cards and product page heroes */
 .offer-short { margin: -.1em 0 .7em; font-family: var(--font-display); font-weight: 700; font-stretch: 87.5%; font-size: 1.3rem; line-height: 1.15; color: var(--oc); }
