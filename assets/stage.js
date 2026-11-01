@@ -1,4 +1,4 @@
-/* Messerschmidts v8 "orbit" - the animated stages (vanilla JS, no libraries).
+/* Messerschmidts v8 "orbit" + v9 "grid" HUD - the animated stages (vanilla JS, no libraries).
 
    [data-stage="earth"]  home: a night globe of the Philippines. City lights
                          twinkle; amber plant and site points and the links
@@ -275,6 +275,47 @@
         ctx.fillStyle = rgba(COL.site, base); ctx.beginPath(); ctx.arc(sp.x, sp.y, 2.6, 0, TAU); ctx.fill();
         if (v > .5) { ctx.strokeStyle = rgba(COL.site, .6 * (1 - pulse) * v); ctx.beginPath(); ctx.arc(sp.x, sp.y, 4 + 16 * pulse, 0, TAU); ctx.stroke(); }
       }
+      this.hud(s, t);
+    },
+    /* v9 HUD layer: a reticle on the archipelago, island-group labels with
+       leader lines, Manila's coordinates and one scan line across the disc.
+       Reduced motion draws it once at t = 0 (the static frame). */
+    hud: function (s, t) {
+      var ctx = s.ctx, g = this.g, c = this.proj(12.2, 122.4), rr = g.R * .3;
+      ctx.save();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(244,244,245,.28)';
+      ctx.beginPath(); ctx.arc(c.x, c.y, rr, 0, TAU); ctx.stroke();
+      var a0 = t * .25;
+      ctx.strokeStyle = 'rgba(255,184,0,.75)'; ctx.lineWidth = 2;
+      for (var k = 0; k < 3; k++) { ctx.beginPath(); ctx.arc(c.x, c.y, rr + 8, a0 + k * TAU / 3, a0 + k * TAU / 3 + .5); ctx.stroke(); }
+      ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(244,244,245,.55)';
+      for (var q = 0; q < 4; q++) {
+        var an = q * TAU / 4, ca = Math.cos(an), sa = Math.sin(an);
+        ctx.beginPath(); ctx.moveTo(c.x + ca * (rr - 6), c.y + sa * (rr - 6)); ctx.lineTo(c.x + ca * (rr + 14), c.y + sa * (rr + 14)); ctx.stroke();
+      }
+      /* scan line, clipped to the globe */
+      var y = g.cy - g.R + ((t * .06) % 1) * 2 * g.R, dy = y - g.cy, half = Math.sqrt(Math.max(0, g.R * g.R - dy * dy));
+      if (half > 0) {
+        ctx.strokeStyle = 'rgba(255,184,0,.22)';
+        ctx.beginPath(); ctx.moveTo(Math.max(g.cx - half, this.g.fadeX * .9), y); ctx.lineTo(g.cx + half, y); ctx.stroke();
+      }
+      /* labels: condensed caps, leader lines (only where there is room) */
+      var big = s.w >= 560, fs = big ? 13 : 11;
+      ctx.font = '700 ' + fs + 'px "Barlow Semi Condensed", "Arial Narrow", sans-serif';
+      if ('letterSpacing' in ctx) ctx.letterSpacing = big ? '2.5px' : '1.5px';
+      ctx.textBaseline = 'middle';
+      var L = [[16.4, 121.2, 'LUZON', 1], [11.0, 124.0, 'VISAYAS', 1], [7.6, 125.0, 'MINDANAO', 1], [14.6, 121.0, big ? 'MANILA 14.60°N 120.98°E' : 'MANILA', -1]];
+      for (var i = 0; i < L.length; i++) {
+        var p = this.proj(L[i][0], L[i][1]), dir = L[i][3], lx = p.x + dir * (big ? 64 : 34), ly = p.y - (big ? 18 : 12);
+        if (p.z <= 0 || lx > s.w - 8 || lx < 8) continue;
+        ctx.strokeStyle = 'rgba(244,244,245,.45)';
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x + dir * 12, ly); ctx.lineTo(lx, ly); ctx.stroke();
+        ctx.fillStyle = 'rgba(244,244,245,.86)';
+        ctx.textAlign = dir > 0 ? 'left' : 'right';
+        ctx.fillText(L[i][2], lx + dir * 6, ly);
+      }
+      ctx.restore();
     }
   };
 
@@ -358,8 +399,22 @@
     });
   }
 
+  /* v9 HUD: CSS data traces, the platform diagram and screen scans run only
+     while their section is on screen (class .is-live). With reduced motion,
+     without IntersectionObserver or without JS they never start: the static
+     frame is the finished picture. */
+  function initHud() {
+    var els = doc.querySelectorAll('[data-hud]');
+    if (!els.length || !hasIO || mqReduce.matches) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle('is-live', e.isIntersecting); });
+    }, { rootMargin: '40px' });
+    els.forEach(function (e) { io.observe(e); });
+  }
+
   function boot() {
     initSearchLink();
+    initHud();
     if (!window.requestAnimationFrame) return;
     var earth = null;
     doc.querySelectorAll('canvas[data-stage="earth"]').forEach(function (c) {

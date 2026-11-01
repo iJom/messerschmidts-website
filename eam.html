@@ -29,9 +29,9 @@
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/BarlowSemiCondensed-Bold-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/site.css?v=8">
-<script src="assets/site.js?v=8" defer></script>
-<script src="assets/stage.js?v=8" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=9">
+<script src="assets/site.js?v=9" defer></script>
+<script src="assets/stage.js?v=9" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -75,41 +75,34 @@
   </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="page-hero" aria-labelledby="eam-title">
-  <div class="container hero-split">
-    <div>
-    <span class="eyebrow eam">Messerschmidts EAM</span>
+<section class="v9-phero hud-grid acc-eam" aria-labelledby="eam-title" data-hud>
+  <div class="container">
+    <p class="hud-label"><span>Messerschmidts EAM</span><span>Power plants</span><span>Substations</span></p>
     <h1 id="eam-title">Power plant maintenance that is planned, not panicked</h1>
-    <p class="lead">An enterprise asset management and CMMS application for power plants, substations and facilities in the Philippines. Work orders, preventive maintenance, assets, stores, procurement and budget, in one place that keeps working offline at remote sites.</p>
-    <p class="hero-price"><strong>Messerschmidts EAM Standard: &#8369;20,000 per month</strong> for the whole organisation, up to 25 users included. &#8369;750 per month for each additional user. A new organisation that picks EAM at sign-up gets a <span data-trial="eam" data-trial-fmt="day">7-day</span> free trial.</p>
-    <div class="btn-row">
+    <div class="v9-phero-body">
+      <div>
+        <p class="lead-brief">Maintenance management for solar, wind, hydro, geothermal, biomass and diesel plants and substations.</p>
+        <p class="lead">An enterprise asset management and CMMS application for power plants, substations and facilities in the Philippines. Work orders, preventive maintenance, assets, stores, procurement and budget, in one place that keeps working offline at remote sites.</p>
+        <p class="hero-price"><strong>Messerschmidts EAM Standard: &#8369;20,000 per month</strong> for the whole organisation, up to 25 users included. &#8369;750 per month for each additional user. A new organisation that picks EAM at sign-up gets a <span data-trial="eam" data-trial-fmt="day">7-day</span> free trial.</p>
+        <div class="btn-row">
       <a class="btn btn-primary" href="contact.html?topic=eam">Talk to us about EAM</a>
       <a class="btn btn-secondary" href="pricing.html#eam">See EAM prices</a>
     </div>
+      </div>
+      <aside class="hud-readout hud-frame" aria-label="Plant types">
+        <p class="hud-label"><span>Plant types</span></p>
+        <ul><li>Solar</li><li>Wind</li><li>Hydro</li><li>Geothermal</li><li>Biomass</li><li>Diesel</li><li>Substations</li></ul>
+        <div class="hud-trace" aria-hidden="true"></div>
+      </aside>
     </div>
-    <figure class="hero-art">
-<svg class="sld" viewBox="-30 0 620 470" role="img" aria-labelledby="eam-art-title" focusable="false"><title id="eam-art-title">Illustration with sample data: the maintenance loop from asset register to PM schedule, work order, spare parts and downtime report, with a sample work order for an inverter quarterly inspection in progress.</title>
-<circle class="wire" cx="280" cy="238" r="150" stroke-width="3"/>
-<circle class="pulse p-amber" pathLength="100" style="--d:1s" cx="280" cy="238" r="150" stroke-width="4" transform="rotate(-90 280 238)"/>
-<circle class="pulse p-cyan" pathLength="100" style="--d:2.3s" cx="280" cy="238" r="150" stroke-width="4" transform="rotate(-90 280 238)"/>
-<g class="pop" style="--d:0.10s"><circle class="node-eam" cx="280.0" cy="88.0" r="30"/><g transform="translate(268.0 76.0)"><g class="glyph g-cyan"><path d="M12 3 3 7.5v9L12 21l9-4.5v-9L12 3Z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></g></g></g>
-<text x="280.0" y="46.0" text-anchor="middle" class="lbl">Asset register</text>
-<g class="pop" style="--d:0.22s"><circle class="node-eam" cx="422.7" cy="191.6" r="30"/><g transform="translate(410.7 179.6)"><g class="glyph g-cyan"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3v3H8z"/></g></g></g>
-<text x="462.7" y="196.6" text-anchor="start" class="lbl">PM schedule</text>
-<g class="pop" style="--d:0.34s"><circle class="node-hot" cx="368.2" cy="359.4" r="30"/><g transform="translate(356.2 347.4)"><g class="glyph g-amber"><path d="M14.5 5.5a4 4 0 0 0 4.9 4.9L21 12l-9 9-3-3 9-9-1.6-1.6A4 4 0 0 1 14.5 5.5Z"/><path d="M3 21l6-6"/></g></g></g>
-<text x="368.2" y="411.4" text-anchor="middle" class="lbl">Work order</text>
-<g class="pop" style="--d:0.46s"><circle class="node-eam" cx="191.8" cy="359.4" r="30"/><g transform="translate(179.8 347.4)"><g class="glyph g-cyan"><rect x="3" y="4" width="18" height="6" rx="1"/><path d="M5 10v10h14V10M10 14h4"/></g></g></g>
-<text x="191.8" y="411.4" text-anchor="middle" class="lbl">Spare parts</text>
-<g class="pop" style="--d:0.58s"><circle class="node-eam" cx="137.3" cy="191.6" r="30"/><g transform="translate(125.3 179.6)"><g class="glyph g-cyan"><path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/></g></g></g>
-<text x="97.3" y="196.6" text-anchor="end" class="lbl">Downtime report</text>
-<g class="pop" style="--d:.8s"><rect x="186" y="180" width="188" height="118" rx="14" fill="#EEF3F8"/><rect x="186" y="180" width="188" height="6" rx="3" fill="#00B4D8"/>
-<text class="t-dark t-sub" x="204" y="212" style="fill:#3D4B5E">Work order, PM</text>
-<text class="t-dark t-big" x="204" y="240" style="fill:#0E1C2F">Inverter 3B</text>
-<text class="t-dark t-sub" x="204" y="261" style="fill:#3D4B5E">Quarterly inspection</text>
-<rect class="blink" x="204" y="270" width="92" height="20" rx="10" fill="#FFB000"/><text x="250" y="284" text-anchor="middle" style="fill:#0E1C2F;font-size:11.5px;font-weight:800">In progress</text></g>
-</svg>
-    </figure>
   </div>
+  <figure class="v9-shot hud-frame acc-eam" data-hud>
+    <picture class="shot">
+      <source type="image/webp" srcset="assets/screens/eam-dashboard-dark-640.webp 640w, assets/screens/eam-dashboard-dark-1280.webp 1280w" sizes="(min-width: 1360px) 1296px, 94vw">
+      <img src="assets/screens/eam-dashboard-dark-1280.jpg" srcset="assets/screens/eam-dashboard-dark-640.jpg 640w, assets/screens/eam-dashboard-dark-1280.jpg 1280w" sizes="(min-width: 1360px) 1296px, 94vw" width="1280" height="856" loading="lazy" decoding="async" alt="Screenshot with sample data: the EAM operations dashboard of a demo company's sample solar plant, with 4.10 MW live AC output, 5 open work orders, 4 active alarms, a 30-day MTTR of 182.2 hours, 5 low-stock items, 3 preventive maintenance jobs awaiting approval, plant OEE of 96.3%, open work by priority and asset health by tier.">
+    </picture>
+    <figcaption><span class="spec spec-eam"><span>EAM</span><span>Operations dashboard</span><span>Sample plant</span></span><span class="mock-caption">Screenshot of the app with sample data.</span></figcaption>
+  </figure>
 </section>
 
 <section class="section section-alt" id="loop" aria-labelledby="loop-title">

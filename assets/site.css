@@ -1643,3 +1643,237 @@ input, select, textarea { border-radius: 2px; }
   .js .globe-sticky { position: static !important; height: auto !important; }
   .statement .w { color: #000 !important; }
 }
+
+/* =====================================================================
+   v9 "grid" (Nov 2026): a full overhaul into a control-room HUD.
+   Keeps v8's black ground, huge condensed uppercase headlines and the
+   night globe; adds the instrument layer: a subtle 56px grid, 1px
+   technical lines, corner ticks on every frame, tracked micro-labels
+   with real coordinates (Manila 14.60 N 120.98 E) and data traces that
+   run only while on screen and never under reduced motion.
+   Accents name the apps: EAM cyan, Safety green, Construction amber
+   (amber also stays the one action colour). Tokens: design-tokens.json.
+   HUD rules: lines are decoration (no text sits on them); every frame
+   keeps an opaque ground so text contrast is measurable; ticks are
+   2px x 14px in the frame's accent; micro-labels are >= 14px and
+   >= 4.5:1; motion is transform, opacity or stroke-dashoffset only.
+   ===================================================================== */
+:root {
+  --hud-line: rgba(255, 255, 255, .16);
+  --hud-line-strong: rgba(255, 255, 255, .34);
+  --hud-grid: rgba(255, 255, 255, .055);
+  --hud-ground: #060607;
+  --surface: #0C0C0E;
+  --surface-2: #121215;
+  --surface-hover: #18181C;
+  --acc: var(--amber-ink);
+  --tick: 14px;
+  --tick-w: 2px;
+  --card-r: 0px;
+  --fs-micro: .875rem;
+  --fs-hero: clamp(3rem, 6.7vw, 6.6rem);
+  --fs-h1: clamp(2.6rem, 6.2vw, 6rem);
+}
+.acc-eam { --acc: var(--eam); }
+.acc-safety { --acc: var(--safety); }
+.acc-build { --acc: var(--amber-ink); }
+
+/* ---------- HUD primitives ---------- */
+.hud-grid { position: relative; isolation: isolate; }
+.hud-grid::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(var(--hud-grid) 1px, transparent 1px), linear-gradient(90deg, var(--hud-grid) 1px, transparent 1px);
+  background-size: 56px 56px; background-position: 50% -1px;
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 35%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 35%, #000 35%, transparent 100%); }
+
+/* Corner ticks: eight 2px strokes on an opaque ground (no pseudo-elements, so cards keep theirs) */
+.hud-frame, .card, .fm-card.fm-sheet, .mock.shot-frame, .bir-seal {
+  --tk: var(--acc);
+  background-color: var(--surface);
+  background-image: linear-gradient(var(--tk), var(--tk)), linear-gradient(var(--tk), var(--tk)), linear-gradient(var(--tk), var(--tk)), linear-gradient(var(--tk), var(--tk)),
+    linear-gradient(var(--tk), var(--tk)), linear-gradient(var(--tk), var(--tk)), linear-gradient(var(--tk), var(--tk)), linear-gradient(var(--tk), var(--tk));
+  background-size: var(--tick) var(--tick-w), var(--tick-w) var(--tick), var(--tick) var(--tick-w), var(--tick-w) var(--tick), var(--tick) var(--tick-w), var(--tick-w) var(--tick), var(--tick) var(--tick-w), var(--tick-w) var(--tick);
+  background-position: 0 0, 0 0, 100% 0, 100% 0, 0 100%, 0 100%, 100% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  box-shadow: inset 0 0 0 1px var(--hud-line);
+  border-radius: 0; clip-path: none;
+}
+.hud-frame { --focus-gap: var(--surface); }
+.bir-seal { --acc: var(--text-2); }
+
+/* Micro-labels: tracked condensed caps, slash-separated, the first in the accent */
+.hud-label { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 0; margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-micro); line-height: 1.4; letter-spacing: .18em; text-transform: uppercase; color: var(--text-2); font-variant-numeric: tabular-nums; }
+.hud-label > span + span::before { content: "/"; margin: 0 .75em; color: var(--dim); }
+.hud-label > span:first-child { color: var(--acc); }
+
+/* Data trace: a 1px line with a running packet (transform only) */
+.hud-trace { position: relative; height: 1px; background: var(--hud-line); overflow: hidden; margin: 28px 0; }
+.hud-trace::after { content: ""; position: absolute; left: 0; top: 0; width: 22%; height: 1px; background: var(--acc); transform: translateX(120%); }
+@media (prefers-reduced-motion: no-preference) {
+  .is-live .hud-trace::after { animation: hud-run 3.6s cubic-bezier(.45, 0, .2, 1) infinite; }
+}
+@keyframes hud-run { from { transform: translateX(-100%); } to { transform: translateX(460%); } }
+
+/* Tag strip (plant types, Safety records, the Construction loop) */
+.hud-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.hud-tags li { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; padding: 4px 12px; font-family: var(--font-display); font-weight: 700; font-size: .9375rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text); background: var(--hud-ground); box-shadow: inset 0 0 0 1px var(--hud-line-strong); }
+.hud-tags li::before { content: ""; width: 6px; height: 6px; background: var(--acc); flex: none; }
+
+/* ---------- Global restyle: instrument cells ---------- */
+h1, h2 { letter-spacing: -.018em; }
+.card::after { height: 2px; width: 40px; }
+.card .icon, .feature-card > .icon, .offer .icon { border-radius: 0; background: transparent; box-shadow: inset 0 0 0 1px currentColor; }
+.feature-card { --acc: var(--fc); }
+.feature-card > .icon { color: var(--fc); }
+.feature-card.build > .icon { color: var(--amber-ink); background: transparent; }
+.card.safety, .card.domain { --acc: var(--safety); }
+.card.build { --acc: var(--amber-ink); }
+.card.product-card { --acc: var(--cc); }
+.card.product-card.build { --acc: var(--amber-ink); }
+.card.product-card::after { display: none; }
+@media (hover: hover) { .card:not(.static):not(.contact-form):hover { background-color: var(--surface-hover); } }
+.eyebrow::before { width: 8px; height: 8px; clip-path: none; }
+.btn { border-radius: 0; }
+.status { border-radius: 0; background: transparent; box-shadow: inset 0 0 0 1px currentColor; font-size: .875rem; letter-spacing: .14em; text-transform: uppercase; }
+.check-list li::before { border-radius: 0; width: 18px; height: 18px; }
+.site-header { background: rgba(0, 0, 0, .94); }
+
+/* App screens: a HUD frame around every real screenshot */
+.mock.shot-frame { --acc: var(--text-2); padding: 10px; }
+.mock.shot-frame .spec, .mock.shot-frame .mock-caption { padding: 0 6px 4px; }
+.shot { box-shadow: none; border-radius: 0; }
+
+/* ---------- Home hero: designed for power plants ---------- */
+.v9-hero { background: #000; --focus-gap: #000; padding: 32px 0 72px; overflow: hidden; }
+@media (min-width: 1000px) { .v9-hero { padding: 64px 0 112px; } }
+.v9-hero-grid { display: grid; gap: 40px; align-items: center; }
+@media (min-width: 1000px) { .v9-hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 56px; } }
+.v9-hero h1 { font-size: var(--fs-hero); line-height: .86; letter-spacing: -.02em; margin: 22px 0 0; }
+.v9-hero h1 > span { display: block; }
+.v9-hero h1 > span + span { color: var(--amber-ink); }
+.v9-hero .lead { margin: 28px 0 0; max-width: 48ch; color: var(--text); }
+.v9-hero .btn-row { margin-top: 36px; }
+.v9-hero .btn { min-height: 56px; }
+.v9-hero-copy .hud-trace { max-width: 520px; margin: 36px 0 0; }
+.v9-platform { margin: 0; padding: 12px; background-color: var(--hud-ground); --acc: var(--text-2); }
+.v9-platform svg { display: block; width: 100%; height: auto; aspect-ratio: 1; }
+.v9-platform figcaption { margin: 8px 6px 4px; font-size: var(--fs-sm); line-height: 1.5; color: var(--text-2); }
+@media (prefers-reduced-motion: no-preference) {
+  .v9-hero-copy > * { animation: rise .9s var(--ease-out) both; }
+  .v9-hero-copy > :nth-child(2) { animation-delay: 60ms; }
+  .v9-hero-copy > :nth-child(3) { animation-delay: 130ms; }
+  .v9-hero-copy > :nth-child(4) { animation-delay: 190ms; }
+  .v9-platform { animation: rise 1.1s var(--ease-out) .12s both; }
+}
+
+/* The platform diagram (inline SVG; colours as classes so forced colours can take over) */
+.pf-ring { fill: none; stroke: rgba(255, 255, 255, .2); stroke-width: 1; }
+.pf-ring-dash { fill: none; stroke: rgba(255, 255, 255, .34); stroke-width: 1.2; stroke-dasharray: 2 8; }
+.pf-arc { fill: none; stroke: var(--amber-ink); stroke-width: 2; }
+.pf-tick { stroke: rgba(255, 255, 255, .3); stroke-width: 1; }
+.pf-tick-major { stroke: rgba(255, 255, 255, .7); stroke-width: 1.5; }
+.pf-sweep { stroke: var(--amber-ink); stroke-width: 1.2; opacity: .55; }
+.pf-link { stroke: rgba(255, 255, 255, .34); stroke-width: 1.2; }
+.pf-pk { fill: none; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 4 96; stroke-dashoffset: 30; }
+.pf-pk.r { stroke-dashoffset: 70; }
+.pf-core { fill: var(--hud-ground); stroke: rgba(255, 255, 255, .6); stroke-width: 1.5; }
+.pf-core-in { fill: none; stroke: rgba(255, 255, 255, .18); stroke-width: 1; }
+.pf-node { fill: var(--hud-ground); stroke-width: 1.2; }
+.pf-switch { fill: none; stroke: var(--safety); stroke-width: 1.6; stroke-dasharray: 5 6; }
+.pf-t { font-family: var(--font-display); font-weight: 700; letter-spacing: .14em; fill: #B6B6BD; }
+.pf-t.big { fill: #F4F4F5; letter-spacing: .06em; }
+.pf-frame { fill: none; stroke: rgba(255, 255, 255, .7); stroke-width: 2; }
+.c-eam { stroke: var(--eam); } .f-eam { fill: var(--eam); }
+.c-safety { stroke: var(--safety); } .f-safety { fill: var(--safety); }
+.c-build { stroke: var(--amber-ink); } .f-build { fill: var(--amber-ink); }
+.pf-spin, .pf-spin-rev, .pf-sweep-g { transform-box: view-box; transform-origin: 300px 300px; }
+@media (prefers-reduced-motion: no-preference) {
+  .is-live .pf-spin { animation: spin 80s linear infinite; }
+  .is-live .pf-spin-rev { animation: spin 50s linear infinite reverse; }
+  .is-live .pf-sweep-g { animation: spin 9s linear infinite; }
+  .is-live .pf-pk { animation: pf-flow 2.8s linear infinite; }
+  .is-live .pf-pk.r { animation-direction: reverse; animation-delay: -1.4s; }
+  .is-live .pf-pk.d2 { animation-delay: -.9s; }
+  .is-live .pf-pk.r.d2 { animation-delay: -2.1s; }
+  .is-live .pf-pk.d3 { animation-delay: -1.8s; }
+  .is-live .pf-pk.r.d3 { animation-delay: -.5s; }
+  .is-live .pf-switch { animation: pf-dash 1.6s linear infinite; }
+  .is-live .pf-live { animation: blink 2.4s ease-in-out infinite; }
+}
+@keyframes pf-flow { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes pf-dash { to { stroke-dashoffset: -22; } }
+
+/* Offer sheet under the hero: the 14-day Safety Premium trial */
+.v9-hero .fm-card.fm-sheet { --acc: var(--safety); max-width: none; margin: 72px 0 0; }
+@media (min-width: 1000px) { .v9-hero .fm-card.fm-sheet { margin-top: 112px; } }
+.fm-sheet .fm-head { margin: 0 0 8px; }
+.fm-sheet .offer-title { font-size: clamp(2rem, 4.2vw, 3.6rem); line-height: .95; margin: 14px 0 20px; max-width: 18ch; }
+@media (min-width: 860px) { .fm-sheet .fm-head { grid-column: 1 / -1; } .fm-sheet .fm-price { grid-row: auto; } }
+.v9-hero .hero-meta { justify-content: space-between; }
+.v9-hero .hero-live { margin: 0; font-family: var(--font-display); font-size: .875rem; letter-spacing: .2em; text-transform: uppercase; gap: 8px 28px; color: var(--text-2); }
+.v9-hero .window-rail { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; gap: 16px; }
+.v9-hero .window-rail::before, .v9-hero .window-rail::after { display: none; }
+.v9-hero .btn.fm-cta { width: auto; font-size: 1.0625rem; padding: .8em 1.8em; }
+@media (max-width: 520px) { .v9-hero .btn.fm-cta { width: 100%; } }
+.window-rail a { border-radius: 0; }
+.v9-hero .bus-stats { margin-top: 72px; padding-top: 32px; }
+
+/* ---------- Three apps, one platform ---------- */
+.v9-pillars { display: grid; gap: 16px; }
+@media (min-width: 1100px) { .v9-pillars { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.pillar { display: flex; flex-direction: column; padding: 32px 24px 28px; }
+@media (min-width: 700px) { .pillar { padding: 40px 36px 32px; } }
+.pillar-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 28px; }
+.pillar h3 { font-size: clamp(2.2rem, 3vw, 3.2rem); line-height: .92; text-transform: uppercase; color: var(--acc); margin: 0 0 20px; }
+.pillar-brief { font-size: 1.1875rem; line-height: 1.5; color: var(--text); margin: 0 0 22px; }
+.pillar .hud-trace { margin: 26px 0 24px; }
+.pillar .check-list { margin-bottom: 28px; }
+.pillar .check-list li::before { background-color: var(--acc); }
+.pillar .btn-row { margin-top: auto; }
+
+/* ---------- Globe and the why board ---------- */
+.globe-copy .statement { box-shadow: inset 2px 0 0 var(--amber-ink); }
+
+/* ---------- Product pages: one hero per app ---------- */
+.v9-phero { background: #000; --focus-gap: #000; padding: 32px 0 72px; overflow: hidden; }
+@media (min-width: 1000px) { .v9-phero { padding: 64px 0 120px; } }
+.v9-phero h1 { font-size: var(--fs-h1); line-height: .9; letter-spacing: -.02em; max-width: 23ch; margin: 22px 0 0; }
+.v9-phero-body { display: grid; gap: 40px; margin-top: 36px; }
+@media (min-width: 1000px) { .v9-phero-body { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 64px; align-items: start; margin-top: 48px; } }
+.v9-phero .lead-brief { font-size: clamp(1.3rem, 1.9vw, 1.625rem); line-height: 1.42; color: var(--text); margin: 0 0 20px; max-width: 46ch; }
+.v9-phero .lead { margin: 0 0 24px; font-size: var(--fs-body); }
+.v9-phero .hero-price { max-width: none; }
+.hud-readout { padding: 24px 24px 20px; }
+.hud-readout ul { list-style: none; margin: 16px 0 0; padding: 0; }
+.hud-readout li { display: flex; align-items: baseline; gap: 12px; padding: 10px 0; font-family: var(--font-display); font-weight: 700; font-size: 1.0625rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text); box-shadow: inset 0 -1px 0 var(--hud-line); }
+.hud-readout li:last-child { box-shadow: none; }
+.hud-readout li::before { content: ""; flex: none; width: 7px; height: 7px; background: var(--acc); transform: translateY(-2px); }
+.hud-readout .hud-trace { margin: 16px 0 0; }
+.v9-shot { position: relative; width: min(1320px, 100% - 2 * var(--gutter)); margin: 56px auto 0; padding: 12px; background-color: var(--hud-ground); overflow: hidden; }
+@media (min-width: 1000px) { .v9-shot { margin-top: 88px; } }
+.v9-shot .shot { display: block; }
+.v9-shot figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; padding: 14px 6px 4px; }
+.v9-shot figcaption .spec, .v9-shot figcaption .mock-caption { margin: 0; }
+.v9-shot::after { content: ""; position: absolute; left: 12px; right: 12px; top: 12px; height: 2px; background: var(--acc); opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .is-live.v9-shot::after { animation: shot-scan 7s cubic-bezier(.45, 0, .55, 1) 1s infinite; }
+  .v9-phero > .container > * { animation: rise .9s var(--ease-out) both; }
+  .v9-phero > .container > :nth-child(2) { animation-delay: 60ms; }
+  .v9-phero > .container > :nth-child(3) { animation-delay: 130ms; }
+}
+@keyframes shot-scan { 0% { opacity: 0; transform: translateY(0); } 8% { opacity: .7; } 60% { opacity: .7; transform: translateY(min(52vw, 740px)); } 66%, 100% { opacity: 0; transform: translateY(min(52vw, 740px)); } }
+
+/* ---------- Forced colours and print ---------- */
+@media (forced-colors: active) {
+  .hud-frame, .card, .fm-card.fm-sheet, .mock.shot-frame, .bir-seal, .hud-tags li, .v9-platform, .v9-shot { background-image: none; border: 1px solid CanvasText; }
+  .hud-grid::before, .hud-trace, .v9-shot::after { display: none; }
+  .v9-platform svg, .v9-platform svg * { forced-color-adjust: none; }
+  .v9-platform svg { background: Canvas; }
+  .pf-ring, .pf-ring-dash, .pf-arc, .pf-tick, .pf-tick-major, .pf-link, .pf-core, .pf-core-in, .pf-node, .pf-switch, .pf-frame, .pf-pk, .pf-sweep { stroke: CanvasText; }
+  .pf-core, .pf-node { fill: Canvas; }
+  .pf-t, .pf-t.big, .f-eam, .f-safety, .f-build { fill: CanvasText; }
+  .hud-tags li::before, .hud-readout li::before { forced-color-adjust: none; background: CanvasText; }
+}
+@media print {
+  .hud-grid::before, .hud-trace, .v9-shot::after { display: none !important; }
+}
