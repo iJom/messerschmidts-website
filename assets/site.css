@@ -1173,7 +1173,7 @@ a.btn::before { content: ""; order: 2; flex: none; width: .95em; height: .95em; 
 .brand { min-height: 44px; }
 .menu-foot a { min-height: 44px; }
 .cta-band .btn-row { gap: 16px; }
-.fm-also { line-height: 1.75; } .fm-also a { display: inline; padding: 0; }   /* inline links in running text: WCAG 2.5.8 exempt, so no tall boxes breaking the sentence */
+
 
 /* Short app descriptions: product cards and product page heroes */
 .offer-short { margin: -.1em 0 .7em; font-family: var(--font-display); font-weight: 700; font-stretch: 87.5%; font-size: 1.3rem; line-height: 1.15; color: var(--oc); }
@@ -1272,3 +1272,19 @@ a.btn::before { content: ""; order: 2; flex: none; width: .95em; height: .95em; 
   .js .carousel.is-ready .car-slide { opacity: 1 !important; visibility: visible !important; transform: none !important; }
   .car-viewport { display: block; }
 }
+
+/* Home: 'Also from Messerschmidts' as two product cards */
+.fm-also { margin: 22px 0 0; max-width: 620px; }
+.fm-also-h { margin: 0 0 10px; font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-2); }
+.fm-also-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.fm-also .fm-also-card { position: relative; display: grid; gap: 2px; min-height: 44px; padding: 14px 44px 14px 16px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border-strong); border-left: 4px solid var(--fm-c, var(--amber)); color: var(--text); text-decoration: none; transition: transform var(--t-fast) var(--ease), border-color var(--t-fast), background-color var(--t-fast); }
+.fm-also .fm-also-card.eam { --fm-c: #22b8e6; } .fm-also .fm-also-card.cx { --fm-c: var(--amber); }
+.fm-also .fm-also-card:hover { transform: translateY(-2px); border-color: var(--fm-c); }
+.fm-also .fm-also-card:active { transform: translateY(0); }
+.fm-also-tag { font-size: .74rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--fm-c); }
+.fm-also-t { font-weight: 700; font-size: 1rem; line-height: 1.3; }
+.fm-also-d { font-size: .88rem; color: var(--text-2); }
+.fm-also-go { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: var(--fm-c); transition: transform var(--t-fast) var(--ease); }
+.fm-also .fm-also-card:hover .fm-also-go { transform: translate(4px, -50%); }
+@media (prefers-reduced-motion: reduce) { .fm-also .fm-also-card, .fm-also-go { transition: none; } .fm-also .fm-also-card:hover { transform: none; } }
+@media (forced-colors: active) { .fm-also .fm-also-card { border: 2px solid CanvasText; } }
