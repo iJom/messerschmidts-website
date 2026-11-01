@@ -18,6 +18,7 @@ Static site for **Messerschmidts EAM**, **Messerschmidts Safety** and **Messersc
 | `disclaimer.html` | Disclaimer v1.0: accuracy, use, damages, other users, safety (RA 11058 / DOLE), weather and Day Ahead Nominations, regulatory reports (ERC / DOE / NGCP / IEMOP), permits lists (LGU), calculations (EVM, billing, tax) |
 | `404.html` | Not-found page (uses root-relative links, so it works at any path) |
 | `assets/site.css`, `assets/site.js`, `assets/logo.svg` | Shared styles, script, logo/favicon |
+| `assets/stage.js` | v7 animated stage: home particle globe (`canvas[data-stage="globe"]`) and the quiet constellation behind every `.page-hero` / `.notfound` window |
 | `favicon.ico`, `assets/apple-touch-icon.png` | Fallback favicon (16/32/48 px) and 180 px home-screen icon, drawn from the logo |
 
 ## Legal pages
@@ -64,6 +65,10 @@ If plans are returned for an app, the cards in `[data-plans="safety"]` / `[data-
 - **Any static host** (GitHub Pages, Cloudflare Pages, Netlify free tier, etc.): upload this folder as-is; set `msm-api` and `msm-app` to the application's address. Configure `404.html` as the not-found page if the host asks.
 - **Behind the same server** as the application: serve this folder as static files (for example at `www.messerschmidts.online`, or at the root with the app's paths routed separately). Leave both meta tags empty.
 - Local preview: `python3 -m http.server 8080` in this folder, then open http://localhost:8080/.
+
+## Design notes (v7 "window", Nov 2026)
+
+Each page is a set of calm, rounded windows floating over a soft violet bokeh (`body::before/::after`, CSS only, fixed). Navy is the ground, amber is the one action colour; violet/lilac (`--violet`, `--lilac`, `--rim`) is light only: glows, window rims, micro-labels. Nav and short labels are widely tracked uppercase in Barlow Semi Condensed (the only weight we ship is Bold, so "thin" comes from size and tracking); the home wordmark uses the system UI face at weight 200; running text stays the system sans at 18px. Text never sits on raw bokeh: sections carry a 0.72-0.84 scrim of the ground, windows 0.86. The home hero is a window with a particle-network globe (nodes = plants and sites, amber pulses = sites) whose streams dissolve into the MESSERSCHMIDTS wordmark, the three apps orbiting it in their colours (`assets/stage.js`, vanilla canvas): max 60 fps (30 on phones / 4-core CPUs, fewer particles, DPR capped), paused off-screen and in hidden tabs, one static frame under `prefers-reduced-motion`, hidden in forced colours. The older notes below describe the v2 base it builds on.
 
 ## Design notes (v2, Oct 2026)
 

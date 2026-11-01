@@ -33,6 +33,7 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
 <link rel="preload" href="assets/fonts/BarlowSemiCondensed-Bold-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
+<script src="assets/stage.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -72,78 +73,43 @@ if (/(^|\.)messerschmidts\.online$/.test(location.hostname) && location.hash.ind
         <a class="btn btn-primary btn-sm" href="/#/account/signup" data-app-link="/#/account/signup">Start free demo</a>
       </div>
     </nav>
+    <a class="header-search" href="faq.html#faq-find" aria-label="Search the FAQ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
   </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="hero" aria-labelledby="hero-title">
-<svg class="hero-sky" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMin meet" aria-hidden="true" focusable="false">
-<defs><radialGradient id="sun-halo"><stop offset="0" stop-color="#FFC233" stop-opacity=".5"/><stop offset=".35" stop-color="#FFB000" stop-opacity=".16"/><stop offset="1" stop-color="#FFB000" stop-opacity="0"/></radialGradient></defs>
-<path class="sky-arc" d="M155 460A640 640 0 0 1 1285 460"/>
-<g class="sky-orbit"><circle class="sky-halo" cx="720" cy="120" r="120" fill="url(#sun-halo)"/><circle cx="720" cy="120" r="17" fill="#FFC233"/></g>
-</svg>
-<svg class="hero-pv" viewBox="0 0 1440 70" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
-<defs>
-<pattern id="pv-a" width="84" height="30" patternUnits="userSpaceOnUse" y="36"><path d="M6 28 18 2h62L68 28Z" fill="rgba(63,211,238,.13)" stroke="rgba(170,200,230,.30)"/><path d="M12 15h62M43 2 37 28" fill="none" stroke="rgba(170,200,230,.16)"/></pattern>
-<pattern id="pv-b" width="66" height="24" patternUnits="userSpaceOnUse" x="30" y="6"><path d="M5 22 14 2h48L53 22Z" fill="rgba(63,211,238,.09)" stroke="rgba(170,200,230,.22)"/></pattern>
-<pattern id="pv-aw" width="84" height="30" patternUnits="userSpaceOnUse" y="36"><path d="M6 28 18 2h62L68 28Z" fill="#fff"/></pattern>
-<pattern id="pv-bw" width="66" height="24" patternUnits="userSpaceOnUse" x="30" y="6"><path d="M5 22 14 2h48L53 22Z" fill="#fff"/></pattern>
-<linearGradient id="pv-glint" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".38"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-<mask id="pv-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="70"><rect x="0" y="6" width="1440" height="24" fill="url(#pv-bw)"/><rect x="0" y="36" width="1440" height="30" fill="url(#pv-aw)"/></mask>
-</defs>
-<rect x="0" y="6" width="1440" height="24" fill="url(#pv-b)"/>
-<rect x="0" y="36" width="1440" height="30" fill="url(#pv-a)"/>
-<g mask="url(#pv-mask)"><rect class="sky-shine" x="0" y="0" width="420" height="70" fill="url(#pv-glint)"/></g>
-</svg>
-  <div class="container hero-grid">
-    <div class="hero-head">
-      <span class="eyebrow safety">Messerschmidts Safety Premium</span>
-      <h1 id="hero-title" class="fm-title">Get <span data-trial="safety" data-trial-fmt="Days">14 Days</span> of Premium Free upon Sign-Up</h1>
-    </div>
-    <div class="fm-hero">
-      <p class="lead">Permits to work, incidents, man-hours, ID cards and gate passes for everyone on your site. Use the full Premium plan with your own team before you pay anything.</p>
-      <div class="fm-card" data-inview>
-        <p class="fm-price"><span class="fm-amount">&#8369;0</span><span class="fm-for">for your first <span data-trial="safety">14 days</span> of Premium</span></p>
-        <a class="btn btn-primary fm-cta" href="/#/account/signup" data-app-link="/#/account/signup"><span>Start free, up to <span data-trial="safety">14 days</span></span></a>
-        <ul class="fm-perks">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M3 3l18 18"/></svg>No credit card required</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>Instant access &mdash; no complex account setup needed</li>
-        </ul>
-        <p class="fm-fine">Confirm your e-mail, set your password and activate your device &mdash; that&rsquo;s it. A paid subscription (<span data-live-price="safety">&#8369;1,000</span> per user per month) is only needed after the <span data-trial="safety" data-trial-fmt="day">14-day</span> free trial ends. Without one, the site turns read-only after a 7&#8209;day grace period; your data is kept. At sign-up a new organisation picks one app, once: Safety only (<span data-trial="safety">14 days</span> free), Construction with Safety (<span data-trial="construction">7 days</span>) or EAM (<span data-trial="eam">7 days</span>).</p>
+<section class="hero hero-stage" aria-labelledby="hero-title">
+  <div class="container">
+  <div class="window">
+    <div class="hero-grid">
+      <div class="hero-head">
+        <span class="eyebrow safety">Messerschmidts Safety Premium</span>
+        <h1 id="hero-title" class="fm-title">Get <span data-trial="safety" data-trial-fmt="Days">14 Days</span> of Premium Free upon Sign-Up</h1>
       </div>
-      <p class="fm-also">Also from Messerschmidts: <a href="contact.html?topic=eam">Ask for an EAM demo</a> for your power plant, or <a href="/#/account/signup" data-app-link="/#/account/signup">start a <span data-trial="construction" data-trial-fmt="day">7-day</span> Construction trial</a>.</p>
+      <div class="fm-hero">
+        <p class="lead">Permits to work, incidents, man-hours, ID cards and gate passes for everyone on your site. Use the full Premium plan with your own team before you pay anything.</p>
+        <div class="fm-card" data-inview>
+          <p class="fm-price"><span class="fm-amount">&#8369;0</span><span class="fm-for">for your first <span data-trial="safety">14 days</span> of Premium</span></p>
+          <a class="btn btn-primary fm-cta" href="/#/account/signup" data-app-link="/#/account/signup"><span>Start free, up to <span data-trial="safety">14 days</span></span></a>
+          <ul class="fm-perks">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M3 3l18 18"/></svg>No credit card required</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>Instant access &mdash; no complex account setup needed</li>
+          </ul>
+          <p class="fm-fine">Confirm your e-mail, set your password and activate your device &mdash; that&rsquo;s it. A paid subscription (<span data-live-price="safety">&#8369;1,000</span> per user per month) is only needed after the <span data-trial="safety" data-trial-fmt="day">14-day</span> free trial ends. Without one, the site turns read-only after a 7&#8209;day grace period; your data is kept. At sign-up a new organisation picks one app, once: Safety only (<span data-trial="safety">14 days</span> free), Construction with Safety (<span data-trial="construction">7 days</span>) or EAM (<span data-trial="eam">7 days</span>).</p>
+        </div>
+        <p class="fm-also">Also from Messerschmidts: <a href="contact.html?topic=eam">Ask for an EAM demo</a> for your power plant, or <a href="/#/account/signup" data-app-link="/#/account/signup">start a <span data-trial="construction" data-trial-fmt="day">7-day</span> Construction trial</a>.</p>
+      </div>
     </div>
-    <figure class="hero-art">
-<svg class="sld grid-flow" viewBox="0 0 560 460" role="img" aria-labelledby="sld-title" focusable="false"><title id="sld-title">Diagram: solar, wind, hydro and thermal plants and substations all send their data up to one Messerschmidts platform, which runs EAM for maintenance, Safety for HSSE and Construction for projects.</title>
-<defs><radialGradient id="cloud-halo"><stop offset="0" stop-color="#FFB000" stop-opacity=".34"/><stop offset=".55" stop-color="#FFB000" stop-opacity=".08"/><stop offset="1" stop-color="#FFB000" stop-opacity="0"/></radialGradient></defs>
-<path class="wire" d="M64 362V320M172 362V320M280 362V320M388 362V320M496 362V320M280 320V262M280 150V72M95 100H465M95 100V72M465 100V72"/>
-<path class="bus pop" style="--d:.55s" d="M36 320H524"/>
-<ellipse class="halo" cx="280" cy="196" rx="200" ry="120" fill="url(#cloud-halo)"/>
-<g class="pop" style="--d:.75s"><path class="node-hot cloud" d="M186 262H374A30 30 0 0 0 392 206A52 52 0 0 0 300 160A52 52 0 0 0 204 196A35 35 0 0 0 186 262Z"/><text class="t-big" x="286" y="222" text-anchor="middle">Messerschmidts</text><text class="t-sub sub-detail" x="286" y="246" text-anchor="middle">One sign-in for sites, people, devices</text></g>
-<g class="pop" style="--d:.95s"><rect class="node-eam" x="10" y="8" width="170" height="64" rx="12"/><text class="t-big app-name" x="95" y="38" text-anchor="middle">EAM</text><text class="t-sub sub-detail" x="95" y="60" text-anchor="middle">Assets, PM and work orders</text></g>
-<g class="pop" style="--d:1.05s"><rect class="node-safe" x="195" y="8" width="170" height="64" rx="12"/><text class="t-big app-name" x="280" y="38" text-anchor="middle">Safety</text><text class="t-sub sub-detail" x="280" y="60" text-anchor="middle">Permits, people and gates</text></g>
-<g class="pop" style="--d:1.15s"><rect class="node-build" x="380" y="8" width="170" height="64" rx="12"/><text class="t-big app-name" x="465" y="38" text-anchor="middle">Construction</text><text class="t-sub sub-detail" x="465" y="60" text-anchor="middle">Project control</text></g>
-<g transform="translate(0 334)"><g class="pop" style="--d:.05s"><circle class="node" cx="64" cy="58" r="30"/><circle class="glyph g-amber" cx="64" cy="58" r="8"/><path class="glyph g-amber" d="M64 40v5M64 71v5M46 58h5M77 58h5M51.3 45.3l3.5 3.5M73.2 67.2l3.5 3.5M51.3 70.7l3.5-3.5M73.2 48.8l3.5-3.5"/></g></g>
-<g transform="translate(0 334)"><g class="pop" style="--d:.15s"><circle class="node" cx="172" cy="58" r="30"/><path class="glyph" d="M172 56V82"/><g class="rotor"><circle cx="172" cy="52" r="18" fill="none"/><path class="glyph g-cyan" d="M172 52V35M172 52l14.7 8.5M172 52l-14.7 8.5"/></g><circle class="f-cyan" cx="172" cy="52" r="2.6"/></g></g>
-<g transform="translate(0 334)"><g class="pop" style="--d:.25s"><circle class="node" cx="280" cy="58" r="30"/><path class="glyph" d="M266 44h10l8 30h-18z"/><path class="glyph g-cyan" d="M287 62c3-2 5-2 8 0s5 2 8 0M287 69c3-2 5-2 8 0s5 2 8 0"/></g></g>
-<g transform="translate(0 334)"><g class="pop" style="--d:.35s"><circle class="node" cx="388" cy="58" r="30"/><path class="glyph" d="M376 78V52h8v26M392 78V60h8v18M372 78h32"/><path class="glyph g-amber blink" d="M380 46c-3-3 0-6 3-8M396 54c-3-3 0-6 3-8"/></g></g>
-<g transform="translate(0 334)"><g class="pop" style="--d:.45s"><circle class="node" cx="496" cy="58" r="30"/><path class="glyph" d="M488 80l8-40 8 40M484 52h24M482 62h28M491 70h10"/><path class="glyph g-amber" d="M478 46l-8 4M514 46l8 4"/></g></g>
-<text x="64" y="446" text-anchor="middle">Solar</text>
-<text x="172" y="446" text-anchor="middle">Wind</text>
-<text x="280" y="446" text-anchor="middle">Hydro</text>
-<text x="388" y="446" text-anchor="middle">Thermal</text>
-<text x="496" y="446" text-anchor="middle">Substations</text>
-<text class="t-sub sub-detail" x="36" y="344">Your plants and sites</text>
-<g class="pk" style="--dx:216px;--y1:-42px;--y2:-100px;--d:1.60s"><circle class="f-amber pk-glow" cx="64" cy="362" r="9"/><circle class="f-amber" cx="64" cy="362" r="4"/></g>
-<g class="pk" style="--dx:108px;--y1:-42px;--y2:-100px;--d:2.15s"><circle class="f-amber pk-glow" cx="172" cy="362" r="9"/><circle class="f-amber" cx="172" cy="362" r="4"/></g>
-<g class="pk" style="--dx:0px;--y1:-42px;--y2:-100px;--d:2.70s"><circle class="f-amber pk-glow" cx="280" cy="362" r="9"/><circle class="f-amber" cx="280" cy="362" r="4"/></g>
-<g class="pk" style="--dx:-108px;--y1:-42px;--y2:-100px;--d:3.25s"><circle class="f-amber pk-glow" cx="388" cy="362" r="9"/><circle class="f-amber" cx="388" cy="362" r="4"/></g>
-<g class="pk" style="--dx:-216px;--y1:-42px;--y2:-100px;--d:3.80s"><circle class="f-amber pk-glow" cx="496" cy="362" r="9"/><circle class="f-amber" cx="496" cy="362" r="4"/></g>
-<g class="pk pk-up" style="--dx:-185px;--y1:-50px;--y2:-78px;--d:2.40s"><circle class="f-cyan pk-glow" cx="280" cy="150" r="9"/><circle class="f-cyan" cx="280" cy="150" r="4"/></g>
-<g class="pk pk-up" style="--dx:0px;--y1:-50px;--y2:-78px;--d:3.10s"><circle class="f-green pk-glow" cx="280" cy="150" r="9"/><circle class="f-green" cx="280" cy="150" r="4"/></g>
-<g class="pk pk-up" style="--dx:185px;--y1:-50px;--y2:-78px;--d:3.80s"><circle class="f-amber pk-glow" cx="280" cy="150" r="9"/><circle class="f-amber" cx="280" cy="150" r="4"/></g>
-</svg>
-      <ul class="hero-live" aria-label="Apps on the platform"><li class="hl-eam">EAM: live</li><li>Safety: live</li><li class="hl-build">Construction: live</li></ul>
+    <figure class="stage">
+      <canvas class="stage-canvas" data-stage="globe" role="img" aria-label="Animated diagram: your solar, wind, hydro and thermal plants and substations are points on a globe, streaming their data into one Messerschmidts platform, with EAM, Safety and Construction orbiting it."></canvas>
+      <p class="stage-word" aria-hidden="true">Messerschmidts</p>
     </figure>
+    <ul class="window-rail" aria-label="Get in touch">
+      <li><a href="mailto:customerservice@messerschmidts.online" aria-label="E-mail customer service"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></a></li>
+      <li><a href="contact.html" aria-label="Contact us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg></a></li>
+      <li><a href="faq.html" aria-label="Frequently asked questions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.6"/><path d="M12 16.8v.2"/></svg></a></li>
+    </ul>
+    <ul class="hero-live" aria-label="Apps on the platform"><li class="hl-eam">EAM: live</li><li>Safety: live</li><li class="hl-build">Construction: live</li></ul>
+  </div>
   </div>
   <div class="container">
     <ul class="bus-stats" aria-label="Key facts" data-inview>
