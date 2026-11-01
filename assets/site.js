@@ -543,7 +543,7 @@
   function initReveal() {
     // Deep links (#section) jump straight to content: never hide it there.
     if (reduceMotion || !hasIO || window.location.hash) return;
-    var sel = '.section .section-head, .section .grid > *, .offers > *, .plans > *, .flow, .split > *, .cta-band, .table-wrap, .faq-group, .section .panel';
+    var sel = '.section .section-head, .section .grid > *, .offers > *, .plans > *, .flow, .split > *, .platform > *, .tour-tabs, .cta-band, .table-wrap, .faq-group, .section .panel, .std-matrix, .included-band';
     var vh = window.innerHeight || doc.documentElement.clientHeight;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -656,7 +656,44 @@
     nodes.forEach(function (n) { io.observe(n); });
   }
 
+  /* ---------- Energy lines (decoration) ----------
+     Adds a layer of thin grid lines with travelling light to every navy hero and
+     the home tour band. aria-hidden, behind the content, CSS-only motion
+     (transform/opacity) that stops under prefers-reduced-motion. */
+  function initEnergy() {
+    doc.querySelectorAll('.hero, .page-hero, .chrome-band').forEach(function (host) {
+      if (host.querySelector(':scope > .energy')) return;
+      var layer = el('div', { 'class': 'energy', 'aria-hidden': 'true' });
+      for (var i = 0; i < 6; i++) layer.appendChild(el('i'));
+      host.insertBefore(layer, host.firstChild);
+    });
+  }
+
+  /* ---------- Manila clock ----------
+     [data-manila-clock] shows the current time in Asia/Manila, updated each minute.
+     Hidden without JS or Intl time-zone support. */
+  function initClock() {
+    var box = doc.querySelector('[data-manila-clock]');
+    if (!box || !window.Intl || !Intl.DateTimeFormat) return;
+    var t = box.querySelector('.ph-clock-time'), d = box.querySelector('.ph-clock-date');
+    var ft, fd;
+    try {
+      ft = new Intl.DateTimeFormat('en-PH', { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', hour12: false });
+      fd = new Intl.DateTimeFormat('en-PH', { timeZone: 'Asia/Manila', weekday: 'short', day: 'numeric', month: 'short' });
+    } catch (e) { return; }
+    function tick() {
+      var now = new Date();
+      if (t) t.textContent = ft.format(now);
+      if (d) d.textContent = fd.format(now) + ' · PHT, UTC+8';
+    }
+    tick();
+    box.hidden = false;
+    setTimeout(function () { tick(); setInterval(tick, 60000); }, (60 - new Date().getSeconds()) * 1000 + 50);
+  }
+
   function init() {
+    initEnergy();
+    initClock();
     initTrials();
     initTabs();
     initMenus();
