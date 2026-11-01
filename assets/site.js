@@ -428,6 +428,7 @@
           t.tabIndex = on ? 0 : -1;
           var p = doc.getElementById(t.getAttribute('aria-controls'));
           if (!p) return;
+          p.setAttribute('aria-hidden', on ? 'false' : 'true');
           if (on && p.hidden) {
             p.hidden = false;
             p.classList.remove('is-entering');
