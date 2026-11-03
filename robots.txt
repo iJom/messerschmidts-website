@@ -42,3 +42,4 @@ Disallow: /
 
 User-agent: *
 Allow: /
+Disallow: /legal-templates/
