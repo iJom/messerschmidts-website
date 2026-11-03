@@ -1,0 +1,11 @@
+// Cloudflare Workers (static assets). The site is plain files at the repository root, with no build step.
+// "previews": {} lets `npx wrangler preview` build the pull-request previews (it fails without this block).
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "messerschmidts-website",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "."
+  },
+  "previews": {}
+}
