@@ -1352,12 +1352,17 @@ a.btn::before { content: ""; order: 2; flex: none; width: .95em; height: .95em; 
 
 /* Page-hero animations */
 .page-hero .container { position: relative; }
-.ph-art { display: none; margin: 0; pointer-events: none; }
+.ph-art { display: block; margin: 0; pointer-events: none; }
+.ph-art svg { display: block; width: 100%; height: auto; }
+@media (max-width: 1199px) {
+  .page-hero > .container:has(> .ph-art) { display: flex; flex-direction: column; }
+  .page-hero .ph-art { order: 1; width: 100%; max-width: 420px; margin: 28px auto 0; }
+}
 @media (min-width: 1200px) { .ph-art { display: block; position: absolute; right: 24px; top: -12px; width: 400px; } .ph-art svg { display: block; width: 100%; height: auto; } }
 .sld .spin-c { transform-box: view-box; transform-origin: 220px 120px; }
 .sld .ping, .sld .bob { transform-box: fill-box; transform-origin: center; }
 .legal-art { float: right; width: 120px; margin: 0 0 12px 24px; }
-@media (max-width: 600px) { .legal-art { display: none; } }
+@media (max-width: 600px) { .legal-art { width: 72px; margin: 0 0 8px 14px; } }
 @media (prefers-reduced-motion: no-preference) {
   .sld .spin-c { animation: spin 24s linear infinite; }
   .sld .ping { animation: ping 2.2s ease-out infinite; }
