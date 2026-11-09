@@ -444,17 +444,16 @@ html:not(.js) .has-menu:hover > .menu, html:not(.js) .has-menu:focus-within > .m
 }
 
 /* Home hero: safe-days ring (A-16) */
-.sld .t-huge { font-family: var(--font-display); font-size: 68px; font-weight: 800; }
-.sld .tick { fill: none; stroke: rgba(170, 195, 225, .35); stroke-width: 2; stroke-linecap: round; }
-.sld .ring-track { fill: none; stroke: rgba(170, 195, 225, .16); stroke-width: 16; }
-.sld .ring-run { fill: none; stroke: #3EE0A1; stroke-width: 16; stroke-linecap: round; stroke-dasharray: var(--c); stroke-dashoffset: var(--o); }
-.sld .orbit { transform-box: view-box; transform-origin: 280px 196px; }
+.sld .t-huge { font-family: var(--font-display); font-size: 84px; font-weight: 800; }
+.sld .t-target { fill: var(--ok, #34d399); font-size: 15px; font-weight: 600; }
+.sld .ring-track { fill: none; stroke: color-mix(in srgb, var(--text, #eef3ea) 10%, transparent); stroke-width: 18; }
+.sld .ring-run { fill: none; stroke: var(--ok, #34d399); stroke-width: 18; stroke-linecap: round; stroke-dasharray: var(--c); stroke-dashoffset: var(--o); }
+.hero-a16 .hero-sky { display: none; }
 @media (prefers-reduced-motion: no-preference) {
-  .sld .ring-run { animation: ring-fill 1.4s var(--ease) .1s both; }
-  .sld .orbit { animation: spin 9s linear infinite; }
+  .sld .ring-run { animation: ring-loop 8s var(--ease) infinite; }
 }
-@keyframes ring-fill { from { stroke-dashoffset: var(--c); } }
-@media (max-width: 600px) { .hero .sld .t-huge { font-size: 76px; } }
+@keyframes ring-loop { 0% { stroke-dashoffset: var(--c); } 62.5%, 100% { stroke-dashoffset: var(--o); } }
+@media (max-width: 600px) { .hero .sld .t-huge { font-size: 92px; } .hero .sld .t-target { font-size: 18px; } }
 
 /* Light-surface illustrations (industries, gate, 404) */
 .art { --a: var(--primary); --ink: var(--text); --soft: var(--well); margin: 0; }

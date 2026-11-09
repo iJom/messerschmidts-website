@@ -608,6 +608,26 @@
   /* ---------- Counters ----------
      [data-count] figures count up from zero once when they scroll into view.
      The final text is in the HTML, so without JS or with reduced motion it simply shows. */
+  /* [data-count-loop]: the A-16 safe-days figure rolls up from zero in step with its ring
+     (5 s up, 3 s hold, repeat) while on screen. Static under reduced motion. */
+  function initLoopCounters() {
+    var nodes = doc.querySelectorAll('[data-count-loop]');
+    if (!nodes.length || reduceMotion || !window.requestAnimationFrame) return;
+    nodes.forEach(function (n) {
+      var target = parseInt(n.textContent, 10);
+      if (!isFinite(target)) return;
+      var t0 = null, visible = true;
+      if (hasIO) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(n);
+      function step(ts) {
+        if (t0 === null) t0 = ts;
+        var k = ((ts - t0) % 8000) / 5000;
+        if (visible) n.textContent = String(Math.round(target * (k >= 1 ? 1 : 1 - Math.pow(1 - k, 3))));
+        window.requestAnimationFrame(step);
+      }
+      window.requestAnimationFrame(step);
+    });
+  }
+
   function initCounters() {
     var nodes = doc.querySelectorAll('[data-count]');
     if (!nodes.length || reduceMotion || !hasIO || !window.requestAnimationFrame) return;
@@ -849,6 +869,7 @@
     initTabs();
     initMenus();
     initCounters();
+    initLoopCounters();
     initInView();
     initNav();
     initAppLinks();
