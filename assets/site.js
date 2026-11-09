@@ -870,6 +870,7 @@
     initMenus();
     initCounters();
     initLoopCounters();
+    if (reduceMotion) doc.querySelectorAll('svg.a16-net').forEach(function (s) { if (s.pauseAnimations) s.pauseAnimations(); });
     initInView();
     initNav();
     initAppLinks();

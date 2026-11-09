@@ -455,6 +455,17 @@ html:not(.js) .has-menu:hover > .menu, html:not(.js) .has-menu:focus-within > .m
 @keyframes ring-loop { 0% { stroke-dashoffset: var(--c); } 62.5%, 100% { stroke-dashoffset: var(--o); } }
 @media (max-width: 600px) { .hero .sld .t-huge { font-size: 92px; } .hero .sld .t-target { font-size: 18px; } }
 
+/* Home hero: A-16 Network, sequence (plants light up one by one, then the platform, then each app) */
+.a16-net { display: block; width: 100%; height: auto; }
+.a16-net .seq, .a16-net .seqn { opacity: .25; }
+@media (prefers-reduced-motion: no-preference) {
+  .a16-net .flow { animation: a16-flow 1.4s linear infinite; }
+  .a16-net .seq, .a16-net .seqn { animation: a16-seq 5.4s ease-in-out infinite; }
+}
+@media (prefers-reduced-motion: reduce) { .a16-net .seq, .a16-net .seqn { opacity: 1; } }
+@keyframes a16-flow { to { stroke-dashoffset: -30; } }
+@keyframes a16-seq { 0% { opacity: .25; } 8% { opacity: 1; } 40% { opacity: 1; } 58% { opacity: .25; } 100% { opacity: .25; } }
+
 /* Light-surface illustrations (industries, gate, 404) */
 .art { --a: var(--primary); --ink: var(--text); --soft: var(--well); margin: 0; }
 .art svg { display: block; width: 100%; height: auto; }
