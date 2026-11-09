@@ -610,6 +610,26 @@
      The final text is in the HTML, so without JS or with reduced motion it simply shows. */
   /* [data-count-loop]: the A-16 safe-days figure rolls up from zero in step with its ring
      (5 s up, 3 s hold, repeat) while on screen. Static under reduced motion. */
+  /* Footer "Pause animations": stops every looping animation (CSS and SVG) on all pages; remembered in this browser. */
+  function initMotionToggle() {
+    var btn = doc.querySelector('.motion-toggle');
+    if (!btn || reduceMotion) return;
+    btn.hidden = false;
+    function apply(off) {
+      doc.documentElement.classList.toggle('motion-off', off);
+      btn.setAttribute('aria-pressed', off ? 'true' : 'false');
+      btn.textContent = off ? 'Play animations' : 'Pause animations';
+      doc.querySelectorAll('svg').forEach(function (s) { if (off && s.pauseAnimations) s.pauseAnimations(); else if (!off && s.unpauseAnimations) s.unpauseAnimations(); });
+    }
+    var off = false;
+    try { off = window.localStorage.getItem('ms-motion') === 'off'; } catch (e) {}
+    apply(off);
+    btn.addEventListener('click', function () {
+      off = !off; apply(off);
+      try { window.localStorage.setItem('ms-motion', off ? 'off' : 'on'); } catch (e) {}
+    });
+  }
+
   function initLoopCounters() {
     var nodes = doc.querySelectorAll('[data-count-loop]');
     if (!nodes.length || reduceMotion || !window.requestAnimationFrame) return;
@@ -870,6 +890,7 @@
     initMenus();
     initCounters();
     initLoopCounters();
+    initMotionToggle();
     if (reduceMotion) doc.querySelectorAll('svg.a16-net').forEach(function (s) { if (s.pauseAnimations) s.pauseAnimations(); });
     initInView();
     initNav();

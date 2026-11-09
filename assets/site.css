@@ -1394,3 +1394,31 @@ body { background: var(--bg); color: var(--text); }
 .sld .node, .sld .node-hot { fill: #1f221f; }
 .sld .node-build { fill: color-mix(in srgb, #fbbf24 14%, transparent); stroke: #fbbf24; }
 @media print { :root { color-scheme: light; } }
+
+/* ---------- Livelier motion (all pages). Off under prefers-reduced-motion; "Pause animations" in the footer stops loops. ---------- */
+.motion-toggle { margin-left: 12px; min-height: 32px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--border-strong); background: transparent; color: var(--text-2); font: inherit; font-size: .85rem; cursor: pointer; }
+.motion-toggle:hover { color: var(--text); border-color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .card, .offer, .plan, .price-tile, .product-card, .fm-also-card { transition: transform var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease), border-color var(--t-med); }
+  @media (hover: hover) {
+    .card:hover, .offer:hover, .plan:hover, .price-tile:hover, .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+    .card:hover .icon { transform: scale(1.08) rotate(-4deg); }
+    .btn svg { transition: transform var(--t-fast) var(--ease); }
+    .btn:hover svg { transform: translateX(3px); }
+  }
+  .rv.in .icon, .rv.in .icon-lg { animation: icon-pop .6s var(--ease) calc(var(--rv-d, 0ms) + 180ms) both; }
+  .rv.in .eyebrow::before, .hero .eyebrow::before, .page-hero .eyebrow::before { animation: eb-grow .8s var(--ease) .15s both; }
+  .hero, .page-hero { animation: grid-drift 40s linear infinite; }
+  .site-header::after { background-size: 200% 100%; animation: line-shimmer 6s linear infinite; }
+  .page-hero.safety-hero::after, .page-hero.build-hero::after, .hazard-edge::after { animation: stripe-march-28 2.4s linear infinite; }
+  .ticker::before, .ticker::after { animation: stripe-march-24 2.4s linear infinite; }
+  .bus-stats li::before { animation: dot-breathe 3s ease-in-out infinite; }
+}
+@keyframes icon-pop { from { opacity: 0; transform: scale(.6) rotate(-12deg); } }
+@keyframes eb-grow { from { width: 0; } }
+@keyframes grid-drift { to { background-position: 40px 40px, 40px 40px, 0 0, 0 0; } }
+@keyframes line-shimmer { to { background-position: -200% 0; } }
+@keyframes stripe-march-28 { to { background-position: 39.6px 0; } }
+@keyframes stripe-march-24 { to { background-position: 33.94px 0; } }
+@keyframes dot-breathe { 50% { transform: scale(1.25); } }
+.motion-off *, .motion-off *::before, .motion-off *::after { animation-play-state: paused !important; }
